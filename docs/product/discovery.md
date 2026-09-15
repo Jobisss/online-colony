@@ -430,64 +430,77 @@ O documento descreve expansão, economia e conflito, mas não define o que signi
 
 Sem uma resposta, o produto pode virar apenas manutenção infinita ou competição econômica sem direção.
 
-## 9. Perguntas mínimas antes do Macro System Design
+## 9. Status das respostas de Macro System
 
-Estas perguntas devem ser respondidas em conjunto, pois alteram boundaries e contratos conceituais.
+As perguntas originais não ficam mais repetidas aqui. Esta seção é o registro consolidado do que já foi decidido e do que ainda está pendente.
 
-### Visão e público
+### Decisões confirmadas
 
-1. Qual é a experiência primária: governar uma colônia, construir uma economia, contar histórias de colonos ou competir por poder?
-2. Qual é a escala esperada de uma colônia e do mundo no primeiro produto jogável?
-3. Qual duração de sessão e frequência de retorno o jogo espera?
-4. O jogo é PvP obrigatório, PvE com comércio, ou possui mundos/modos distintos?
-5. Qual é o critério de sucesso de uma partida/mundo: vitória, domínio, sobrevivência, legado ou sandbox contínuo?
+#### Experiência e ritmo
 
-### Tempo e persistência
+- prioridade da experiência: **governar uma colônia → competir por poder → construir uma economia → contar histórias de colonos**;
+- sucesso é relativo: colônias podem se especializar em comida, armas, soldados, comércio ou outras funções;
+- organização mínima deve caber em aproximadamente 40 minutos por dia;
+- o jogador deve conseguir participar entrando pelo menos 3 vezes por semana;
+- o mundo terá velocidade fixa;
+- o mundo será persistente e não terá reset/temporadas por enquanto.
 
-6. Qual é a unidade de tempo do jogo e o que acontece quando o jogador está offline?
-7. O mundo tem velocidade fixa, aceleração, pausas locais ou apenas execução contínua?
-8. Há mundos sazonais, reset, migração ou permanência indefinida?
-9. Quais eventos podem ocorrer sem o jogador e quais exigem confirmação?
+#### Operação offline
 
-### Agência e autonomia
+- a colônia continua funcionando sem o jogador;
+- decisões críticas, como iniciar uma invasão, não são tomadas automaticamente;
+- comércio automático só poderá acontecer no futuro por meio de rotas comerciais previamente configuradas.
 
-10. Quais decisões são exclusivamente estratégicas e quais controles manuais são permitidos?
-11. O jogador pode substituir uma decisão da autonomia? Por quanto tempo?
-12. Quais razões o sistema deve mostrar para uma demanda, escolha de job ou falha?
-13. Qual comportamento é considerado uma autonomia “boa”: eficiência, estabilidade, satisfação ou cumprimento de política?
+#### População
 
-### Mundo, população e identidade
+- a colônia começa com 3 colonos básicos;
+- os colonos são gerados aleatoriamente, mas a geração deve garantir um começo viável;
+- reprodução cria novos colonos;
+- satisfação alta pode atrair imigrantes;
+- não haverá NPCs ou facções externas inicialmente;
+- fauna pode existir;
+- corporações/facções serão formadas por jogadores;
+- o primeiro escopo precisa considerar 3 colonos individualmente.
 
-14. O jogador começa com colonos pré-existentes, uma expedição ou uma única unidade fundadora?
-15. Reprodução, imigração, recrutamento e contratos coexistem? Qual é o papel de cada um?
-16. Colonos podem morrer de forma permanente? Há herança, sucessão e recuperação?
-17. Quantos colonos precisam ser simulados individualmente no primeiro mundo?
-18. Há NPCs, fauna, facções neutras ou apenas jogadores?
+#### Saúde e mortalidade
 
-### Economia e ownership
+- colonos não morrem com frequência a cada incidente;
+- invasões recebidas e invasões malsucedidas podem causar ferimentos, doenças ou cicatrizes;
+- condições não tratadas podem piorar e gerar debuffs;
+- condições podem ser tratadas e recuperadas;
+- três condições permanentes graves podem levar à morte.
 
-19. Qual é o ativo mínimo que precisa de localização e cadeia de custódia?
-20. Quem possui recursos em uma fábrica, em trânsito e em escrow?
-21. Como nasce e desaparece a moeda interna?
-22. Existe mercado inicial/NPC para garantir liquidez?
-23. Quais ações econômicas são reversíveis, canceláveis ou contestáveis?
-24. Corporações podem possuir ativos e território independentemente dos jogadores?
+O significado exato de “três condições” ainda precisa ser fechado: a proposta é contar três condições graves simultâneas, e não um contador irreversível ao longo da vida.
 
-### Conflito
+#### PvP e invasões
 
-25. Qual perda máxima um jogador offline pode sofrer?
-26. O que inicia um conflito e como ele termina?
-27. Invasões podem destruir permanentemente infraestrutura, itens ou população?
-28. Quais mecanismos impedem snowball, griefing e domínio de jogadores antigos?
-29. Combate é um domínio essencial do primeiro produto ou uma expansão posterior?
+- PvP é opcional;
+- uma colônia precisa se liberar para invasões para poder invadir outras;
+- invasões são preparadas e avisadas com antecedência;
+- o defensor tem tempo para se preparar;
+- uma derrota não elimina a colônia do dia para a noite;
+- o atacante pode escolher itens/recursos para tentar roubar;
+- o defensor pode manter um estoque seguro, limitado por peso e por tipos de itens;
+- combate é essencial ao produto;
+- a invasão termina quando os combatentes designados são derrotados e os sistemas de segurança são desativados.
 
-### Produto e operação
+### Decisões ainda pendentes
 
-30. Qual é o menor ciclo jogável que prova a visão sem mercado, corporação e combate?
-31. Quais explicações e relatórios são obrigatórios para o jogador confiar na autonomia?
-32. Que ferramentas de administração e recuperação serão necessárias desde o primeiro mundo persistente?
-33. Que métricas definem saúde do jogo: retenção, colônias ativas, estabilidade econômica, tempo até primeira produção, falhas de simulação?
-34. Qual conteúdo é configurável por dados e qual é regra estrutural do sistema?
+1. **Escala:** população madura, prédios, regiões, número de colônias e quantidade de jogadores simultâneos.
+2. **Ciclo de tempo:** unidade de tempo percebida pelo jogador, duração das tarefas e tratamento de períodos offline.
+3. **Autonomia:** quais ações serão automáticas, quais terão controle manual e quando o jogador poderá substituir a colônia.
+4. **Explicabilidade:** quais informações o jogo mostrará para explicar demandas, jobs, bloqueios e decisões.
+5. **Qualidade da autonomia:** prioridade entre segurança, necessidades, estabilidade, políticas do jogador e eficiência.
+6. **Localização e custody:** quais ativos precisam de posição individual e quem os guarda durante produção, reserva e transporte.
+7. **Moeda e finanças:** emissão, destruição, taxas, sinks, reservas, escrow e separação do dinheiro real.
+8. **Mercado:** uso de ordens de compra/venda, liquidez inicial, cancelamentos, disputas e momento de introdução.
+9. **Contratos de colonos:** confirmar se ficam fora do primeiro escopo; reprodução e imigração já cobrem o crescimento inicial.
+10. **Corporações:** confirmar quando ownership coletivo, tesouraria e infraestrutura compartilhada serão necessários.
+11. **Proteção PvP:** custo, duração, alcance e cooldown da preparação de invasões.
+12. **Anti-snowball:** limites de dano, proteção de iniciantes, custos de guerra e formas de recuperação.
+13. **Saque e destruição:** quais recursos, itens, prédios e condições podem ser afetados permanentemente.
+14. **Primeiro ciclo jogável:** sequência mínima que prova governança, autonomia e defesa básica.
+15. **Operação:** relatórios obrigatórios, ferramentas de recuperação, métricas e conteúdo configurável.
 
 ## 10. Recorte recomendado para a próxima etapa
 
@@ -516,7 +529,7 @@ Esse núcleo deve permitir responder:
 - falhas têm causas e alternativas?
 - a individualidade dos colonos agrega valor?
 
-Depois disso, a segunda camada natural é logística local e energia. Mercado/ledger e combate devem entrar após as regras de localização, reserva, tempo e ownership estarem conceitualmente estáveis, pois dependem delas.
+Depois disso, a segunda camada natural é logística local, energia e defesa básica. O combate entra no núcleo porque é essencial à visão; mercado/ledger e invasões PvP completas podem entrar depois que localização, reserva, tempo e ownership estiverem conceitualmente estáveis.
 
 ## 11. Mermaid inicial — mapa conceitual de sistemas
 
@@ -886,18 +899,3 @@ Como combate é essencial, o menor ciclo não precisa começar com PvP completo.
 ```
 
 Esse recorte responde se Frontier é divertido como colônia governada antes de adicionar mercado entre jogadores, corporações e invasões completas.
-
-## 15. Próximas decisões para fechar o Macro System Design
-
-As respostas mais importantes que ainda faltam são:
-
-1. confirmar se uma colônia madura deve ficar na faixa de dezenas de colonos;
-2. confirmar a hierarquia de autonomia: segurança → necessidades → estabilidade → políticas → eficiência;
-3. definir se condições graves são simultâneas para contar na mortalidade;
-4. decidir o que uma invasão pode destruir, danificar e roubar;
-5. definir o custo e a duração da preparação de uma invasão;
-6. decidir como colônias `PROTECTED` podem competir por poder sem virar um modo sem risco;
-7. escolher a regra inicial de criação da moeda e seus principais sinks;
-8. decidir se o mercado começa como feature futura junto das rotas comerciais;
-9. definir os controles manuais permitidos e as decisões sempre autônomas;
-10. aprovar o menor ciclo jogável recomendado.
