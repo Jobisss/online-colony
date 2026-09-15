@@ -16,7 +16,7 @@
 
 ## 1. Leitura executiva
 
-Frontier é um jogo multiplayer persistente de colonização em um mundo compartilhado. O jogador não deve operar cada colono individualmente; ele define intenções, restrições e prioridades, enquanto a colônia converte essas decisões em trabalho, produção, logística, pesquisa, comércio e defesa.
+Frontier é um jogo multiplayer persistente de colonização em um mundo compartilhado. O jogador não deve operar cada colono individualmente; ele define intenções, restrições e políticas, enquanto a colônia deriva prioridades e converte essas decisões em trabalho, produção, logística, pesquisa, comércio e defesa.
 
 O diferencial pretendido não é apenas ter muitos sistemas, mas fazer com que eles formem uma cadeia causal legível:
 
@@ -60,7 +60,7 @@ O jogador deve sentir que:
 
 ### Pilar 1 — Governança por intenção
 
-O jogador define metas, políticas, prioridades, orçamento, expansão, pesquisa e doutrina. A colônia decide como executar dentro dessas regras.
+O jogador define metas, políticas, orçamento, expansão, pesquisa e doutrina. A colônia deriva prioridades e decide como executar dentro dessas regras.
 
 **Critério de sucesso:** uma decisão de alto nível deve gerar consequências operacionais observáveis sem exigir que o jogador atribua manualmente cada tarefa.
 
@@ -540,7 +540,7 @@ Isso não exige mostrar cálculo técnico interno; exige uma explicação útil 
 5. eficiência e lucro;
 6. conveniência ou melhoria de longo prazo.
 
-Políticas do jogador podem alterar prioridades dentro de limites seguros. A escolha final será feita depois do inventário de interações.
+Políticas do jogador definem prioridades por setor e contexto dentro de limites seguros. A ordenação operacional final é derivada pelo sistema depois do inventário de interações.
 
 ### 9.3 Precisão de localização
 

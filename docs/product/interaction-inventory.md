@@ -57,7 +57,7 @@ Uma ação pode mudar de classificação após os testes. Por exemplo, “tratar
 
 ```mermaid
 flowchart LR
-    P["Jogador define intenção<br/>prioridades, metas, políticas e pesquisa"]
+    P["Jogador define intenção<br/>metas, políticas, ordens e pesquisa"]
     S["Estado da colônia<br/>necessidades, estoques, saúde e energia"]
     D["Demand System<br/>identifica déficits e oportunidades"]
     J["Job System<br/>cria e prioriza jobs"]
@@ -136,7 +136,7 @@ Este diagrama mostra responsabilidades conceituais, não serviços. Um mesmo pro
 | --- | --- | --- | --- | --- | --- |
 | GOV-01 | Criar colônia | Jogador | Manual | Cria território, 3 colonos e estado inicial | Validação de mapa e seed |
 | GOV-02 | Nomear/configurar colônia | Jogador | Manual | Altera identidade e preferências | Regras de nomes e abuso |
-| GOV-03 | Definir prioridade | Jogador | Manual | Altera ordenação de demandas | Conflito entre prioridades |
+| GOV-03 | Derivar prioridade setorial | Sistema | Automático | Ordena demandas a partir das políticas, necessidades e segurança | Regras de desempate |
 | GOV-04 | Definir meta de estoque | Jogador | Manual | Cria demanda de reposição | Limite e prioridade da meta |
 | GOV-05 | Definir política | Jogador | Manual | Altera comportamento permitido | Quais políticas existem |
 | GOV-06 | Habilitar/desabilitar prédio | Jogador | Manual | Abre ou fecha capacidade produtiva | Efeito sobre jobs e reservas |
@@ -171,7 +171,7 @@ Este diagrama mostra responsabilidades conceituais, não serviços. Um mesmo pro
 | --- | --- | --- | --- | --- | --- |
 | AUT-01 | Observar estado | Sistema | Automático | Coleta fatos sobre mundo e colônia | Fonte de verdade |
 | AUT-02 | Criar demanda | Sistema | Automático | Registra necessidade ou oportunidade | Duplicação e prioridade |
-| AUT-03 | Priorizar demanda | Sistema | Híbrido | Combina política, urgência e risco | Hierarquia ainda aberta |
+| AUT-03 | Priorizar demanda | Sistema | Automático | Combina política setorial, urgência, risco e ordem | Regras de desempate |
 | AUT-04 | Criar job | Sistema | Automático | Converte demanda em trabalho executável | Decomposição de tarefas |
 | AUT-05 | Reservar capacidade | Sistema | Automático | Separa colono, prédio, item ou energia | Concorrência e expiração |
 | AUT-06 | Alocar job | Sistema/colono | Automático | Vincula agente e job | Regras de desempate |
@@ -193,7 +193,7 @@ Este diagrama mostra responsabilidades conceituais, não serviços. Um mesmo pro
 | PROD-08 | Reparar prédio | Colono/colônia | Híbrido | Recupera capacidade | Recursos e urgência |
 | PROD-09 | Armazenar recurso | Colono/sistema | Automático | Move recurso para estoque válido | Capacidade e rota |
 | PROD-10 | Gerenciar energia | Rede/colônia | Automático | Distribui geração e consumo | Prioridade, bateria e apagão |
-| PROD-11 | Definir prioridade de energia | Jogador | Manual | Ordena quais consumidores recebem energia primeiro | Padrão seguro sem configuração |
+| PROD-11 | Configurar política de energia | Jogador | Manual | Define quais consumidores devem ser priorizados em déficit | O sistema deriva a ordem operacional |
 | PROD-12 | Racionar energia | Sistema | Automático | Desliga consumidores de baixa prioridade em déficit | Aviso, explicação e retomada |
 
 ### 6.5 Localização, custody e logística

@@ -9,7 +9,7 @@
 
 Colony Governance é o sistema que transforma decisões do jogador em instruções duráveis para a colônia.
 
-O jogador não deve precisar escolher cada colono ou controlar cada deslocamento. Ele define intenção por meio de prioridades, metas, políticas, planos e decisões críticas. Os sistemas autônomos usam essas intenções para decidir como executar o trabalho.
+O jogador não deve precisar escolher cada colono ou controlar cada deslocamento. Ele define intenção por meio de metas, políticas, ordens, planos e decisões críticas. As prioridades operacionais são derivadas dessas configurações; os sistemas autônomos usam o resultado para decidir como executar o trabalho.
 
 O sistema precisa responder de forma clara:
 
@@ -116,7 +116,7 @@ Uma intenção persistida do jogador ou uma autorização formal para a autonomi
 Exemplos:
 
 - “manter 50 unidades de comida”;
-- “priorizar segurança acima de produção”;
+- “configurar a política de Segurança acima da Produção”;
 - “manter a fábrica habilitada”;
 - “preparar defesa contra ameaça identificada”;
 - “aceitar este imigrante”;
@@ -126,9 +126,9 @@ Uma directive não é um job. Ela pode gerar, alterar ou cancelar várias demand
 
 ### 5.3 PriorityRule
 
-Define como a colônia ordena intenções concorrentes.
+Regra de prioridade derivada das políticas da colônia, da segurança, das necessidades e das ordens ativas. O jogador não cria uma fila de prioridade livre; ele escolhe políticas e parâmetros que fazem o sistema calcular a ordem adequada.
 
-Uma prioridade precisa ter:
+Uma prioridade derivada precisa ter:
 
 - escopo;
 - valor ou posição relativa;
@@ -136,6 +136,8 @@ Uma prioridade precisa ter:
 - duração ou validade;
 - origem (jogador, política ou segurança);
 - explicação visível.
+
+Exemplo: o jogador não arrasta “tratar colono A” para o topo de uma lista. Ele configura a política de Saúde para priorizar colonos próprios em relação a pacientes externos; o sistema deriva a prioridade de cada atendimento e explica a decisão.
 
 ### 5.4 StockGoal
 
@@ -179,6 +181,20 @@ As políticas precisam ter limites explícitos. Uma política não pode autoriza
 | Comércio | produtos/serviços autorizados, preços, reservas e contrapartes | altera liquidez, estoques, risco e dependência externa |
 
 Cada setor deve possuir parâmetros com custo e efeito observáveis. “Produzir comida” não é uma única opção: tipo de alimento, conservação, prioridade, mão de obra, energia e estoque-alvo devem criar escolhas diferentes.
+
+As prioridades podem ser configuradas dentro de uma política setorial, sem permitir uma ordenação arbitrária de indivíduos ou jobs. Exemplos:
+
+| Setor | Política de prioridade | Resultado possível |
+| --- | --- | --- |
+| Saúde | próprios colonos antes de pacientes externos | o sistema usa médicos e remédios primeiro na população da colônia |
+| Saúde | emergência antes de rotina | condições graves interrompem atendimentos menos urgentes |
+| Produção | consumo interno antes de exportação | a colônia repõe suas metas antes de vender excedentes |
+| Energia | vida/sistema médico antes de indústria | déficit desliga consumidores menos críticos primeiro |
+| Alimentação | população antes de comércio | alimentos necessários não são enviados para venda |
+| Segurança | defesa da colônia antes de escolta | combatentes permanecem disponíveis para proteger o território |
+| Descanso | recuperação de fadiga antes de horas extras | trabalho adicional não ignora limites de saúde e segurança |
+
+Uma política pode definir ordem entre categorias, mas não deve criar microgerenciamento disfarçado. A escolha individual de cada executor continua pertencendo à Autonomy.
 
 #### 5.5.2 Pesquisa como expansão de políticas
 
@@ -285,7 +301,7 @@ sequenceDiagram
     participant Sim as Simulation
     participant Report as Relatórios
 
-    Player->>UI: Define prioridade/meta/política
+    Player->>UI: Define política/meta/ordem
     UI->>Gov: Envia intenção com versão esperada
     Gov->>Gov: Valida ownership, regra e conflito
     Gov-->>UI: Confirma intenção persistida
@@ -332,7 +348,6 @@ Os nomes abaixo são comandos de domínio, não endpoints de API.
 | --- | --- | --- | --- |
 | `CreateColony` | Jogador | Cria uma colônia inicial válida | Manual |
 | `RenameColony` | Jogador | Altera identidade | Manual |
-| `SetPriority` | Jogador | Atualiza ordenação de intenção | Manual |
 | `SetStockGoal` | Jogador | Cria/altera meta de estoque | Manual |
 | `SetPolicy` | Jogador | Ativa ou altera uma política | Manual |
 | `SetSectorPolicy` | Jogador | Altera parâmetros de Segurança, Alimentação, Saúde, Energia, Produção, Descanso, Fauna ou Comércio | Manual |
@@ -347,7 +362,7 @@ Os nomes abaixo são comandos de domínio, não endpoints de API.
 | `ConfigureSecureStock` | Jogador | Define reserva protegida | Manual |
 | `ConfigureDefenseDoctrine` | Jogador | Define orientação de defesa | Manual |
 | `ConfigureLivestockPolicy` | Jogador | Define manejo, reprodução e abate de fauna domesticada | Manual |
-| `ConfigureMedicalPolicy` | Jogador | Define prioridade de medicina, cirurgia e tratamentos | Manual |
+| `ConfigureMedicalPolicy` | Jogador | Define regras de prioridade para medicina, cirurgia e tratamentos | Manual |
 | `SetWorkRestSchedule` | Jogador | Define trabalho, sono e recreação | Manual |
 | `ConfigureConstructionPolicy` | Jogador | Define regras para propostas e expansão da base | Manual |
 | `EnablePvpProtection` | Jogador/NPC | Ativa proteção conforme regra | Crítico |
@@ -363,7 +378,7 @@ Eventos abaixo comunicam que algo aconteceu; não são comandos.
 | `DirectiveCreated` | Nova intenção persistida | Autonomy, Audit |
 | `DirectiveChanged` | Intenção alterada | Autonomy, UI, Audit |
 | `DirectiveCanceled` | Intenção cancelada | Autonomy, Inventory, Audit |
-| `PriorityUpdated` | Ordem de prioridade mudou | Autonomy |
+| `PriorityUpdated` | Ordem derivada de uma política ou regra de segurança mudou | Autonomy |
 | `StockGoalUpdated` | Meta de estoque mudou | Demand, Autonomy |
 | `PolicyActivated` | Política ficou ativa | Autonomy, Security |
 | `PolicyDeactivated` | Política foi removida | Autonomy, Security |
@@ -390,6 +405,8 @@ Os nomes são provisórios. O contrato final precisa definir versão, ordenaçã
 - uma intenção inválida não pode ser persistida como ativa;
 - uma directive cancelada não pode continuar gerando novos jobs sem uma nova autorização;
 - uma decisão crítica não pode ser tratada como aprovada apenas porque expirou;
+- o jogador não pode editar diretamente uma fila de prioridade de indivíduos ou jobs;
+- toda prioridade operacional precisa ser derivável de uma política, necessidade, ordem ou regra de segurança;
 - uma alteração de prioridade deve possuir versão e histórico;
 - reenvio do mesmo comando não pode duplicar directive, meta ou autorização;
 - uma `ColonyOrder` não pode ser tratada como um job até que suas pré-condições sejam satisfeitas;
@@ -405,7 +422,7 @@ Os nomes são provisórios. O contrato final precisa definir versão, ordenaçã
 
 ### 11.1 Ordem por colônia
 
-Alterações de governança devem ser ordenadas por colônia. Se o jogador enviar duas mudanças de prioridade rapidamente, o sistema precisa aceitar uma ordem clara ou rejeitar a segunda por versão antiga.
+Alterações de governança devem ser ordenadas por colônia. Se o jogador enviar duas mudanças de política rapidamente, o sistema precisa aceitar uma ordem clara ou rejeitar a segunda por versão antiga.
 
 ### 11.2 Idempotência
 
@@ -472,8 +489,8 @@ Alternativa: priorizar energia ou comprar no NPC
 Estas são as decisões específicas de Colony Governance que precisam ser respondidas antes de fechar o macro design:
 
 1. Os setores confirmados para políticas são Segurança, Alimentação, Saúde, Energia, Produção, Descanso, Fauna e Comércio. Quais são os parâmetros mínimos de cada setor na v1?
-2. O jogador poderá criar prioridades livres ou escolher uma lista predefinida por setor?
-3. Uma prioridade será global, por setor, por prédio, por recurso ou por ordem?
+2. **Resolvido:** o jogador não cria prioridades livres. Ele configura políticas, e o sistema deriva as prioridades operacionais.
+3. **Direção definida:** políticas podem conter prioridades por setor e contexto — por exemplo, Saúde prioriza colonos próprios antes de pacientes externos. Ainda falta definir se uma política também pode aplicar-se a um prédio, recurso ou ordem específica.
 4. O jogador poderá assumir controle manual temporário de um colono ou apenas alterar a intenção da colônia? Essa decisão será tomada após o inventário completo de interações.
 5. As ações críticas provisórias são invasão, desativação da proteção PvP, aceitação de imigrante, aceitação de contrato e saque. Alguma delas deve ser automática por política?
 6. Quando uma meta de estoque entra em conflito com uma reserva de emergência ou com uma ordem de maior prioridade?
