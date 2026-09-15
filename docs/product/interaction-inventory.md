@@ -205,7 +205,7 @@ Este diagrama mostra responsabilidades conceituais, não serviços. Um mesmo pro
 
 ### 6.6 Eventos, fauna e defesa
 
-As interações de invasão (DEF-05, DEF-07, DEF-08, DEF-10) estão **em revisão**, junto com as regras de invasão do discovery (§11.1).
+As interações de invasão seguem o modelo aprovado no discovery (§8.14): aviso pela distância, horário de vulnerabilidade, doutrina obrigatória e alvos fixados na declaração.
 
 | ID | Interação | Iniciador | Controle inicial | Efeito principal | Falhas/decisões abertas |
 | --- | --- | --- | --- | --- | --- |
@@ -221,6 +221,8 @@ As interações de invasão (DEF-05, DEF-07, DEF-08, DEF-10) estão **em revisã
 | DEF-10 | Saquear alvo permitido | Atacante | Híbrido | Transfere carga limitada | Estoque seguro e limites |
 | DEF-11 | Recuperar defesa | Colônia | Automático | Remove estado de breach e repara | Tempo e custo |
 | DEF-12 | Receber proteção inicial | Sistema | Automático | Ativa 7 dias de proteção gratuita na criação da colônia | Aviso antes do fim |
+| DEF-13 | Definir horário de vulnerabilidade | Jogador | Manual | Define quando combates podem ocorrer em `OPEN` | Duração e cooldown de alteração |
+| DEF-14 | Executar doutrina offline | Colônia | Automático | Defende conforme doutrina sem o jogador | Conteúdo mínimo da doutrina |
 
 ### 6.7 Economia, NPC e contratos
 

@@ -458,9 +458,9 @@ Terminologia adotada:
 - **grave:** estágio que ocupa capacidade de saúde e conta para mortalidade;
 - **fatal:** estado terminal quando a regra de mortalidade é atingida.
 
-### 8.9 PvP — o que está confirmado
+### 8.9 PvP — regras gerais
 
-As regras detalhadas de invasão estão **em revisão** (§11.1). O que permanece confirmado:
+O modelo de invasão está em §8.14; números e detalhes seguem abertos em §11.1.
 
 - PvP é opcional; uma colônia precisa estar aberta a invasões para poder invadir outras;
 - invasões são preparadas e avisadas com antecedência, e o defensor tem tempo real para se preparar;
@@ -498,6 +498,23 @@ As regras detalhadas de invasão estão **em revisão** (§11.1). O que permanec
 ### 8.13 Localização e custody
 
 Localização e custody devem ser informados explicitamente em tempo real. Recursos fungíveis podem ser agregados por estoque quando isso não esconder a posição relevante; itens únicos, colonos e carregamentos precisam de rastreamento individual.
+
+### 8.14 Modelo de invasão
+
+A proposta inicial de uma janela fixa de 5 dias foi descartada: nenhuma janela fixa garante que um jogador que entra 3 vezes por semana veja o aviso, e uma janela longa esfria o conflito e permite esconder o saque. O modelo aprovado combina quatro regras:
+
+1. **Aviso pela distância física:** o tempo de deslocamento do atacante pelos espaços de conexão é o aviso, com um piso mínimo. Ataques distantes são mais lentos e caros.
+2. **Horário de vulnerabilidade:** ao entrar em `OPEN`, a colônia define um horário diário em que combates podem acontecer. A chegada do atacante é ajustada para esse horário.
+3. **Doutrina de defesa obrigatória:** só pode ficar em `OPEN` a colônia com doutrina de defesa configurada, executada automaticamente quando o defensor está offline.
+4. **Alvos de saque fixados na declaração:** o que o atacante escolheu tentar roubar fica registrado no momento da declaração.
+
+Aviso típico esperado: entre 1 e 3 dias. Sequência:
+
+```text
+declaração (alvos fixados) → deslocamento pelos espaços de conexão
+→ chegada no horário de vulnerabilidade → combate (doutrina se offline)
+→ breach/defesa → saque limitado ou falha → recuperação e cooldown
+```
 
 ## 9. Conceitos de referência
 
@@ -671,33 +688,16 @@ Esse inventário vem antes da escolha entre Utility AI, GOAP, HTN ou qualquer t�
 
 ## 11. Questões em aberto
 
-### 11.1 Regras de invasão (em revisão)
+### 11.1 Números e detalhes de invasão
 
-Proposta inicial do fundador: **5 dias** entre a decisão de invadir e o combate efetivo. O próprio fundador considera o prazo longo demais e pediu para repensar o modelo.
+O modelo de invasão está aprovado em §8.14. Seguem abertos:
 
-Sequência base ainda válida:
-
-```text
-declaração → janela de preparação → deslocamento → combate → breach/defesa
-→ saque ou falha → recuperação e cooldown
-```
-
-Restrições que qualquer modelo precisa respeitar:
-
-- o jogador pode entrar só 3 vezes por semana, então o intervalo entre acessos pode passar de 2–3 dias;
-- nenhum aviso de duração fixa garante sozinho que o defensor verá a invasão; a defesa offline precisa funcionar razoavelmente sem ele;
-- janela longa demais esfria o conflito e permite esconder todo o saque;
-- janela curta demais pune quem joga pouco.
-
-Alternativas em discussão:
-
-- **A. Janela fixa longa** (ex.: 5 dias): simples, mas lenta e fácil de explorar.
-- **B. Aviso pela distância física:** o tempo de deslocamento pelos espaços de conexão define o aviso, com um piso mínimo. Colônias próximas são mais expostas; ataques distantes são mais lentos e caros.
-- **C. Janela de vulnerabilidade escolhida pelo defensor:** ao entrar em `OPEN`, a colônia define um horário diário em que combates podem acontecer.
-- **D. Doutrina de defesa obrigatória:** entrar em `OPEN` exige uma doutrina configurada, executada automaticamente se o defensor estiver offline.
-- **E. Alvos de saque fixados na declaração:** o que o atacante escolheu fica registrado no momento da declaração, limitando a fuga de estoque durante o aviso.
-
-Também seguem abertos: custo de proteção após os 7 dias, duração das proteções pagas, cooldowns, regras de ativação/desativação, alvos permitidos, limites de saque e destruição permanente.
+- piso mínimo do aviso e velocidade de deslocamento pelos espaços de conexão;
+- duração mínima e máxima do horário de vulnerabilidade e cooldown para alterá-lo;
+- conteúdo mínimo obrigatório de uma doutrina de defesa;
+- custo de proteção após os 7 dias, duração das proteções pagas e cooldowns de ativação/desativação;
+- alvos permitidos, limites de saque e destruição permanente;
+- o que acontece com recursos vendidos ou consumidos durante o aviso que estavam entre os alvos fixados.
 
 ### 11.2 Consequências do tempo 1:1
 
@@ -753,7 +753,7 @@ Relatórios obrigatórios, ferramentas de recuperação, métricas e conteúdo c
 
 ## 12. Recorte e próximo passo
 
-Frontier ainda não está pronto para gerar tasks de implementação. As decisões com maior poder de alterar a arquitetura e que continuam abertas são: regras de invasão, consequências do tempo 1:1, representação da topologia, limites da autonomia, fidelidade da simulação em escala e autoridade sobre estado entre simulação e economia.
+Frontier ainda não está pronto para gerar tasks de implementação. As decisões com maior poder de alterar a arquitetura e que continuam abertas são: consequências do tempo 1:1 (incluindo dia/noite e fusos horários), representação da topologia, limites da autonomia, fidelidade da simulação em escala e autoridade sobre estado entre simulação e economia.
 
 Validar primeiro o ciclo de §10.5. Esse núcleo deve permitir responder:
 
@@ -769,7 +769,7 @@ Depois disso, a segunda camada natural é logística local, energia avançada e 
 Próximos artefatos:
 
 1. revisão do [interaction-inventory.md](./interaction-inventory.md) com as classificações confirmadas;
-2. decisão sobre as regras de invasão (§11.1) e as durações principais (§11.2);
+2. decisão sobre dia/noite, fusos horários e durações principais (§11.2);
 3. Macro System Design do núcleo da colônia.
 
 ## 13. Mapa conceitual de sistemas
