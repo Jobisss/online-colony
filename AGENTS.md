@@ -2,6 +2,8 @@
 
 ## Graph traceability
 
+Graphify must be installed before any graph query or update. Verify with `python -c "import graphify"`; if unavailable, install it with `python -m pip install graphifyy` and verify again.
+
 After changing project documentation or cross-system decisions, update the impact graph with:
 
 ```text

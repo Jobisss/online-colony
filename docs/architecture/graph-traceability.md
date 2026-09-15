@@ -2,6 +2,22 @@
 
 O projeto mantém um grafo de rastreabilidade em `graphify-out/`. Ele conecta conceitos, políticas, interações e decisões aos documentos e seções onde aparecem.
 
+## Pré-requisito
+
+O pacote **Graphify precisa estar instalado** no ambiente antes de continuar. Sem ele, não execute consultas nem considere a atualização concluída. Verifique a instalação com:
+
+```powershell
+python -c "import graphify; print('Graphify instalado')"
+```
+
+Se a verificação falhar, instale o pacote antes de prosseguir:
+
+```powershell
+python -m pip install graphifyy
+```
+
+Depois confirme novamente o import e só então execute o fluxo de atualização.
+
 ## Fluxo para mudanças
 
 Antes de alterar um conceito transversal, consulte o grafo pelo nome do conceito. Para Fauna, por exemplo:
