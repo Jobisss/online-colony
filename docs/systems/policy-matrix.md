@@ -85,7 +85,7 @@ O pipeline é comum, mas a forma como cada setor calcula capacidade, risco, qual
 | Descanso | trabalho, sono, recreação, fadiga | recuperação, produtividade e segurança | disponibilidade e saúde | efeito acumulado no agente | Posterior |
 | Fauna | criação, alimentação, reprodução, abate, manejo e interação com fauna regional | alimento, materiais, espaço, risco e oportunidades | comida, materiais, animais e capacidades futuras | seres vivos, comportamento regional e capacidades variáveis | Posterior |
 | Comércio | produtos, serviços, preços, reservas, contrapartes | consumo interno, liquidez e margem | transações e compromissos | dependência externa e risco econômico | Posterior |
-| Educação | treinamento, transmissão de skills, foco de formação | skills críticas, pesquisa e sucessão | especialistas e progresso | desenvolvimento lento e irreversível parcial | Piloto 1 |
+| Educação | treinamento individual, transmissão de skills, foco de formação | skills críticas, pesquisa e sucessão | especialistas e progresso | desenvolvimento lento por colono | Piloto 1 |
 
 ### 4.2 Segurança
 
@@ -257,6 +257,16 @@ Cada espécie deve possuir capacidades configuráveis por dados. Um valor `0` si
 
 **Dependências:** saúde, descanso, pesquisa, população, produção e contratos.
 
+Pesquisa não ensina automaticamente todos os colonos. Ela libera uma capacidade para a colônia aprender; a Educação transmite essa capacidade para indivíduos compatíveis. Por exemplo, pesquisar **Neurologia** torna o campo disponível, mas um médico ainda precisa passar por educação específica antes de tratar neurologia.
+
+```mermaid
+flowchart LR
+    Research[Pesquisa: Neurologia] --> Capability[Capacidade liberada para a colônia]
+    Capability --> Education[Educação específica]
+    Education --> Doctor[Médico aprende Neurologia]
+    Doctor --> Treatment[Tratamento neurológico]
+```
+
 ## 5. Pesquisa e especialização
 
 O sistema de pesquisa deve tornar essas políticas profundamente diferentes entre colônias.
@@ -293,7 +303,7 @@ As linhas representam dependência e competição, não necessariamente bloqueio
 
 ## 6. O que é comum e o que deve continuar específico
 
-**Decisão de pesquisa:** o conhecimento adquirido é permanente e não é transferido diretamente por contratos ou comércio. Permanecem em aberto apenas as regras de recuperação de skills e de redistribuição da capacidade ativa ao trocar de especialização.
+**Decisão de pesquisa:** o conhecimento adquirido pela colônia é permanente e não é transferido diretamente por contratos ou comércio. A capacidade individual também permanece depois de aprendida; a pesquisa, porém, não ensina todos os colonos automaticamente. A Educação é necessária para formar novos indivíduos.
 
 ### Deve ser comum
 
@@ -381,7 +391,7 @@ Cada piloto deve ser especificado com o template comum, mas preservar suas regra
 1. **Resolvido:** no máximo 5 parâmetros principais por setor entram na v1; detalhes avançados podem ser liberados por pesquisa.
 2. **Resolvido:** cada colônia possui uma fila única e apenas uma pesquisa ativa por vez; não há pesquisas paralelas na v1.
 3. **Resolvido:** o conhecimento adquirido é permanente. Ainda pode ser necessário decidir como a colônia redistribui sua capacidade ativa ao trocar de especialização.
-4. **Em aberto:** educação pode recuperar uma skill perdida ou apenas formar novas capacidades? A regra ainda precisa de uma definição mais concreta.
+4. **Resolvido:** Educação forma novas capacidades individuais; a pesquisa apenas libera a capacidade para a colônia aprender. Um colono não sabe automaticamente uma área pesquisada — ele precisa ser educado nela. Recuperação de uma skill perdida fica fora dessa decisão e pode ser definida posteriormente.
 5. **Resolvido:** a pesquisa em si não é transferível por contratos ou comércio; cada colônia desenvolve seu próprio conhecimento.
 6. **Resolvido:** o primeiro ciclo prioriza Produção, Energia e Educação. Saúde entra depois do fluxo inicial do core loop.
 7. **Resolvido:** quando o mercado de serviços médicos e educacionais existir, ele exige pacientes e estudantes externos reais, não apenas demanda abstrata.

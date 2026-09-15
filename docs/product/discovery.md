@@ -532,6 +532,8 @@ declaração (alvos fixados) → deslocamento pelos espaços de conexão
 - o sistema deriva a prioridade de demandas e jobs a partir dessas políticas, necessidades, ordens e regras de segurança;
 - cada política deve produzir consequências e trade-offs perceptíveis na colônia;
 - pesquisa desbloqueia novas capacidades de política, especializações e automações, mas não ativa essas opções automaticamente;
+- uma pesquisa libera uma capacidade para a colônia aprender, mas não concede esse conhecimento a todos os colonos;
+- a educação precisa formar cada colono na capacidade específica antes que ele possa usá-la; por exemplo, pesquisar Neurologia desbloqueia o campo e um médico precisa ser educado para aprender Neurologia;
 - pesquisa ou conteúdo futuro pode alterar capacidades de espécies de fauna sem exigir uma regra rígida de “impossível de domesticar”;
 - medicina, educação, militar, produção, energia e outros setores competem pelo mesmo potencial de pesquisa;
 - é intencionalmente impossível pesquisar tudo em um horizonte relevante: especializações devem levar tempo suficiente para tornar a escolha estratégica;

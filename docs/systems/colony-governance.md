@@ -224,7 +224,7 @@ Exemplos:
 - educação avançada → treinamento de skills e formação de especialistas;
 - doutrina militar → novas regras de armamento e composição de `CombatEntity`.
 
-Uma pesquisa desbloqueia uma **capacidade de política**; o jogador ainda decide se, quando e onde usá-la. O sistema não deve ativar automaticamente toda opção recém-desbloqueada.
+Uma pesquisa desbloqueia uma **capacidade de política** para a colônia; isso não ensina automaticamente todos os colonos. O jogador ainda decide se, quando e onde usá-la, e a Educação precisa formar indivíduos compatíveis nessa capacidade. Por exemplo, pesquisar Neurologia libera o campo, mas um médico precisa ser educado para aprender a aplicá-lo. O sistema não deve ativar automaticamente toda opção recém-desbloqueada.
 
 ```mermaid
 flowchart TD
@@ -243,7 +243,7 @@ flowchart TD
     Energy -. compete por tempo .- Logistics
 ```
 
-O grafo representa competição por capacidade e tempo, não necessariamente bloqueios permanentes. O conhecimento adquirido é permanente e não é transferido diretamente por contratos ou comércio; seguem abertas apenas as regras de recuperação de skills e redistribuição da capacidade ativa ao trocar de especialização.
+O grafo representa competição por capacidade e tempo, não necessariamente bloqueios permanentes. O conhecimento adquirido pela colônia é permanente e não é transferido diretamente por contratos ou comércio. A capacidade individual também permanece depois de aprendida; a Educação é necessária para formar novos colonos, e a recuperação de skills perdidas continua sendo uma decisão futura.
 
 #### 5.5.3 Política como cadeia de consequências
 

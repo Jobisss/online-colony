@@ -1,22 +1,23 @@
 # Graph Report - online-colony  (2026-09-15)
 
 ## Corpus Check
-- Corpus is ~16,982 words - fits in a single context window. You may not need a graph.
+- Corpus is ~17,240 words - fits in a single context window. You may not need a graph.
 
 ## Summary
-- 69 nodes · 88 edges · 11 communities (9 shown, 2 thin omitted)
-- Extraction: 78% EXTRACTED · 19% INFERRED · 2% AMBIGUOUS · INFERRED: 17 edges (avg confidence: 0.83)
+- 89 nodes · 116 edges · 12 communities (10 shown, 2 thin omitted)
+- Extraction: 78% EXTRACTED · 20% INFERRED · 2% AMBIGUOUS · INFERRED: 23 edges (avg confidence: 0.82)
 - Token cost: 0 input · 0 output
 
 ## Community Hubs (Navigation)
-- Traceability Fauna Policies
-- Health Combat Colonists
-- Frontier Governance Time
+- Core Systems and Research
+- Traceability and Consistency
+- Research Education and Core Loop
 - Research Decisions
-- Autonomy and Production
-- Research Model
+- Governance and Autonomy
+- Policy Model
 - Time and Open Questions
-- Core Loop Production-Energy-Education
+- Health and Skills
+- Sector Policies
 - Planning Documents
 - Colony
 - Policy Matrix
@@ -24,55 +25,53 @@
 ## God Nodes (most connected - your core abstractions)
 1. `Frontier` - 10 edges
 2. `Combat` - 9 edges
-3. `Production` - 8 edges
-4. `Research and Technology` - 7 edges
+3. `Research` - 9 edges
+4. `Production` - 8 edges
 5. `Autonomy and Execution` - 5 edges
-6. `Job System` - 5 edges
+6. `Consistency Audit` - 5 edges
 7. `Regional fauna` - 5 edges
-8. `Policy` - 5 edges
-9. `Logistics and Transport` - 4 edges
-10. `Demand System` - 4 edges
+8. `Education` - 5 edges
+9. `Job System` - 5 edges
+10. `Policy` - 5 edges
 
 ## Surprising Connections (you probably didn't know these)
-- `Policy-to-Outcome Pipeline` --implements--> `Policy`  [INFERRED]
-  docs/systems/policy-matrix.md → docs/systems/colony-governance.md
 - `Graph traceability project instruction` --references--> `Graph Traceability`  [EXTRACTED]
   AGENTS.md → docs/architecture/graph-traceability.md
 - `Graph traceability project instruction` --references--> `Incremental impact graph update`  [EXTRACTED]
   AGENTS.md → docs/architecture/graph-traceability.md
+- `Production–Energy–Education Core Loop` --rationale_for--> `Research and Specialization`  [INFERRED]
+  docs/product/discovery.md → docs/systems/policy-matrix.md
+- `Policy-to-Outcome Pipeline` --implements--> `Policy`  [INFERRED]
+  docs/systems/policy-matrix.md → docs/systems/colony-governance.md
 - `Real-time game clock and bounded action durations` --conceptually_related_to--> `Open interaction decisions`  [AMBIGUOUS]
-  docs/product/discovery.md → docs/product/interaction-inventory.md
-- `Frontier` --references--> `Interaction Inventory`  [EXTRACTED]
   docs/product/discovery.md → docs/product/interaction-inventory.md
 
 ## Hyperedges (group relationships)
-- **Research Decision Traceability Across Governance and Policy Matrix** — docs_systems_colony_governance_document, docs_systems_policy_matrix_document, permanent_acquired_knowledge, no_direct_research_transfer [EXTRACTED 1.00]
-- **Pilot Scope for Production Energy and Education** — production_energy_education_pilot, single_active_research_queue, permanent_acquired_knowledge [INFERRED 0.75]
-- **Specialization and Active Research Capacity Constraints** — limited_research_capacity, single_active_research_queue, capacity_redistribution_unresolved, skill_recovery_unresolved [INFERRED 0.85]
+- **Consistency Audit Requirements** — agents_consistency_audit, contradiction_checking, resolved_open_decision_conflicts, cross_community_connections, ambiguous_relation_review, affected_files_reporting [EXTRACTED 1.00]
 
-## Communities (11 total, 2 thin omitted)
+## Communities (12 total, 2 thin omitted)
 
-### Community 0 - "Traceability Fauna Policies"
-Cohesion: 0.22
-Nodes (11): Graph traceability project instruction, Graph Traceability, Incremental impact graph update, Regional fauna, Fauna interactions, Energy Policy, Fauna policy, Production Policy (+3 more)
+### Community 0 - "Core Systems and Research"
+Cohesion: 0.16
+Nodes (18): Autonomy and Execution, Frontier, Logistics and Transport, Sector Policies, Production, Real-Time 1:1 Clock, Interaction Inventory, Colony Governance (+10 more)
 
-### Community 1 - "Health Combat Colonists"
-Cohesion: 0.22
-Nodes (10): Health sequencing after the initial core loop, Colonist, Combat, Logistics and Transport, PendingDecision, Health as basic support in the first cycle, CombatEntity, Ownership, Custody and Reservation (+2 more)
+### Community 1 - "Traceability and Consistency"
+Cohesion: 0.17
+Nodes (15): Graph traceability project instruction, Graph Traceability, Incremental impact graph update, Regional fauna, Combat, PendingDecision, Fauna interactions, CombatEntity (+7 more)
 
-### Community 2 - "Frontier Governance Time"
-Cohesion: 0.24
-Nodes (10): Frontier, Sector Policies, Research and Technology, Real-Time 1:1 Clock, Interaction Inventory, Colony Governance, Directive, Offline Operation (+2 more)
+### Community 2 - "Research Education and Core Loop"
+Cohesion: 0.19
+Nodes (13): Colony Research Capability, Research, Single Research Queue, Neurology, Policy Capability, Research as Policy Expansion and Specialization, Individual Skill Formation, One Active Research at a Time (+5 more)
 
 ### Community 3 - "Research Decisions"
 Cohesion: 0.31
 Nodes (9): Unresolved Active Capacity Redistribution, docs_systems_colony_governance_document, docs_systems_policy_matrix_document, Limited Research Capacity and Specialization Trade-off, No Direct Research Transfer Through Contracts or Trade, Permanent Acquired Knowledge, Production-Energy-Education Pilot, Single Research Queue and One Active Research (+1 more)
 
-### Community 4 - "Autonomy and Production"
-Cohesion: 0.31
-Nodes (9): Autonomy and Execution, Production, BuildPlan, ColonyOrder, Governance Explanation, Demand System, Job System, Production Interactions (+1 more)
+### Community 4 - "Governance and Autonomy"
+Cohesion: 0.39
+Nodes (8): Affected Files Reporting, Consistency Audit, AMBIGUOUS Relation Review, Contradiction Checking, Cross-Community Connections, docs_architecture_graph_traceability, Impact Traversal, Resolved-vs-Open Decision Conflicts
 
-### Community 5 - "Research Model"
+### Community 5 - "Policy Model"
 Cohesion: 0.29
 Nodes (7): Research queue and permanent knowledge, Policy, PriorityRule, StockGoal, Single research queue interaction, Common Policy Contract, Research specialization and limited capacity
 
@@ -80,11 +79,15 @@ Nodes (7): Research queue and permanent knowledge, Policy, PriorityRule, StockGo
 Cohesion: 0.50
 Nodes (5): Real-time game clock and bounded action durations, Open product questions, Game-time durations in interactions, Open interaction decisions, Policy Matrix cross-document reference
 
-### Community 7 - "Core Loop Production-Energy-Education"
-Cohesion: 0.67
-Nodes (3): Production–Infrastructure–Energy–Education core loop, Initial Production–Infrastructure–Energy–Education chain, Production, Energy and Education pilot
+### Community 7 - "Health and Skills"
+Cohesion: 0.40
+Nodes (5): Production–Infrastructure–Energy–Education core loop, Production–Energy–Education Core Loop, Initial Production–Infrastructure–Energy–Education chain, Production → Infrastructure → Energy → Education Chain, Production + Energy + Education Pilot
 
-### Community 8 - "Planning Documents"
+### Community 8 - "Sector Policies"
+Cohesion: 0.50
+Nodes (4): Health sequencing after the initial core loop, Individual Colonist, Health as basic support in the first cycle, Health policy
+
+### Community 9 - "Planning Documents"
 Cohesion: 0.67
 Nodes (3): Frontier Product Discovery, Frontier Interaction Inventory, Frontier Policy Matrix
 
@@ -96,7 +99,7 @@ Nodes (3): Frontier Product Discovery, Frontier Interaction Inventory, Frontier 
 
 ## Knowledge Gaps
 - **3 isolated node(s):** `Policy Matrix`, `Frontier Product Discovery`, `Frontier Policy Matrix`
-  These have ≤1 connection - possible missing edges or undocumented components. (Counts symbols only; 22 node(s) total have ≤1 connection when file, concept and rationale nodes are included.)
+  These have ≤1 connection - possible missing edges or undocumented components. (Counts symbols only; 24 node(s) total have ≤1 connection when file, concept and rationale nodes are included.)
 - **2 thin communities (<3 nodes) omitted from report** — run `graphify query` to explore isolated nodes.
 
 ## Suggested Questions
@@ -106,11 +109,11 @@ _Questions this graph is uniquely positioned to answer:_
   _Edge tagged AMBIGUOUS (relation: conceptually_related_to) - confidence is low._
 - **What is the exact relationship between `Real-time game clock and bounded action durations` and `Open interaction decisions`?**
   _Edge tagged AMBIGUOUS (relation: conceptually_related_to) - confidence is low._
-- **Why does `Frontier` connect `Frontier Governance Time` to `Traceability Fauna Policies`, `Health Combat Colonists`, `Autonomy and Production`?**
-  _High betweenness centrality (0.135) - this node is a cross-community bridge._
-- **Why does `Combat` connect `Health Combat Colonists` to `Traceability Fauna Policies`, `Frontier Governance Time`?**
-  _High betweenness centrality (0.128) - this node is a cross-community bridge._
-- **Why does `Research and Technology` connect `Frontier Governance Time` to `Health Combat Colonists`, `Autonomy and Production`, `Research Model`?**
-  _High betweenness centrality (0.113) - this node is a cross-community bridge._
+- **Why does `Research` connect `Research Education and Core Loop` to `Core Systems and Research`, `Traceability and Consistency`, `Policy Model`?**
+  _High betweenness centrality (0.219) - this node is a cross-community bridge._
+- **Why does `Combat` connect `Traceability and Consistency` to `Sector Policies`, `Core Systems and Research`, `Research Education and Core Loop`?**
+  _High betweenness centrality (0.115) - this node is a cross-community bridge._
+- **Are the 3 inferred relationships involving `docs_architecture_graph_traceability` (e.g. with `Contradiction Checking` and `Resolved-vs-Open Decision Conflicts`) actually correct?**
+  _`docs_architecture_graph_traceability` has 3 INFERRED edges - model-reasoned connections that need verification._
 - **What connects `Policy Matrix`, `Frontier Product Discovery`, `Frontier Policy Matrix` to the rest of the system?**
   _3 weakly-connected nodes found - possible documentation gaps or missing edges._

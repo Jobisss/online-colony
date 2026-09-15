@@ -166,7 +166,7 @@ Este diagrama mostra responsabilidades conceituais, não serviços. Um mesmo pro
 | POP-08 | Tratar condição | Colono/colônia | Híbrido | Reduz severidade ou risco | Prioridade médica e recursos |
 | POP-09 | Piorar condição | Sistema | Automático | Cria debuff ou novo estágio | Tempo, negligência e tratamento |
 | POP-10 | Morrer | Sistema | Automático | Remove colono após regra fatal | Três condições graves simultâneas |
-| POP-11 | Educar/treinar colono | Colônia/colono | Híbrido | Desenvolve skill conforme política e capacidade | Professor, tempo, talento e especialização |
+| POP-11 | Educar/treinar colono | Colônia/colono | Híbrido | Desenvolve uma capacidade individual já desbloqueada pela pesquisa | Professor, tempo, talento, especialização e capacidade liberada |
 
 ### 6.3 Demandas, jobs e autonomia
 
