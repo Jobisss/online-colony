@@ -635,3 +635,269 @@ flowchart LR
 Frontier tem uma visão promissora, mas ainda não está pronto para gerar tasks de implementação. As decisões com maior poder de alterar a arquitetura são: modelo de tempo, limites da autonomia, escala de colonos, ownership entre simulação e economia, tratamento offline, liquidez do mercado, perdas de conflito, permanência do mundo e objetivo de longo prazo.
 
 O próximo artefato recomendado, após a revisão humana deste documento, é uma decisão de produto sobre o **menor ciclo jogável** e um mapa de contextos limitado a esse ciclo. Só então vale iniciar o Macro System Design.
+
+## 13. Revisão v0.2 — respostas do fundador
+
+Esta seção registra as respostas fornecidas após a primeira rodada de perguntas. “Confirmado” significa intenção atual do produto; “proposta” ainda precisa de validação.
+
+### 13.1 Direção do produto
+
+Prioridade da experiência principal:
+
+1. governar uma colônia;
+2. competir por poder;
+3. construir uma economia;
+4. contar histórias de colonos.
+
+O sucesso não será uma condição única de vitória. Colônias poderão buscar papéis diferentes, como exportar soldados, fornecer comida, produzir armas ou especializar-se em outros setores. Isso aponta para um modelo de sucesso relativo, baseado em estratégia, reputação, influência e especialização.
+
+**Implicação:** “poder” não deve ser apenas força militar. Pode ser uma combinação de capacidade produtiva, influência, logística, tecnologia, alianças e defesa. Um ranking único de poder provavelmente reduziria a variedade desejada.
+
+### 13.2 Ritmo de participação
+
+Requisitos atuais:
+
+- organização mínima da colônia em até aproximadamente 40 minutos por dia;
+- possibilidade de jogar adequadamente entrando pelo menos 3 vezes por semana;
+- jogadores que desejarem competir por poder podem investir mais tempo e atenção;
+- velocidade do mundo fixa;
+- a colônia continua funcionando sem o jogador;
+- decisões críticas não são tomadas automaticamente.
+
+**Consequência de design:** o jogo precisa privilegiar planejamento, filas, políticas, alertas e relatórios. Não pode depender de reação em tempo real ou de presença contínua para evitar uma catástrofe.
+
+### 13.3 PvP e invasões
+
+O PvP deve ser opcional. A hipótese atual é que uma colônia precise se liberar para invasões para poder invadir outras colônias. A invasão deve ser anunciada e oferecer tempo real de preparação. O jogador não deve perder a colônia de um dia para o outro.
+
+Regras desejadas até aqui:
+
+- a colônia pode sofrer invasão;
+- uma invasão deve ser uma ação preparada, não um ataque instantâneo;
+- o alvo recebe aviso e tem uma janela para reagir;
+- a derrota não transfere automaticamente a propriedade da colônia;
+- uma fábrica pode parar por falta de recursos, mas a colônia não deve ser apagada;
+- o atacante pode escolher o que tenta roubar;
+- o defensor pode manter um estoque seguro, limitado por peso e por tipos de itens;
+- combate é essencial ao produto, mas não deve permitir snowball ou griefing sem contramedidas.
+
+**Proposta de modelo para validação:** três estados de PvP por colônia — `PROTECTED`, `OPEN` e `ENGAGED`.
+
+- `PROTECTED`: não pode iniciar nem receber invasões; possui limitações para competir por certos benefícios de guerra;
+- `OPEN`: pode iniciar e receber invasões; a troca para este estado tem cooldown e não pode ser usada para escapar de uma guerra;
+- `ENGAGED`: está em uma invasão declarada e permanece vulnerável até o encerramento da operação.
+
+Uma invasão poderia seguir:
+
+```text
+declaração → janela de preparação → deslocamento → combate → breach/defesa
+→ saque ou falha → recuperação e cooldown
+```
+
+O tempo exato, o custo de declarar guerra, os alvos permitidos e a proteção de iniciantes continuam abertos.
+
+### 13.4 Mundo e população inicial
+
+Decisões atuais:
+
+- mundo persistente, sem reset ou temporada por enquanto;
+- sem NPCs e sem facções externas;
+- fauna pode existir;
+- corporações/facções serão formadas apenas por jogadores;
+- cada nova colônia começa com 3 colonos básicos;
+- os 3 colonos são gerados aleatoriamente;
+- a geração deve garantir capacidade mínima para iniciar;
+- a população começa com funções básicas e não pode nascer com uma condição que impeça o começo;
+- população cresce por reprodução;
+- satisfação alta pode gerar imigração espontânea.
+
+**Regra adicional recomendada:** a geração aleatória deve validar um conjunto mínimo de cobertura, por exemplo capacidade de obter alimento, água, abrigo e manutenção básica. Isso preserva variedade sem criar uma abertura impossível.
+
+### 13.5 Saúde e mortalidade
+
+O modelo desejado é de mortalidade indireta e consequência persistente, não de morte frequente como em *RimWorld*.
+
+- invasões recebidas e invasões malsucedidas podem causar condições;
+- condições podem ser cicatrizes, doenças ou lesões;
+- condições não tratadas podem piorar;
+- uma condição grave pode ocupar mais de um espaço/nível de gravidade;
+- tratamento pode reduzir ou recuperar condições;
+- três condições permanentes graves podem causar a morte do colono.
+
+Há uma tensão terminológica entre “condição permanente” e “condição tratável”. A formulação mais clara para o sistema seria:
+
+- **temporária:** desaparece com tempo ou tratamento;
+- **persistente:** pode ser tratada e reduzida, mas deixa risco ou sequela;
+- **grave:** estágio que ocupa capacidade de saúde e pode contribuir para mortalidade;
+- **fatal:** estado terminal quando as regras de mortalidade são atingidas.
+
+**Ponto a confirmar:** “três condições graves” significa três condições graves simultâneas, três níveis acumulados ou três condições permanentes ao longo da vida? A recomendação é usar simultaneidade para que tratamento e prevenção tenham valor e para evitar uma contagem inevitável até a morte.
+
+### 13.6 Conceitos que ficaram pouco claros
+
+#### O que significa “escala” na pergunta 2?
+
+Escala não é somente tamanho do mapa. É o conjunto de limites que o sistema precisa suportar:
+
+| Dimensão | Exemplo da pergunta |
+| --- | --- |
+| Colônia | Quantos prédios, estoques e processos uma colônia madura possui? |
+| População | Quantos colonos existem: 3, 20, 100 ou milhares? |
+| Mundo | Quantas regiões e colônias compartilham o mesmo mundo? |
+| Interação | Quantos jogadores podem negociar ou guerrear na mesma região? |
+| Simulação | Quantos agentes e tarefas precisam ser avaliados por ciclo? |
+| Conteúdo | Quantas receitas, itens, tecnologias e eventos existem? |
+
+Isso importa porque uma colônia de 20 colonos pede decisões e UX diferentes de uma colônia de 2.000. Não é necessário escolher números finais agora.
+
+**Faixas sugeridas apenas para discussão:** começar com 3 colonos, crescer para 10–30 no núcleo jogável e deixar 50–100 como hipótese de colônia madura. O mundo inicial poderia ser pequeno o suficiente para testar dezenas de colônias ativas, sem prometer escala global antes de medir a simulação.
+
+#### O que significa “explicabilidade” na pergunta 12?
+
+É o sistema mostrar por que algo aconteceu. Exemplos:
+
+- “A demanda de comida subiu porque a população cresceu e o estoque caiu.”
+- “O job não foi atribuído porque não existe colono disponível com a skill necessária.”
+- “A fábrica parou porque o estoque de cobre reservado foi enviado para outra ordem.”
+- “O colono escolheu reparar a bomba antes de extrair pedra porque a política de sobrevivência tem prioridade maior.”
+
+Isso não exige mostrar cálculo técnico interno; exige uma explicação útil para o jogador investigar e decidir.
+
+#### O que significa “boa autonomia” na pergunta 13?
+
+É definir o que o sistema prioriza quando não consegue fazer tudo ao mesmo tempo. Por exemplo, ele pode priorizar:
+
+1. sobrevivência e segurança;
+2. necessidades básicas;
+3. estabilidade da infraestrutura;
+4. políticas e metas do jogador;
+5. eficiência e lucro;
+6. conveniência ou melhoria de longo prazo.
+
+**Proposta inicial:** essa hierarquia, com as políticas do jogador podendo alterar prioridades dentro de limites seguros. Assim, a autonomia não maximiza apenas produção e não deixa a população morrer para cumprir uma ordem econômica.
+
+#### O que significa “localização e custody” na pergunta 19?
+
+É decidir o nível de precisão necessário para saber onde um ativo está. Exemplos:
+
+- minério fungível pode ser controlado como “500 ferro no armazém A”;
+- uma arma única precisa ter localização e identidade próprias;
+- um colono precisa existir em uma localização exata ou em trânsito;
+- um carregamento precisa indicar origem, destino e rota.
+
+**Proposta para o início:** recursos fungíveis são rastreados por estoque e nó logístico; itens únicos e colonos são rastreados individualmente; não é necessário simular coordenada exata de cada parafuso.
+
+#### O que significa ownership durante uma operação na pergunta 20?
+
+Ownership é quem tem o direito sobre o ativo. Custody é quem o guarda ou transporta. Reservation é quem tem aquele ativo separado para uma operação.
+
+Exemplo de venda:
+
+```text
+ferro pertence ao vendedor
+→ ferro é reservado para uma ordem
+→ transportador recebe a custody
+→ comprador recebe ownership na entrega confirmada
+```
+
+Para dinheiro:
+
+```text
+créditos pertencem ao comprador
+→ ficam reservados
+→ entram em escrow
+→ vendedor recebe após entrega
+→ refund ocorre se a operação for cancelada segundo a regra
+```
+
+Essa separação evita que “estar dentro de uma fábrica”, “estar em uma carroça” ou “estar reservado” crie duplicação ou transferência indevida.
+
+#### O que são corporações na pergunta 24?
+
+São organizações criadas por jogadores, equivalentes a guildas, clãs ou companhias. Elas poderiam ter membros, cargos, tesouraria, instalações compartilhadas, contratos, projetos e relações diplomáticas.
+
+Não precisam existir no primeiro ciclo. O conceito só deve entrar no Macro System Design quando houver uma necessidade clara de ownership coletivo ou colaboração que uma colônia individual não resolva.
+
+#### O que são contratos de colonos na pergunta 15?
+
+Contrato não significa necessariamente vender uma pessoa. Seria um acordo entre colônias para um colono trabalhar, ser emprestado ou prestar serviço por determinado período, com salário, duração, transporte, direitos e condições de retorno.
+
+**Proposta:** deixar esse mercado para uma fase posterior. No início, reprodução e imigração já cobrem crescimento populacional sem introduzir regras complexas de consentimento, família, transporte e abandono.
+
+## 14. Propostas para decisões ainda abertas
+
+### 14.1 Ciclo de tempo
+
+Para combinar mundo persistente, velocidade fixa e três acessos semanais, a hipótese mais simples é:
+
+- relógio global contínuo em tempo real;
+- sem pause ou aceleração por jogador;
+- ações possuem duração real;
+- o servidor usa ciclos internos menores para precisão, mas agrupa trabalho de colônias inativas;
+- decisões críticas ficam pendentes até o jogador ou uma política autorizada resolvê-las;
+- relatórios resumem o que ocorreu desde o último acesso.
+
+O número exato do ciclo interno deve ser decidido depois de definir combate, jobs e necessidades. Não é necessário tratar “tick de simulação” e “dia do jogador” como a mesma unidade.
+
+### 14.2 Mercado inspirado no Bazaar
+
+Uma boa referência conceitual para o mercado de recursos é um bazar com ordens:
+
+- ordem de compra com preço e quantidade;
+- ordem de venda com preço e quantidade;
+- compra/venda imediata contra ordens existentes;
+- saldo e mercadoria reservados enquanto a ordem está ativa;
+- taxa de operação e regras de cancelamento;
+- histórico de preço e volume;
+- mercados regionais, quando a logística física estiver pronta.
+
+Para não criar uma economia vazia no começo, será necessário escolher entre liquidez fornecida por jogadores, ordens de referência do sistema ou algum mecanismo inicial de mercado. Isso é uma decisão de economia, não apenas de interface.
+
+### 14.3 Anti-snowball e proteção contra abuso
+
+“Snowball” significa que quem está na frente acumula tanta força, território e recursos que os demais deixam de ter uma resposta possível. Para preservar competição, a proposta é combinar:
+
+- proteção inicial para colônias novas;
+- invasões com declaração, custo e tempo de preparação;
+- limite de dano e de saque por operação;
+- estoque seguro limitado, nunca uma invulnerabilidade total;
+- custos logísticos crescentes para operações distantes;
+- recuperação e reconstrução após derrota;
+- mais de um eixo de poder, permitindo competir por comida, tecnologia, defesa, logística ou comércio;
+- nenhuma transferência instantânea da propriedade da colônia.
+
+Ainda é preciso definir quais desses mecanismos fazem parte da fantasia desejada e quais seriam artificiais demais.
+
+### 14.4 Menor ciclo jogável recomendado
+
+Como combate é essencial, o menor ciclo não precisa começar com PvP completo. Ele pode provar a governança e a defesa básica:
+
+```text
+3 colonos aleatórios válidos
+→ necessidades de água/comida/abrigo
+→ prioridades do jogador
+→ demandas e jobs autônomos
+→ extração e produção simples
+→ armazenamento e consumo
+→ energia e manutenção básica
+→ fauna/hazard ou incidente local
+→ preparação de defesa
+→ relatório de consequências
+```
+
+Esse recorte responde se Frontier é divertido como colônia governada antes de adicionar mercado entre jogadores, corporações e invasões completas.
+
+## 15. Próximas decisões para fechar o Macro System Design
+
+As respostas mais importantes que ainda faltam são:
+
+1. confirmar se uma colônia madura deve ficar na faixa de dezenas de colonos;
+2. confirmar a hierarquia de autonomia: segurança → necessidades → estabilidade → políticas → eficiência;
+3. definir se condições graves são simultâneas para contar na mortalidade;
+4. decidir o que uma invasão pode destruir, danificar e roubar;
+5. definir o custo e a duração da preparação de uma invasão;
+6. decidir como colônias `PROTECTED` podem competir por poder sem virar um modo sem risco;
+7. escolher a regra inicial de criação da moeda e seus principais sinks;
+8. decidir se o mercado começa como feature futura junto das rotas comerciais;
+9. definir os controles manuais permitidos e as decisões sempre autônomas;
+10. aprovar o menor ciclo jogável recomendado.
