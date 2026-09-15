@@ -1,7 +1,7 @@
 # Frontier — Macro System Design: Colony Governance
 
 **Status:** rascunho para revisão humana  
-**Versão:** v0.1  
+**Versão:** v0.2  
 **Escopo:** governança e intenção de uma única colônia  
 **Fora do escopo:** execução de jobs, IA de colonos, produção, ledger, mercado, clãs e resolução detalhada de combate
 
@@ -152,7 +152,7 @@ Uma meta gera demanda; ela não cria recursos instantaneamente.
 
 ### 5.5 Policy
 
-Regra que limita ou orienta decisões autônomas.
+Regra que limita ou orienta decisões autônomas. Políticas são a principal superfície de customização da colônia: duas colônias podem possuir os mesmos prédios e ainda operar de maneiras muito diferentes por causa das suas políticas.
 
 Exemplos conceituais:
 
@@ -165,7 +165,62 @@ Exemplos conceituais:
 
 As políticas precisam ter limites explícitos. Uma política não pode autorizar uma ação proibida pelo estado do mundo ou por uma regra de segurança.
 
-### 5.6 PendingDecision
+#### 5.5.1 Catálogo inicial de políticas
+
+| Setor | O jogador configura | Consequência esperada |
+| --- | --- | --- |
+| Segurança | armamento, muros, prontidão, regras de engajamento e defesa | altera risco, consumo de materiais e resposta a ameaças |
+| Alimentação | restrições alimentares, tipos de produção, conservação e reserva | altera saúde, satisfação, espaço, energia e consumo |
+| Saúde | medicina, cirurgia, tratamento de doenças e prioridade médica | altera sobrevivência, disponibilidade de colonos e uso de remédios |
+| Energia | fontes permitidas, produção, reserva e prioridade de consumo | altera custo, confiabilidade, apagões e produção |
+| Produção | armas, roupas, armaduras, comida, medicina e materiais básicos | altera cadeias produtivas, capacidade e especialização |
+| Descanso | tempo de trabalho, recreação, sono e tolerância à fadiga | altera produtividade, moral, saúde e segurança |
+| Fauna | criação de gado, abate, reprodução, alimentação e manejo | altera alimento, materiais, espaço, risco e trabalho |
+| Comércio | produtos/serviços autorizados, preços, reservas e contrapartes | altera liquidez, estoques, risco e dependência externa |
+
+Cada setor deve possuir parâmetros com custo e efeito observáveis. “Produzir comida” não é uma única opção: tipo de alimento, conservação, prioridade, mão de obra, energia e estoque-alvo devem criar escolhas diferentes.
+
+#### 5.5.2 Pesquisa como expansão de políticas
+
+Pesquisa não deve apenas liberar prédios. Ela também pode liberar novas opções de política, maior precisão de controle ou automações mais avançadas.
+
+Exemplos:
+
+- saúde básica → tratamento geral;
+- medicina avançada → cirurgia especializada e tratamento de condições específicas;
+- conservação → novas regras de armazenamento e preservação;
+- metalurgia → políticas de liga, qualidade e prioridade de materiais;
+- engenharia energética → fontes, baterias e racionamento mais sofisticado;
+- doutrina militar → novas regras de armamento e composição de `CombatEntity`.
+
+Uma pesquisa desbloqueia uma **capacidade de política**; o jogador ainda decide se, quando e onde usá-la. O sistema não deve ativar automaticamente toda opção recém-desbloqueada.
+
+### 5.6 ColonyOrder
+
+Uma ordem é uma intenção operacional específica, diferente de uma política permanente.
+
+- **Policy:** “nunca usar o estoque seguro para produção normal”;
+- **Goal:** “manter 100 unidades de comida”;
+- **Order:** “produzir 20 armaduras de qualidade mínima 2 até a data definida”;
+- **Job:** “transportar 10 ferro do armazém A para a oficina B agora”.
+
+Uma `ColonyOrder` pode solicitar produtos ou serviços dentro da própria colônia e, quando os mercados estiverem ativos, de NPCs ou de outras colônias.
+
+Campos conceituais:
+
+- produto ou serviço;
+- quantidade e qualidade mínima;
+- origem e destino;
+- prazo;
+- orçamento ou preço máximo;
+- prioridade;
+- substitutos permitidos;
+- uso de estoque seguro permitido ou proibido;
+- política de falha, cancelamento e expiração.
+
+Isso permite criar ordens sobre comida, remédios, roupas, armaduras, reparos, transporte, tratamento médico, construção e contratos, sem transformar cada novo produto em uma regra especial de Governance.
+
+### 5.7 PendingDecision
 
 Decisão que a colônia detectou, preparou ou recomendou, mas não pode executar sem resposta do jogador.
 
@@ -178,6 +233,46 @@ Exemplos:
 - confirmar uma operação com perda potencial permanente.
 
 Uma PendingDecision precisa informar urgência, prazo, consequências prováveis e o que ocorrerá se ficar sem resposta.
+
+### 5.8 Formação da base e construção
+
+A formação da base precisa preservar a autoria do jogador sem exigir que ele desenhe cada detalhe. A recomendação é um modelo híbrido com três níveis:
+
+| Nível | O jogador faz | A colônia faz |
+| --- | --- | --- |
+| Planta/blueprint | Define posição, formato, área e prioridade | Valida espaço, materiais, acesso e execução |
+| Ordem de ambiente | Pede “construir uma casa para 3 colonos” e define restrições | Propõe layout, calcula custo e apresenta preview |
+| Política de expansão | Define regras como “priorizar abrigo e deixar corredor de expansão” | Sugere novos ambientes quando uma necessidade surgir |
+
+**Recomendação para a v1:** o jogador aprova o blueprint ou a proposta de ambiente; a IA executa a construção, escolhe a ordem dos trabalhos e pode sugerir melhorias. Construção totalmente autônoma sem preview deve ser desbloqueada apenas quando houver confiança suficiente e uma política explícita.
+
+Uma casa “inteligente” deve ser avaliada por restrições verificáveis, não por uma promessa vaga de inteligência. Exemplos:
+
+- abriga a população prevista;
+- possui acesso válido;
+- respeita o espaço físico do território;
+- não bloqueia rotas essenciais;
+- considera energia, água, comida e saúde;
+- permite expansão futura;
+- respeita segurança, distância de ameaças e separação de áreas;
+- informa custo, tempo e trade-offs antes da aprovação.
+
+```mermaid
+flowchart LR
+    Intent[Ordem do jogador\nconstruir ambiente] --> Validate[Governance valida\nterritório e política]
+    Validate --> Propose[Planner propõe\nlayout, custo e prazo]
+    Propose --> Review{Aprovação\nnecessária?}
+    Review -->|Sim| Approve[Jogador aprova ou ajusta]
+    Review -->|Não, política permite| Auto[Política autoriza]
+    Approve --> BuildPlan[Build plan persistido]
+    Auto --> BuildPlan
+    BuildPlan --> Jobs[Autonomy cria jobs]
+    Jobs --> Construction[Colonos constroem]
+    Construction --> Result[Resultado, bloqueio ou falha]
+    Result --> Report[Governance mostra\ncausa e próxima decisão]
+```
+
+O planner de construção não deve escrever diretamente no estado físico. Ele produz uma proposta ou `BuildPlan`; Infrastructure e Autonomy validam recursos, reservas, caminho e execução.
 
 ## 6. Fluxo conceitual de uma decisão
 
@@ -240,6 +335,9 @@ Os nomes abaixo são comandos de domínio, não endpoints de API.
 | `SetPriority` | Jogador | Atualiza ordenação de intenção | Manual |
 | `SetStockGoal` | Jogador | Cria/altera meta de estoque | Manual |
 | `SetPolicy` | Jogador | Ativa ou altera uma política | Manual |
+| `SetSectorPolicy` | Jogador | Altera parâmetros de Segurança, Alimentação, Saúde, Energia, Produção, Descanso, Fauna ou Comércio | Manual |
+| `CreateColonyOrder` | Jogador | Solicita produto ou serviço com quantidade, prazo e restrições | Manual |
+| `CancelColonyOrder` | Jogador | Cancela uma ordem ainda compatível com cancelamento | Manual |
 | `EnableFacility` | Jogador | Autoriza operação de prédio | Manual |
 | `DisableFacility` | Jogador | Suspende novos usos do prédio | Manual |
 | `CreateBuildPlan` | Jogador | Registra intenção de construção | Híbrido |
@@ -248,6 +346,10 @@ Os nomes abaixo são comandos de domínio, não endpoints de API.
 | `RejectPendingDecision` | Jogador | Impede ação crítica | Crítico |
 | `ConfigureSecureStock` | Jogador | Define reserva protegida | Manual |
 | `ConfigureDefenseDoctrine` | Jogador | Define orientação de defesa | Manual |
+| `ConfigureLivestockPolicy` | Jogador | Define manejo, reprodução e abate de fauna domesticada | Manual |
+| `ConfigureMedicalPolicy` | Jogador | Define prioridade de medicina, cirurgia e tratamentos | Manual |
+| `SetWorkRestSchedule` | Jogador | Define trabalho, sono e recreação | Manual |
+| `ConfigureConstructionPolicy` | Jogador | Define regras para propostas e expansão da base | Manual |
 | `EnablePvpProtection` | Jogador/NPC | Ativa proteção conforme regra | Crítico |
 | `DisablePvpProtection` | Jogador | Torna a colônia elegível ao PvP | Crítico |
 
@@ -265,6 +367,13 @@ Eventos abaixo comunicam que algo aconteceu; não são comandos.
 | `StockGoalUpdated` | Meta de estoque mudou | Demand, Autonomy |
 | `PolicyActivated` | Política ficou ativa | Autonomy, Security |
 | `PolicyDeactivated` | Política foi removida | Autonomy, Security |
+| `SectorPolicyUpdated` | Parâmetros de um setor foram alterados | Autonomy, Production, Health, Defense, Energy |
+| `ColonyOrderCreated` | Ordem de produto/serviço foi persistida | Demand, Autonomy, Market |
+| `ColonyOrderChanged` | Ordem foi alterada | Demand, Autonomy, Market |
+| `ColonyOrderCanceled` | Ordem foi cancelada | Demand, Autonomy, Inventory, Market |
+| `PolicyCapabilityUnlocked` | Pesquisa liberou nova opção de política | Governance, UI |
+| `BuildPlanProposed` | Planner sugeriu formação da base | Governance, UI |
+| `BuildPlanApproved` | Jogador autorizou um layout | Autonomy, Infrastructure |
 | `PendingDecisionCreated` | Confirmação passou a ser necessária | UI, Notification |
 | `PendingDecisionResolved` | Jogador aprovou/rejeitou | Autonomy, Audit |
 | `GovernanceVersionAdvanced` | Estado de intenção avançou | Qualquer consumidor de snapshot |
@@ -283,6 +392,10 @@ Os nomes são provisórios. O contrato final precisa definir versão, ordenaçã
 - uma decisão crítica não pode ser tratada como aprovada apenas porque expirou;
 - uma alteração de prioridade deve possuir versão e histórico;
 - reenvio do mesmo comando não pode duplicar directive, meta ou autorização;
+- uma `ColonyOrder` não pode ser tratada como um job até que suas pré-condições sejam satisfeitas;
+- uma política desbloqueada por pesquisa não pode ser usada antes da capacidade estar disponível;
+- alterar uma política deve deixar visível quais demandas e ordens podem ser afetadas;
+- um `BuildPlan` aprovado não garante construção imediata: recursos, espaço, caminho e capacidade ainda precisam ser validados;
 - desligar um prédio não deve apagar silenciosamente recursos já reservados;
 - configurar estoque seguro não pode exceder os limites definidos pelo mundo;
 - desativar proteção PvP deve produzir aviso e histórico;
@@ -358,18 +471,21 @@ Alternativa: priorizar energia ou comprar no NPC
 
 Estas são as decisões específicas de Colony Governance que precisam ser respondidas antes de fechar o macro design:
 
-1. Quais políticas existem no primeiro ciclo? Segurança, comida, saúde, energia, produção e descanso são suficientes?
-2. O jogador pode criar prioridades livres ou escolhe uma lista de prioridades predefinida?
-3. Uma prioridade é global, por sistema ou por prédio/recurso?
-4. O jogador pode assumir controle manual temporário de um colono ou apenas alterar a intenção da colônia?
-5. Quais ações sempre exigem confirmação: invasão, desativar proteção, aceitar imigrante, contrato e saque?
-6. Quando uma meta de estoque entra em conflito com uma reserva de emergência?
-7. O que acontece quando uma decisão crítica expira sem resposta?
-8. O jogador pode habilitar/desabilitar uma instalação enquanto há jobs e reservas ativos?
-9. A proteção PvP é uma política da colônia ou um estado do mundo com contrato NPC?
+1. Os setores confirmados para políticas são Segurança, Alimentação, Saúde, Energia, Produção, Descanso, Fauna e Comércio. Quais são os parâmetros mínimos de cada setor na v1?
+2. O jogador poderá criar prioridades livres ou escolher uma lista predefinida por setor?
+3. Uma prioridade será global, por setor, por prédio, por recurso ou por ordem?
+4. O jogador poderá assumir controle manual temporário de um colono ou apenas alterar a intenção da colônia? Essa decisão será tomada após o inventário completo de interações.
+5. As ações críticas provisórias são invasão, desativação da proteção PvP, aceitação de imigrante, aceitação de contrato e saque. Alguma delas deve ser automática por política?
+6. Quando uma meta de estoque entra em conflito com uma reserva de emergência ou com uma ordem de maior prioridade?
+7. O que acontece quando uma decisão crítica expira sem resposta: rejeitar, manter estado atual ou aplicar política segura?
+8. O jogador pode habilitar/desabilitar uma instalação enquanto há jobs e reservas ativos? Como as reservas serão liberadas?
+9. A proteção PvP será tratada como uma política, um estado da colônia e um contrato NPC ao mesmo tempo? A proposta é usar os três conceitos com responsabilidades separadas.
 10. Quais eventos precisam ser mostrados imediatamente e quais entram em resumo offline?
-11. O jogador pode ter múltiplos perfis de política para alternar ou apenas uma configuração ativa?
+11. O jogador poderá ter múltiplos perfis de política para alternar ou apenas uma configuração ativa?
 12. Qual parte da governança será editável em massa para respeitar o limite de 40 minutos por dia?
+13. O modelo híbrido de construção — blueprint manual, proposta inteligente e política de expansão — está aprovado para a v1?
+14. Quais capacidades de política devem ser liberadas por pesquisa em cada setor?
+15. Quais produtos e serviços podem ser solicitados por `ColonyOrder` no primeiro ciclo e quais ficam para mercados futuros?
 
 ## 15. Critério de pronto para o próximo domínio
 

@@ -143,6 +143,12 @@ Este diagrama mostra responsabilidades conceituais, não serviços. Um mesmo pro
 | GOV-07 | Inspecionar estado | Jogador | Manual | Mostra causas, previsão e consequências | Nível de explicabilidade |
 | GOV-08 | Receber relatório offline | Sistema | Automático | Resume alterações desde o último acesso | Agrupamento e severidade |
 | GOV-09 | Cancelar plano | Jogador | Híbrido | Remove intenção ainda não executada | O que acontece com reservas |
+| GOV-10 | Configurar política setorial | Jogador | Manual | Altera segurança, alimentação, saúde, energia, produção, descanso, fauna ou comércio | Parâmetros, limites e pesquisa necessária |
+| GOV-11 | Criar ordem de produto/serviço | Jogador | Manual | Solicita quantidade, qualidade, prazo e restrições | Reserva, orçamento e substitutos |
+| GOV-12 | Aprovar proposta de ambiente | Jogador | Crítico | Autoriza layout de base gerado pelo planner | Critérios de aprovação e custo |
+| GOV-13 | Definir política de construção | Jogador | Manual | Orienta expansão e sugestões de layout | Quando a IA pode propor/construir |
+| GOV-14 | Configurar manejo de fauna | Jogador | Manual | Define criação, alimentação, reprodução e abate | Limites de espaço e prioridade |
+| GOV-15 | Usar capacidade desbloqueada | Jogador/colônia | Híbrido | Ativa opção de política liberada por pesquisa | Pesquisa pode liberar, mas não ativar sozinha |
 
 ### 6.2 População e saúde
 
