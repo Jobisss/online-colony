@@ -1,26 +1,38 @@
 {
   "E:\\jobisss\\online-colony\\docs\\product\\discovery.md": {
-    "mtime": 1789497647.2671065,
-    "seen": 1789498642.666162,
-    "ast_hash": "3747cc1470ccc2de6213daa4753c366d",
-    "semantic_hash": "3747cc1470ccc2de6213daa4753c366d"
+    "mtime": 1789500389.8084397,
+    "seen": 1789500675.5685606,
+    "ast_hash": "38dc103db7288323bc7663bec1c0eae3",
+    "semantic_hash": "38dc103db7288323bc7663bec1c0eae3"
   },
   "E:\\jobisss\\online-colony\\docs\\product\\interaction-inventory.md": {
-    "mtime": 1789497615.0074885,
-    "seen": 1789498642.666162,
-    "ast_hash": "ea6b548a43fa5f7e27595073c52b5b07",
-    "semantic_hash": "ea6b548a43fa5f7e27595073c52b5b07"
+    "mtime": 1789500387.7036498,
+    "seen": 1789500675.5685606,
+    "ast_hash": "1209259418a2eb1e6e34c7203e7b2349",
+    "semantic_hash": "1209259418a2eb1e6e34c7203e7b2349"
   },
   "E:\\jobisss\\online-colony\\docs\\systems\\colony-governance.md": {
-    "mtime": 1789497579.088869,
-    "seen": 1789498642.666162,
-    "ast_hash": "1454d7b7201a117eaab7f69d87fad839",
-    "semantic_hash": "1454d7b7201a117eaab7f69d87fad839"
+    "mtime": 1789501047.3870475,
+    "seen": 1789501294.4749842,
+    "ast_hash": "b34b01087f09909a4c8a296f48c4eaa9",
+    "semantic_hash": "b34b01087f09909a4c8a296f48c4eaa9"
   },
   "E:\\jobisss\\online-colony\\docs\\systems\\policy-matrix.md": {
-    "mtime": 1789497559.8544643,
-    "seen": 1789498642.666162,
-    "ast_hash": "970d7f90c36f10decd25cfbdc0f35e35",
-    "semantic_hash": "970d7f90c36f10decd25cfbdc0f35e35"
+    "mtime": 1789501100.3556437,
+    "seen": 1789501294.4749842,
+    "ast_hash": "252902d77e0ce9d8acde6561256ab02d",
+    "semantic_hash": "252902d77e0ce9d8acde6561256ab02d"
+  },
+  "E:\\jobisss\\online-colony\\AGENTS.md": {
+    "mtime": 1789499207.9094756,
+    "seen": 1789500675.5685606,
+    "ast_hash": "0f07989ca93b40a50d9a18bca81da938",
+    "semantic_hash": "0f07989ca93b40a50d9a18bca81da938"
+  },
+  "E:\\jobisss\\online-colony\\docs\\architecture\\graph-traceability.md": {
+    "mtime": 1789498625.059507,
+    "seen": 1789500675.5685606,
+    "ast_hash": "b1302b1f7a651eecf7f9e5229a8b7a15",
+    "semantic_hash": "b1302b1f7a651eecf7f9e5229a8b7a15"
   }
 }

@@ -243,7 +243,7 @@ flowchart TD
     Energy -. compete por tempo .- Logistics
 ```
 
-O grafo representa competição por capacidade e tempo, não necessariamente bloqueios permanentes. A forma final de exclusividade, recuperação ou transferência de conhecimento continua sendo uma decisão de Research.
+O grafo representa competição por capacidade e tempo, não necessariamente bloqueios permanentes. O conhecimento adquirido é permanente e não é transferido diretamente por contratos ou comércio; seguem abertas apenas as regras de recuperação de skills e redistribuição da capacidade ativa ao trocar de especialização.
 
 #### 5.5.3 Política como cadeia de consequências
 

@@ -488,7 +488,9 @@ O modelo de invasão está em §8.14; números e detalhes seguem abertos em §11
 ### 8.10 Pesquisa
 
 - pesquisa e tecnologia são **essenciais** e fazem parte do núcleo jogável;
-- o ciclo mínimo jogável (§10.5) inclui pelo menos uma pesquisa básica que altera a colônia.
+- o ciclo mínimo jogável (§10.5) inclui pelo menos uma pesquisa básica que altera a colônia;
+- cada colônia possui uma fila única e apenas uma pesquisa ativa por vez na v1;
+- o conhecimento adquirido é permanente e a pesquisa não é transferida diretamente por contratos ou comércio.
 
 ### 8.11 Contratos de colonos
 
@@ -534,6 +536,7 @@ declaração (alvos fixados) → deslocamento pelos espaços de conexão
 - medicina, educação, militar, produção, energia e outros setores competem pelo mesmo potencial de pesquisa;
 - é intencionalmente impossível pesquisar tudo em um horizonte relevante: especializações devem levar tempo suficiente para tornar a escolha estratégica;
 - não deve existir uma configuração universalmente ótima; colônias especializadas devem depender de outras especializações por meio de comércio, contratos e alianças.
+- o primeiro core loop prioriza Produção, Energia e Educação; Saúde entra depois desse fluxo inicial.
 
 ## 9. Conceitos de referência
 
@@ -682,14 +685,17 @@ Isso permite batalhas com diferentes reforços sem depender do futuro sistema de
 → necessidades de água/comida/abrigo
 → políticas do jogador e prioridades derivadas
 → demandas e jobs autônomos
-→ extração e produção simples
+→ produção simples e infraestrutura
 → armazenamento e consumo
 → energia e manutenção básica
+→ educação e capacitação
 → pesquisa básica que desbloqueia uma melhoria
 → fauna/hazard ou incidente local
 → preparação de defesa
 → relatório de consequências
 ```
+
+O fluxo inicial de especialização é Produção → Infraestrutura → Energia → Educação. Saúde permanece como suporte básico nesse recorte e entra como especialização de sistema depois do core loop.
 
 Esse recorte responde se Frontier é divertido como colônia governada antes de adicionar mercado entre jogadores, contratos e invasões completas.
 
@@ -720,7 +726,7 @@ O modelo de invasão está aprovado em §8.14. Seguem abertos:
 
 ### 11.2 Consequências do tempo 1:1
 
-- **Durações de ações:** construções, receitas, viagens, pesquisas e tratamentos precisam de durações em horas/minutos reais compatíveis com 40 min/dia e 3 acessos por semana.
+- **Resolvido — duração das ações:** nenhuma política central deve exigir semanas de tempo real. Construções, receitas, viagens, pesquisas e tratamentos usam durações em horas/dias de jogo; uma construção pode durar aproximadamente 5 horas no jogo, mesmo que levasse meses no mundo real.
 - **Processos biológicos:** gestação, crescimento, envelhecimento e cura não podem seguir o calendário real (um ano de idade por ano real). Precisam de escala própria.
 - **Dia/noite e fusos horários:** com um relógio global, jogadores em fusos diferentes veem a colônia sempre no mesmo período (por exemplo, sempre de noite). É preciso decidir se o dia/noite é global, por posição no mundo ou desacoplado.
 - **Estações e clima:** um ano real por ciclo de estações pode ser lento demais para gerar variação perceptível.
@@ -750,10 +756,10 @@ Com até 100 colonos por colônia e cerca de 5.000 colônias, a simulação cont
 - como garantir que pesquisar tudo seja virtualmente impossível em um horizonte relevante;
 - como o tempo de pesquisa cria custo de oportunidade entre medicina, educação, militar, produção e demais setores;
 - quais caminhos podem coexistir e quais competem pela mesma capacidade;
-- se pesquisa é por colônia ou se conhecimento pode ser negociado/transferido;
-- durações em tempo real e quantas pesquisas cabem na primeira semana;
+- **Resolvido:** pesquisa é desenvolvida por colônia e não é transferida diretamente por contratos ou comércio;
+- quantas pesquisas cabem na primeira semana e quais durações específicas cada especialização terá;
 - papel dos colonos pesquisadores, da educação e das skills;
-- se uma especialização pode ser abandonada, parcialmente recuperada ou permanentemente limitada.
+- o que acontece com a capacidade ativa quando uma especialização é abandonada, embora o conhecimento já adquirido permaneça permanente.
 
 ### 11.7 Economia e finanças
 
@@ -776,7 +782,7 @@ Relatórios obrigatórios, ferramentas de recuperação, métricas e conteúdo c
 
 ## 12. Recorte e próximo passo
 
-Frontier ainda não está pronto para gerar tasks de implementação. As decisões com maior poder de alterar a arquitetura e que continuam abertas são: consequências do tempo 1:1 (incluindo dia/noite e fusos horários), representação da topologia, limites da autonomia, fidelidade da simulação em escala e autoridade sobre estado entre simulação e economia.
+Frontier ainda não está pronto para gerar tasks de implementação. As decisões com maior poder de alterar a arquitetura e que continuam abertas são: dia/noite e fusos horários, escala dos processos biológicos, representação da topologia, limites da autonomia, fidelidade da simulação em escala e autoridade sobre estado entre simulação e economia.
 
 Validar primeiro o ciclo de §10.5. Esse núcleo deve permitir responder:
 

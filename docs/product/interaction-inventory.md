@@ -33,9 +33,11 @@ O primeiro ciclo deve representar uma colônia pequena e funcional:
 - manutenção e condições de saúde;
 - energia básica;
 - pesquisa básica;
+- cadeia inicial de Produção → Infraestrutura → Energia → Educação;
+- saúde básica como suporte, sem entrar ainda como especialização principal do core loop;
 - fauna ou incidente local;
 - preparação de defesa;
-- tempo contínuo 1:1 com o real (um dia no jogo = 24 horas);
+- tempo contínuo 1:1 com o real (um dia no jogo = 24 horas), com ações medidas em horas/dias de jogo;
 - operação enquanto o jogador está offline.
 
 Mercado de jogadores, contratos de colonos e invasões completas fazem parte do produto, mas não precisam bloquear a validação do ciclo básico de governança. O mercado NPC de último recurso e contratos serão tratados como interações de produto da v1, mesmo que sua implementação seja posterior ao núcleo.
@@ -255,10 +257,10 @@ As interações de invasão seguem o modelo aprovado no discovery (§8.14): avis
 | ID | Interação | Iniciador | Controle inicial | Efeito principal | Falhas/decisões abertas |
 | --- | --- | --- | --- | --- | --- |
 | RES-01 | Escolher pesquisa | Jogador | Manual | Define o próximo objetivo tecnológico | Formato da árvore ou rede |
-| RES-02 | Enfileirar pesquisas | Jogador | Manual | Mantém progresso enquanto o jogador está offline | Tamanho da fila |
+| RES-02 | Enfileirar pesquisas | Jogador | Manual | Mantém uma fila única enquanto o jogador está offline | Tamanho máximo da fila |
 | RES-03 | Sugerir pesquisa | Sistema | Sugestão | Recomenda pesquisa com base em gargalos observados | Evitar decidir pelo jogador |
 | RES-04 | Alocar pesquisador | Colônia | Híbrido | Vincula colono e laboratório à pesquisa | Skill, prioridade e necessidades |
-| RES-05 | Progredir pesquisa | Sistema | Automático | Acumula progresso em tempo real | Duração real e insumos |
+| RES-05 | Progredir pesquisa | Sistema | Automático | Acumula progresso em tempo real em uma pesquisa ativa | Duração em horas/dias de jogo e insumos |
 | RES-06 | Bloquear pesquisa | Sistema | Automático | Pausa por falta de pesquisador, energia ou insumo | Explicação da causa |
 | RES-07 | Concluir pesquisa | Sistema | Automático | Desbloqueia prédios, receitas, políticas ou defesas | Notificação e relatório |
 | RES-08 | Cancelar/trocar pesquisa | Jogador | Manual | Interrompe pesquisa atual | Progresso perdido ou mantido |

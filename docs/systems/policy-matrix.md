@@ -79,13 +79,13 @@ O pipeline é comum, mas a forma como cada setor calcula capacidade, risco, qual
 | --- | --- | --- | --- | --- | --- |
 | Segurança | armamento, muros, prontidão, doutrina, regras de engajamento | defesa da colônia, ameaça, escolta e segurança de ativos | defesa, combate, alertas | decisões críticas e risco permanente | Piloto 3 |
 | Alimentação | dietas, tipos de produção, conservação, reservas | alimentação da população, preservação e comércio | comida, resíduos, saúde | perecibilidade e necessidade contínua | Posterior |
-| Saúde | medicina, cirurgia, doenças, pacientes próprios/externos | emergência, colonos próprios, rotina, contratos | tratamento, recuperação, risco de morte | urgência clínica e mortalidade | Piloto 1 |
-| Energia | fontes, produção, reserva, consumidores | vida, saúde, segurança, produção e conforto | energia, calor, apagões | rede compartilhada e cascata de falhas | Piloto 2 |
-| Produção | armas, roupas, armaduras, comida, medicina, materiais | consumo interno, ordens, exportação, pesquisa | produtos, subprodutos, resíduos | cadeias e gargalos | Piloto 2 |
+| Saúde | medicina, cirurgia, doenças, pacientes próprios/externos | emergência, colonos próprios, rotina, contratos | tratamento, recuperação, risco de morte | urgência clínica e mortalidade | Piloto 2 |
+| Energia | fontes, produção, reserva, consumidores | vida, saúde, segurança, produção e conforto | energia, calor, apagões | rede compartilhada e cascata de falhas | Piloto 1 |
+| Produção | armas, roupas, armaduras, comida, medicina, materiais | consumo interno, ordens, exportação, pesquisa | produtos, subprodutos, resíduos | cadeias e gargalos | Piloto 1 |
 | Descanso | trabalho, sono, recreação, fadiga | recuperação, produtividade e segurança | disponibilidade e saúde | efeito acumulado no agente | Posterior |
 | Fauna | criação, alimentação, reprodução, abate, manejo e interação com fauna regional | alimento, materiais, espaço, risco e oportunidades | comida, materiais, animais e capacidades futuras | seres vivos, comportamento regional e capacidades variáveis | Posterior |
 | Comércio | produtos, serviços, preços, reservas, contrapartes | consumo interno, liquidez e margem | transações e compromissos | dependência externa e risco econômico | Posterior |
-| Educação | treinamento, transmissão de skills, foco de formação | skills críticas, pesquisa e sucessão | especialistas e progresso | desenvolvimento lento e irreversível parcial | Piloto 1/3 |
+| Educação | treinamento, transmissão de skills, foco de formação | skills críticas, pesquisa e sucessão | especialistas e progresso | desenvolvimento lento e irreversível parcial | Piloto 1 |
 
 ### 4.2 Segurança
 
@@ -293,6 +293,8 @@ As linhas representam dependência e competição, não necessariamente bloqueio
 
 ## 6. O que é comum e o que deve continuar específico
 
+**Decisão de pesquisa:** o conhecimento adquirido é permanente e não é transferido diretamente por contratos ou comércio. Permanecem em aberto apenas as regras de recuperação de skills e de redistribuição da capacidade ativa ao trocar de especialização.
+
 ### Deve ser comum
 
 - identidade da política;
@@ -323,29 +325,30 @@ Não devemos criar um único algoritmo genérico para todos esses problemas.
 
 ## 7. Setores-piloto
 
-### Piloto 1 — Saúde + Educação
+### Piloto 1 — Produção + Energia + Educação
 
 Escolhido porque testa:
 
 - políticas setoriais;
-- prioridade por contexto;
-- pacientes próprios versus externos;
+- cadeias produtivas;
+- recursos físicos e infraestrutura;
+- dependência entre produção e energia;
+- educação como capacidade de longo prazo;
 - pesquisa especializada;
-- skills e educação;
 - consequência de longo prazo;
-- interação entre tempo, descanso, produção e mortalidade.
+- interação entre tempo, descanso e produção.
 
-### Piloto 2 — Produção + Energia
+Saúde entra depois do fluxo inicial do core loop. Ela continua sendo importante para o produto, mas não é necessária para validar a primeira cadeia jogável de produção, infraestrutura, energia e capacitação.
+
+### Piloto 2 — Saúde
 
 Escolhido porque testa:
 
-- cadeias produtivas;
-- recursos físicos;
-- ordens;
-- reservas;
-- gargalos;
-- políticas de consumo interno;
-- dependência entre infraestrutura e produção.
+- prioridade por contexto;
+- pacientes próprios versus externos;
+- pesquisa especializada;
+- tratamento, recuperação e mortalidade;
+- serviços médicos com pacientes externos reais.
 
 ### Piloto 3 — Segurança
 
@@ -362,8 +365,8 @@ Escolhido porque testa:
 
 ```text
 Policy Matrix
-→ Saúde + Educação
-→ Produção + Energia
+→ Produção + Energia + Educação
+→ Saúde
 → Segurança
 → revisar abstrações comuns
 → detalhar Alimentação, Descanso e Fauna
@@ -375,14 +378,14 @@ Cada piloto deve ser especificado com o template comum, mas preservar suas regra
 
 ## 9. Questões abertas
 
-1. Quantos parâmetros de cada setor entram na v1 sem sobrecarregar o jogador?
-2. Pesquisa possui uma fila única por colônia ou várias capacidades concorrentes?
-3. O jogador pode abandonar uma especialização com perda, ou o conhecimento adquirido é permanente?
-4. Educação pode recuperar uma skill perdida ou apenas formar novas capacidades?
-5. Pesquisa pode ser transferida por contratos, comércio ou apenas por colônia?
-6. Quais setores devem entrar no primeiro ciclo jogável: Saúde, Educação, Produção ou Energia?
-7. O mercado de serviços médicos e educacionais exige pacientes/estudantes externos reais?
-8. Quais políticas de cada setor terão consequência imediata e quais precisam de semanas de tempo real?
+1. **Resolvido:** no máximo 5 parâmetros principais por setor entram na v1; detalhes avançados podem ser liberados por pesquisa.
+2. **Resolvido:** cada colônia possui uma fila única e apenas uma pesquisa ativa por vez; não há pesquisas paralelas na v1.
+3. **Resolvido:** o conhecimento adquirido é permanente. Ainda pode ser necessário decidir como a colônia redistribui sua capacidade ativa ao trocar de especialização.
+4. **Em aberto:** educação pode recuperar uma skill perdida ou apenas formar novas capacidades? A regra ainda precisa de uma definição mais concreta.
+5. **Resolvido:** a pesquisa em si não é transferível por contratos ou comércio; cada colônia desenvolve seu próprio conhecimento.
+6. **Resolvido:** o primeiro ciclo prioriza Produção, Energia e Educação. Saúde entra depois do fluxo inicial do core loop.
+7. **Resolvido:** quando o mercado de serviços médicos e educacionais existir, ele exige pacientes e estudantes externos reais, não apenas demanda abstrata.
+8. **Resolvido:** nenhuma política central depende de semanas de tempo real. Consequências podem ser imediatas ou ocorrer em horas/dias de jogo; por exemplo, uma construção pode durar aproximadamente 5 horas no jogo.
 
 ## 10. Critério de pronto
 
