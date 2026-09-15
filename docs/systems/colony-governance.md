@@ -179,6 +179,7 @@ As políticas precisam ter limites explícitos. Uma política não pode autoriza
 | Descanso | tempo de trabalho, recreação, sono e tolerância à fadiga | altera produtividade, moral, saúde e segurança |
 | Fauna | criação de gado, abate, reprodução, alimentação e manejo | altera alimento, materiais, espaço, risco e trabalho |
 | Comércio | produtos/serviços autorizados, preços, reservas e contrapartes | altera liquidez, estoques, risco e dependência externa |
+| Educação | treinamento, transmissão de skills e foco de formação | altera evolução dos colonos, pesquisa e disponibilidade de especialistas |
 
 Cada setor deve possuir parâmetros com custo e efeito observáveis. “Produzir comida” não é uma única opção: tipo de alimento, conservação, prioridade, mão de obra, energia e estoque-alvo devem criar escolhas diferentes.
 
@@ -196,9 +197,20 @@ As prioridades podem ser configuradas dentro de uma política setorial, sem perm
 
 Uma política pode definir ordem entre categorias, mas não deve criar microgerenciamento disfarçado. A escolha individual de cada executor continua pertencendo à Autonomy.
 
-#### 5.5.2 Pesquisa como expansão de políticas
+#### 5.5.2 Pesquisa como expansão de políticas e especialização
 
-Pesquisa não deve apenas liberar prédios. Ela também pode liberar novas opções de política, maior precisão de controle ou automações mais avançadas.
+Pesquisa não deve apenas liberar prédios. Ela também pode liberar novas opções de política, maior precisão de controle, especializações ou automações mais avançadas.
+
+O potencial de pesquisa é deliberadamente limitado. Será virtualmente impossível uma colônia pesquisar tudo em um horizonte relevante, não por falta de conteúdo, mas porque cada especialização demora e compete com as demais. Pesquisar medicina avançada significa deixar educação, militar, produção ou energia menos desenvolvidos naquele período.
+
+O objetivo é criar custo de oportunidade real:
+
+- uma colônia pode se especializar em medicina, mas depender de outra para armas;
+- uma colônia militar pode ter ótima defesa, mas importar comida;
+- uma colônia educacional pode formar especialistas, mas precisar de infraestrutura externa;
+- uma colônia industrial pode produzir equipamentos, mas depender de tratamento e conhecimento de terceiros.
+
+Essa limitação deve gerar interdependência econômica, contratos e alianças. Não deve existir uma rota simples para desbloquear tudo e depois manter todas as áreas no máximo.
 
 Exemplos:
 
@@ -207,9 +219,61 @@ Exemplos:
 - conservação → novas regras de armazenamento e preservação;
 - metalurgia → políticas de liga, qualidade e prioridade de materiais;
 - engenharia energética → fontes, baterias e racionamento mais sofisticado;
+- educação avançada → treinamento de skills e formação de especialistas;
 - doutrina militar → novas regras de armamento e composição de `CombatEntity`.
 
 Uma pesquisa desbloqueia uma **capacidade de política**; o jogador ainda decide se, quando e onde usá-la. O sistema não deve ativar automaticamente toda opção recém-desbloqueada.
+
+```mermaid
+flowchart TD
+    Capacity[Capacidade limitada de pesquisa]
+    Capacity --> Foundation[Fundamentos comuns]
+    Foundation --> Medicine[Medicina especializada]
+    Foundation --> Education[Educação e formação]
+    Foundation --> Military[Militar e doutrina]
+    Foundation --> Industry[Produção e materiais]
+    Foundation --> Energy[Energia e infraestrutura]
+    Foundation --> Logistics[Logística e comércio]
+    Medicine -. compete por tempo .- Education
+    Education -. compete por tempo .- Military
+    Military -. compete por tempo .- Industry
+    Industry -. compete por tempo .- Energy
+    Energy -. compete por tempo .- Logistics
+```
+
+O grafo representa competição por capacidade e tempo, não necessariamente bloqueios permanentes. A forma final de exclusividade, recuperação ou transferência de conhecimento continua sendo uma decisão de Research.
+
+#### 5.5.3 Política como cadeia de consequências
+
+Uma política só cumpre seu papel se atravessar os sistemas e produzir uma diferença observável na base:
+
+```mermaid
+flowchart LR
+    Policy[Política escolhida]
+    Capability[Capacidade liberada]
+    Priority[Prioridade derivada]
+    Demand[Demanda criada]
+    Job[Jobs e alocação]
+    Outcome[Resultado material e social]
+    Feedback[Relatório e nova decisão]
+
+    Policy --> Capability
+    Capability --> Priority
+    Priority --> Demand
+    Demand --> Job
+    Job --> Outcome
+    Outcome --> Feedback
+    Feedback --> Policy
+```
+
+Exemplos de customização real:
+
+- **colônia agrícola:** alimentação e conservação recebem capacidade, energia e espaço; produção industrial e militar ficam limitadas;
+- **colônia médica:** pesquisa, educação e tratamento de colonos próprios recebem prioridade; serviços externos só usam capacidade excedente;
+- **colônia militar:** armamento, muros, prontidão e educação de combate recebem prioridade; comida e materiais podem depender de importação;
+- **colônia industrial:** materiais, energia e produção recebem prioridade; saúde, descanso e defesa ainda impõem limites de segurança.
+
+A política não deve alterar apenas uma tela. Ela deve afetar demandas, escolha de jobs, reservas, consumo, pesquisa, composição populacional e dependências comerciais.
 
 ### 5.6 ColonyOrder
 
@@ -363,6 +427,7 @@ Os nomes abaixo são comandos de domínio, não endpoints de API.
 | `ConfigureDefenseDoctrine` | Jogador | Define orientação de defesa | Manual |
 | `ConfigureLivestockPolicy` | Jogador | Define manejo, reprodução e abate de fauna domesticada | Manual |
 | `ConfigureMedicalPolicy` | Jogador | Define regras de prioridade para medicina, cirurgia e tratamentos | Manual |
+| `ConfigureEducationPolicy` | Jogador | Define treinamento, transmissão de skills e foco de formação | Manual |
 | `SetWorkRestSchedule` | Jogador | Define trabalho, sono e recreação | Manual |
 | `ConfigureConstructionPolicy` | Jogador | Define regras para propostas e expansão da base | Manual |
 | `EnablePvpProtection` | Jogador/NPC | Ativa proteção conforme regra | Crítico |

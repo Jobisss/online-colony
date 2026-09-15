@@ -133,6 +133,8 @@ Profundidade só é útil se o jogador consegue entender estado, causa, previsã
 - políticas, prioridades, metas e orçamento;
 - notificações, relatórios e histórico de decisões.
 
+As prioridades operacionais não são criadas livremente pelo jogador. Elas são derivadas das políticas configuradas para cada setor e contexto.
+
 ### 5.2 Mundo e tempo
 
 - geração e configuração do mundo;
@@ -161,6 +163,7 @@ Profundidade só é útil se o jogador consegue entender estado, causa, previsã
 - lealdade, moral, cultura e qualidade de vida;
 - imigração, contratos e transferência temporária;
 - substituição de agentes, automatização e drones.
+- educação, treinamento e transmissão de especializações.
 
 ### 5.5 Autonomia e execução
 
@@ -516,6 +519,18 @@ declaração (alvos fixados) → deslocamento pelos espaços de conexão
 → breach/defesa → saque limitado ou falha → recuperação e cooldown
 ```
 
+### 8.15 Políticas, pesquisa e especialização
+
+- o jogador configura políticas de Segurança, Alimentação, Saúde, Energia, Produção, Descanso, Fauna, Comércio e Educação;
+- o jogador não cria uma fila de prioridades livre;
+- políticas setoriais definem prioridades por contexto, como “médicos tratam primeiro colonos próprios” ou “consumo interno vem antes de exportação”;
+- o sistema deriva a prioridade de demandas e jobs a partir dessas políticas, necessidades, ordens e regras de segurança;
+- cada política deve produzir consequências e trade-offs perceptíveis na colônia;
+- pesquisa desbloqueia novas capacidades de política, especializações e automações, mas não ativa essas opções automaticamente;
+- medicina, educação, militar, produção, energia e outros setores competem pelo mesmo potencial de pesquisa;
+- é intencionalmente impossível pesquisar tudo em um horizonte relevante: especializações devem levar tempo suficiente para tornar a escolha estratégica;
+- não deve existir uma configuração universalmente ótima; colônias especializadas devem depender de outras especializações por meio de comércio, contratos e alianças.
+
 ## 9. Conceitos de referência
 
 ### 9.1 Explicabilidade da autonomia
@@ -727,10 +742,14 @@ Com até 100 colonos por colônia e cerca de 5.000 colônias, a simulação cont
 
 ### 11.6 Pesquisa
 
-- formato: árvore, rede ou especializações exclusivas;
+- como representar especializações longas: árvore, rede, caminhos exclusivos ou combinação;
+- como garantir que pesquisar tudo seja virtualmente impossível em um horizonte relevante;
+- como o tempo de pesquisa cria custo de oportunidade entre medicina, educação, militar, produção e demais setores;
+- quais caminhos podem coexistir e quais competem pela mesma capacidade;
 - se pesquisa é por colônia ou se conhecimento pode ser negociado/transferido;
 - durações em tempo real e quantas pesquisas cabem na primeira semana;
-- papel dos colonos pesquisadores e das skills.
+- papel dos colonos pesquisadores, da educação e das skills;
+- se uma especialização pode ser abandonada, parcialmente recuperada ou permanentemente limitada.
 
 ### 11.7 Economia e finanças
 

@@ -143,7 +143,7 @@ Este diagrama mostra responsabilidades conceituais, não serviços. Um mesmo pro
 | GOV-07 | Inspecionar estado | Jogador | Manual | Mostra causas, previsão e consequências | Nível de explicabilidade |
 | GOV-08 | Receber relatório offline | Sistema | Automático | Resume alterações desde o último acesso | Agrupamento e severidade |
 | GOV-09 | Cancelar plano | Jogador | Híbrido | Remove intenção ainda não executada | O que acontece com reservas |
-| GOV-10 | Configurar política setorial | Jogador | Manual | Altera segurança, alimentação, saúde, energia, produção, descanso, fauna ou comércio | Parâmetros, limites e pesquisa necessária |
+| GOV-10 | Configurar política setorial | Jogador | Manual | Altera segurança, alimentação, saúde, energia, produção, descanso, fauna, comércio ou educação | Parâmetros, limites e pesquisa necessária |
 | GOV-11 | Criar ordem de produto/serviço | Jogador | Manual | Solicita quantidade, qualidade, prazo e restrições | Reserva, orçamento e substitutos |
 | GOV-12 | Aprovar proposta de ambiente | Jogador | Crítico | Autoriza layout de base gerado pelo planner | Critérios de aprovação e custo |
 | GOV-13 | Definir política de construção | Jogador | Manual | Orienta expansão e sugestões de layout | Quando a IA pode propor/construir |
@@ -164,6 +164,7 @@ Este diagrama mostra responsabilidades conceituais, não serviços. Um mesmo pro
 | POP-08 | Tratar condição | Colono/colônia | Híbrido | Reduz severidade ou risco | Prioridade médica e recursos |
 | POP-09 | Piorar condição | Sistema | Automático | Cria debuff ou novo estágio | Tempo, negligência e tratamento |
 | POP-10 | Morrer | Sistema | Automático | Remove colono após regra fatal | Três condições graves simultâneas |
+| POP-11 | Educar/treinar colono | Colônia/colono | Híbrido | Desenvolve skill conforme política e capacidade | Professor, tempo, talento e especialização |
 
 ### 6.3 Demandas, jobs e autonomia
 
@@ -257,6 +258,7 @@ As interações de invasão seguem o modelo aprovado no discovery (§8.14): avis
 | RES-06 | Bloquear pesquisa | Sistema | Automático | Pausa por falta de pesquisador, energia ou insumo | Explicação da causa |
 | RES-07 | Concluir pesquisa | Sistema | Automático | Desbloqueia prédios, receitas, políticas ou defesas | Notificação e relatório |
 | RES-08 | Cancelar/trocar pesquisa | Jogador | Manual | Interrompe pesquisa atual | Progresso perdido ou mantido |
+| RES-09 | Escolher especialização | Jogador | Manual | Direciona capacidade limitada para um setor | Custo de oportunidade e caminhos concorrentes |
 
 ### 6.9 Mundo e tempo
 
