@@ -390,7 +390,7 @@ Cada piloto deve ser especificado com o template comum, mas preservar suas regra
 
 1. **Resolvido:** no máximo 5 parâmetros principais por setor entram na v1; detalhes avançados podem ser liberados por pesquisa.
 2. **Resolvido:** cada colônia possui uma fila única e apenas uma pesquisa ativa por vez; não há pesquisas paralelas na v1.
-3. **Resolvido:** o conhecimento adquirido é permanente. Ainda pode ser necessário decidir como a colônia redistribui sua capacidade ativa ao trocar de especialização.
+3. **Resolvido:** o conhecimento adquirido é permanente. A colônia pode trocar sua especialização ativa, mas a redistribuição exige custo e tempo de transição; a área antiga perde eficiência gradualmente, a nova começa com baixa eficiência e os colonos precisam ser educados individualmente.
 4. **Resolvido:** Educação forma novas capacidades individuais; a pesquisa apenas libera a capacidade para a colônia aprender. Um colono não sabe automaticamente uma área pesquisada — ele precisa ser educado nela. Recuperação de uma skill perdida fica fora dessa decisão e pode ser definida posteriormente.
 5. **Resolvido:** a pesquisa em si não é transferível por contratos ou comércio; cada colônia desenvolve seu próprio conhecimento.
 6. **Resolvido:** o primeiro ciclo prioriza Produção, Energia e Educação. Saúde entra depois do fluxo inicial do core loop.

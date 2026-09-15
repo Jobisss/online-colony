@@ -534,6 +534,8 @@ declaração (alvos fixados) → deslocamento pelos espaços de conexão
 - pesquisa desbloqueia novas capacidades de política, especializações e automações, mas não ativa essas opções automaticamente;
 - uma pesquisa libera uma capacidade para a colônia aprender, mas não concede esse conhecimento a todos os colonos;
 - a educação precisa formar cada colono na capacidade específica antes que ele possa usá-la; por exemplo, pesquisar Neurologia desbloqueia o campo e um médico precisa ser educado para aprender Neurologia;
+- a colônia pode trocar sua especialização ativa sem perder conhecimento pesquisado, mas a mudança tem custo e tempo de transição;
+- durante a transição, a área antiga perde eficiência gradualmente e a nova começa com baixa eficiência; colonos precisam ser educados individualmente na nova capacidade;
 - pesquisa ou conteúdo futuro pode alterar capacidades de espécies de fauna sem exigir uma regra rígida de “impossível de domesticar”;
 - medicina, educação, militar, produção, energia e outros setores competem pelo mesmo potencial de pesquisa;
 - é intencionalmente impossível pesquisar tudo em um horizonte relevante: especializações devem levar tempo suficiente para tornar a escolha estratégica;
@@ -761,7 +763,7 @@ Com até 100 colonos por colônia e cerca de 5.000 colônias, a simulação cont
 - **Resolvido:** pesquisa é desenvolvida por colônia e não é transferida diretamente por contratos ou comércio;
 - quantas pesquisas cabem na primeira semana e quais durações específicas cada especialização terá;
 - papel dos colonos pesquisadores, da educação e das skills;
-- o que acontece com a capacidade ativa quando uma especialização é abandonada, embora o conhecimento já adquirido permaneça permanente.
+- **Resolvido:** ao trocar de especialização, o conhecimento pesquisado permanece. A capacidade ativa muda com custo e tempo de transição; a nova área começa com baixa eficiência e exige educação individual dos colonos.
 
 ### 11.7 Economia e finanças
 
