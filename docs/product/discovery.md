@@ -1,8 +1,18 @@
 # Frontier — Discovery do Produto
 
 **Status:** rascunho para revisão humana  
+**Versão:** v0.4  
 **Escopo:** descoberta do produto e dos domínios conceituais  
 **Fora do escopo:** implementação, escolha final de tecnologias, contratos de API e schema de banco
+
+## Como ler este documento
+
+- **§1–7** descrevem visão, pilares e o mapa conceitual do produto.
+- **§8** é o registro único de decisões confirmadas. Se algo aqui contradizer outra seção, esta seção prevalece.
+- **§9** explica conceitos usados nas decisões.
+- **§10** reúne propostas de design aprovadas como direção, mas ainda sem números.
+- **§11** é a lista única de questões em aberto.
+- **§12** define o recorte e o próximo passo.
 
 ## 1. Leitura executiva
 
@@ -20,7 +30,7 @@ decisão do jogador
 → novas decisões do jogador
 ```
 
-O risco principal nesta fase é confundir profundidade com quantidade de features. O produto precisa primeiro provar um ciclo pequeno, coerente e compreensível, antes de assumir mercado, corporações, invasões, combate de alta escala e simulação detalhada de cada indivíduo.
+O risco principal nesta fase é confundir profundidade com quantidade de features. O produto precisa primeiro provar um ciclo pequeno, coerente e compreensível, antes de assumir mercado entre jogadores, invasões completas e simulação detalhada de cada indivíduo.
 
 ## 2. Product Vision proposta
 
@@ -50,7 +60,7 @@ O jogador deve sentir que:
 
 ### Pilar 1 — Governança por intenção
 
-O jogador define metas, políticas, prioridades, orçamento, expansão e doutrina. A colônia decide como executar dentro dessas regras.
+O jogador define metas, políticas, prioridades, orçamento, expansão, pesquisa e doutrina. A colônia decide como executar dentro dessas regras.
 
 **Critério de sucesso:** uma decisão de alto nível deve gerar consequências operacionais observáveis sem exigir que o jogador atribua manualmente cada tarefa.
 
@@ -70,11 +80,11 @@ Recursos, itens e pessoas ocupam localizações e percorrem rotas. Capacidade, d
 
 **Critério de sucesso:** uma escassez ou atraso pode ser rastreado até a cadeia que o causou e pode ser mitigado por decisões alternativas.
 
-**Risco:** deslocamento excessivamente lento ou burocrático pode transformar o jogo em uma tela de espera.
+**Risco:** deslocamento excessivamente lento ou burocrático pode transformar o jogo em uma tela de espera — risco ampliado pelo tempo 1:1 com o real (§8.3).
 
 ### Pilar 4 — Economia emergente entre jogadores
 
-Colônias podem se especializar, negociar, competir e formar instituições. Preços e oportunidades devem refletir oferta, demanda, região, custos e risco.
+Colônias podem se especializar, negociar, competir e, no futuro, formar instituições. Preços e oportunidades devem refletir oferta, demanda, região, custos e risco.
 
 **Critério de sucesso:** jogadores diferentes podem prosperar por estratégias econômicas distintas, sem que uma única cadeia domine todo o mundo.
 
@@ -96,20 +106,20 @@ Profundidade só é útil se o jogador consegue entender estado, causa, previsã
 
 ## 4. Modelo conceitual do produto
 
-As entidades conceituais centrais são:
-
 | Entidade | Papel no produto |
 | --- | --- |
-| Jogador | Define intenção e controla uma ou mais colônias conforme regras de ownership |
-| Colônia | Unidade política e operacional principal |
+| Jogador | Define intenção e controla exatamente uma colônia |
+| Colônia | Unidade política e operacional principal; ocupa um lote no mundo |
 | Colono | Agente individual que executa trabalho, forma relações e sofre consequências |
 | Infraestrutura | Capacidade material que transforma, armazena, transporta ou protege |
 | Recurso | Material fungível usado por consumo, produção, comércio e construção |
 | Item | Objeto individual com identidade, estado, qualidade e localização |
+| Pesquisa | Conhecimento acumulado que desbloqueia capacidades |
 | Rota/Transporte | Movimento físico de recursos, itens ou colonos |
-| Região | Unidade espacial do mundo compartilhado |
+| Lote de colônia | Área do tamanho de um mapa de *RimWorld* ocupada por uma colônia |
+| Espaço de conexão | Área do mundo que liga lotes e define distância entre colônias |
 | Ordem/Contrato | Compromisso econômico ou de transferência entre participantes |
-| Instituição | Corporação, governo ou grupo que agrega ownership e permissões |
+| Instituição | Clã formado por jogadores (fora da v1) |
 | Evento | Mudança temporal ou externa que cria risco, oportunidade ou perturbação |
 
 ## 5. Mapa de domínios e sistemas
@@ -118,24 +128,25 @@ As entidades conceituais centrais são:
 
 - identidade, autenticação e autorização;
 - perfil do jogador;
-- ownership de colônias e ativos;
-- permissões dentro de colônias e corporações;
+- ownership da colônia e dos ativos;
+- permissões dentro da colônia e, futuramente, de clãs;
 - políticas, prioridades, metas e orçamento;
 - notificações, relatórios e histórico de decisões.
 
 ### 5.2 Mundo e tempo
 
 - geração e configuração do mundo;
-- regiões, biomas, recursos, clima e hazards;
-- topologia, distância e adjacência;
-- tempo persistente, ticks, turnos lógicos e simulação offline;
-- eventos regionais e globais;
-- ciclo de vida do mundo, temporadas ou reset, se houver.
+- lotes de colônia, espaços de conexão e posicionamento;
+- biomas, recursos, clima e hazards;
+- topologia, distância e adjacência entre colônias;
+- tempo contínuo 1:1 com o real e simulação offline;
+- ciclo dia/noite;
+- eventos regionais e globais.
 
 ### 5.3 Colônia e infraestrutura
 
-- fundação e expansão territorial;
-- assentamentos e zonas;
+- fundação da colônia no lote atribuído;
+- zonas e ocupação do território;
 - prédios, módulos, upgrades e manutenção;
 - armazenamento e capacidade;
 - energia e redes;
@@ -148,7 +159,7 @@ As entidades conceituais centrais são:
 - skills, experiência, traits e especializações;
 - relações, família, reprodução e dependentes;
 - lealdade, moral, cultura e qualidade de vida;
-- imigração, recrutamento, contratos e transferência;
+- imigração, contratos e transferência temporária;
 - substituição de agentes, automatização e drones.
 
 ### 5.5 Autonomia e execução
@@ -192,22 +203,25 @@ As entidades conceituais centrais são:
 
 ### 5.9 Pesquisa e tecnologia
 
+Sistema essencial do produto e parte do núcleo jogável (§8.10).
+
 - laboratórios e capacidade de pesquisa;
 - árvore ou rede tecnológica;
-- pesquisas assíncronas;
+- pesquisas assíncronas em tempo real;
 - especializações e pré-requisitos;
 - influência de colonos, instituições e descobertas;
 - desbloqueios que alteram produção, logística, sociedade ou defesa.
 
 ### 5.10 Economia e mercados
 
+- mercado NPC de último recurso;
 - resource market por quantidade;
 - item market por objeto individual;
-- contratos e transferência de colonos;
+- contratos de colonos;
 - buy orders, sell orders, matching e liquidação;
-- regiões, preços, taxas e custos de transporte;
-- crédito, risco, garantias, propostas privadas e trocas;
-- liquidez inicial, proteção contra abuso e regras de cancelamento.
+- preços, taxas e custos de transporte;
+- escrow, propostas privadas e trocas;
+- proteção contra abuso e regras de cancelamento.
 
 ### 5.11 Sistema financeiro
 
@@ -217,14 +231,14 @@ As entidades conceituais centrais são:
 - escrow, capture, refund e reconciliação;
 - idempotência e audit log;
 - separação explícita entre moeda do jogo e dinheiro real;
-- insolvência, crédito e limites, se existirem.
+- insolvência e limites, se existirem.
 
-### 5.12 Diplomacia, corporações e instituições
+### 5.12 Clãs e diplomacia (fora da v1)
 
-- corporações/guildas;
+- clãs formados por jogadores;
 - membros, papéis e permissões;
 - recursos e infraestrutura compartilhados;
-- acordos, tarifas, fronteiras e acesso;
+- acordos, tarifas e acesso;
 - reputação, confiança, sanções e relações;
 - projetos coletivos e governança interna.
 
@@ -269,19 +283,21 @@ O sistema não deve ser implementado na ordem da lista de features. A dependênc
 4. produção, inventário, energia e logística transformam e movimentam valor;
 5. pesquisa aumenta possibilidades;
 6. mercados, finanças e contratos conectam colônias;
-7. corporações, diplomacia e combate disputam acesso, território e valor;
+7. clãs, diplomacia e combate disputam acesso, território e valor;
 8. cliente, auditoria e observabilidade tornam tudo operável e compreensível.
 
 ### 6.1 Dependências mais sensíveis
 
 | Dependência | Por que é crítica |
 | --- | --- |
-| Tempo → todos os sistemas | Define ticks, atrasos, cooldowns, crescimento, combate e processamento offline |
+| Tempo → todos os sistemas | Define durações, atrasos, cooldowns, crescimento, combate e processamento offline |
 | Ownership → todos os estados relevantes | Impede dois subsistemas de alterarem a mesma verdade sem coordenação |
 | Localização → recursos, itens, pessoas e dinheiro | Determina logística, risco, posse e resolução de transações |
+| Topologia → logística, mercado e invasão | Distância entre lotes define custo, tempo e alcance |
 | Demanda → jobs → execução | É o núcleo da promessa de autonomia |
 | Reserva → inventário, produção, transporte e finanças | Evita dupla alocação de bens, capacidade ou fundos |
 | Estado de infraestrutura → produção e energia | Conecta falhas físicas a consequências econômicas |
+| Pesquisa → produção, infraestrutura e defesa | Controla quais capacidades existem em cada colônia |
 | Ledger → mercados e contratos | Torna pagamentos auditáveis e recuperáveis após falhas |
 | Regras de offline → invasões e eventos | Define se persistência é interessante ou injusta |
 | Explicabilidade → UX e autonomia | Sem ela o jogador não consegue governar sistemas autônomos |
@@ -295,7 +311,7 @@ Estas funcionalidades provavelmente serão necessárias para o produto ser jogá
 - onboarding e primeira colônia guiada;
 - objetivos iniciais e curva de complexidade;
 - presets de política e automação gradual;
-- pause conceitual, velocidade ou planejamento com atraso;
+- planejamento antecipado de ações, já que não há pause nem aceleração;
 - desfazer/cancelar com regras claras;
 - comparação entre previsão e resultado;
 - busca, filtros e navegação entre causas e efeitos;
@@ -312,13 +328,12 @@ Estas funcionalidades provavelmente serão necessárias para o produto ser jogá
 
 ### Mundo e conteúdo
 
-- geração/configuração inicial do mundo;
+- geração do mundo, dos lotes e dos espaços de conexão;
 - distribuição e renovação de recursos;
 - clima, estação, desastres e mudanças ambientais;
-- NPCs, fauna, facções ou mercado inicial, se necessários para preencher o mundo;
+- fauna;
 - raridade, descoberta, exploração e informação incompleta;
-- objetivos de longo prazo e possíveis condições de vitória;
-- limites de população, território e número de colônias por jogador.
+- marcos de longo prazo compatíveis com sucesso relativo.
 
 ### Economia e segurança
 
@@ -332,12 +347,12 @@ Estas funcionalidades provavelmente serão necessárias para o produto ser jogá
 
 ### Conflito e sociedade
 
-- regras de proteção para iniciantes;
-- declaração de guerra, casus belli ou custo de agressão;
+- proteção para iniciantes;
+- custo de agressão;
 - seguros, recuperação e reconstrução;
 - captura, resgate, deserção e tratamento de prisioneiros;
 - reputação e consequências diplomáticas;
-- governança interna, sucessão e perda de liderança;
+- sucessão e perda de liderança;
 - moderação de nomes, mensagens e comportamento abusivo.
 
 ### Operação e qualidade
@@ -350,307 +365,11 @@ Estas funcionalidades provavelmente serão necessárias para o produto ser jogá
 - manutenção planejada, incidentes e comunicação de mudanças;
 - matriz de testes de estado, concorrência, falha e carga.
 
-## 8. Ambiguidades, tensões e decisões abertas
+## 8. Decisões confirmadas
 
-### A. Real-time, ticks e processamento offline
+“Confirmado” significa intenção atual do produto. Números marcados como provisórios ainda serão balanceados.
 
-O documento menciona mundo persistente, simulação baseada em ticks e atividades assíncronas, mas não define se o tempo é contínuo, discreto, acelerável ou processado por eventos.
-
-**Alternativas:** tempo contínuo; ticks globais; ticks por região; event-driven com janelas de simulação.  
-**Recomendação provisória:** adotar um modelo lógico de tempo discreto e determinístico para regras críticas, permitindo agrupar ticks quando a colônia estiver inativa. Isso preserva auditabilidade sem obrigar todos os detalhes a rodarem na mesma frequência.
-
-### B. Autonomia versus controle direto
-
-O jogador deve administrar intenções, mas ainda não está definido quais ações podem ser manuais e quais são sempre delegadas.
-
-**Pergunta:** o jogador pode comandar um colono, cancelar um job, mover um item ou ordenar uma unidade diretamente?  
-**Risco:** controle direto irrestrito invalida a autonomia; autonomia irrestrita reduz agência do jogador.
-
-### C. Individualidade versus escala
-
-“Cada colono é uma entidade individual” entra em tensão com grandes populações e simulação frequente.
-
-**Recomendação provisória:** manter identidade individual, mas usar níveis de fidelidade: colonos críticos recebem simulação detalhada; colonos distantes ou pouco relevantes podem usar agregações até que uma interação exija detalhe.
-
-### D. Java e Rust como autoridades
-
-A matriz preliminar sugere Java para economia/conta e Rust para simulação, mas produção, inventário, logística, colonos e energia atravessam os dois mundos.
-
-**Questão crítica:** Rust calcula uma decisão ou é autoridade sobre o estado persistido?  
-**Recomendação provisória:** cada agregado mutável deve ter uma única autoridade; outros componentes publicam comandos ou recebem snapshots/eventos. Cálculo paralelo não deve significar dupla escrita concorrente.
-
-### E. Simulação física versus ritmo do jogador
-
-Transportar tudo fisicamente cria decisões interessantes, mas pode tornar comércio e produção lentos demais.
-
-**Perguntas:** o transporte tem duração observável? Pode ser consolidado? Pode ser acelerado por infraestrutura? Existe transporte instantâneo apenas para certos itens?
-
-### F. Economia de jogadores versus liquidez inicial
-
-Uma economia majoritariamente entre jogadores pode não funcionar quando há poucos jogadores ou pouca oferta.
-
-**Alternativas:** NPCs e ordens de referência; subsídios iniciais; mercado regional administrado; economia sem piso de liquidez.  
-**Decisão necessária:** qual papel o sistema ocupa quando o mercado de jogadores está vazio?
-
-### G. Invasão e proteção offline
-
-“Jogador offline não deve ser inviabilizado” pode entrar em conflito com invasões significativas.
-
-**Alternativas:** janelas de vulnerabilidade; defesa autônoma com objetivos limitados; guerra declarada; escudos com custo; proteção por camadas de ativos.  
-**Decisão necessária:** qual perda é aceitável e qual é proibida?
-
-### H. Colonist Contract Market
-
-Negociar contratos de colonos pode ser uma forma interessante de especialização, mas precisa definir consentimento, direitos, duração, transporte, família, deserção, resgate e abuso.
-
-**Recomendação provisória:** começar tratando o mercado como contratos de trabalho/serviço com termos explícitos, e não como transferência irrestrita de pessoas.
-
-### I. Combate e fidelidade
-
-O documento quer simulação baseada em ticks, autonomia e grandes batalhas. Ainda não está definido o nível mínimo de detalhe que mantém decisões estratégicas significativas.
-
-**Pergunta:** o jogador controla composição e doutrina, ou também formações e alvos?  
-**Recomendação provisória:** o jogador define objetivos, regras de engajamento e doutrina; o sistema executa e gera um relatório auditável.
-
-### J. Escopo da moeda
-
-Wallet, ledger, crédito, escrow e integração futura com payment provider representam problemas diferentes.
-
-**Decisão necessária:** qual é a moeda interna, quem a emite, como é destruída e se ela é transferível entre todos os jogadores? A integração com dinheiro real deve ficar fora do núcleo do jogo e fora do primeiro produto jogável.
-
-### K. Persistência do mundo
-
-Não foi definido se o mundo é permanente, sazonal, reiniciado ou particionado em servidores/mundos independentes.
-
-Essa decisão afeta progressão, valor de ativos, onboarding, recuperação de desbalanceamentos e estratégia de conteúdo.
-
-### L. Vitória e propósito de longo prazo
-
-O documento descreve expansão, economia e conflito, mas não define o que significa “vencer”, concluir uma era ou permanecer relevante.
-
-Sem uma resposta, o produto pode virar apenas manutenção infinita ou competição econômica sem direção.
-
-## 9. Status das respostas de Macro System
-
-As perguntas originais não ficam mais repetidas aqui. Esta seção é o registro consolidado do que já foi decidido e do que ainda está pendente.
-
-### Decisões confirmadas
-
-#### Experiência e ritmo
-
-- prioridade da experiência: **governar uma colônia → competir por poder → construir uma economia → contar histórias de colonos**;
-- sucesso é relativo: colônias podem se especializar em comida, armas, soldados, comércio ou outras funções;
-- organização mínima deve caber em aproximadamente 40 minutos por dia;
-- o jogador deve conseguir participar entrando pelo menos 3 vezes por semana;
-- o mundo terá velocidade fixa;
-- o mundo será persistente e não terá reset/temporadas por enquanto.
-
-#### Operação offline
-
-- a colônia continua funcionando sem o jogador;
-- decisões críticas, como iniciar uma invasão, não são tomadas automaticamente;
-- comércio automático só poderá acontecer no futuro por meio de rotas comerciais previamente configuradas.
-
-#### População
-
-- a colônia começa com 3 colonos básicos;
-- os colonos são gerados aleatoriamente, mas a geração deve garantir um começo viável;
-- reprodução cria novos colonos;
-- satisfação alta pode atrair imigrantes;
-- não haverá NPCs ou facções externas inicialmente;
-- fauna pode existir;
-- corporações/facções serão formadas por jogadores;
-- o primeiro escopo precisa considerar 3 colonos individualmente.
-
-#### Saúde e mortalidade
-
-- colonos não morrem com frequência a cada incidente;
-- invasões recebidas e invasões malsucedidas podem causar ferimentos, doenças ou cicatrizes;
-- condições não tratadas podem piorar e gerar debuffs;
-- condições podem ser tratadas e recuperadas;
-- três condições permanentes graves podem levar à morte.
-
-O significado exato de “três condições” ainda precisa ser fechado: a proposta é contar três condições graves simultâneas, e não um contador irreversível ao longo da vida.
-
-#### PvP e invasões
-
-- PvP é opcional;
-- uma colônia precisa se liberar para invasões para poder invadir outras;
-- invasões são preparadas e avisadas com antecedência;
-- o defensor tem tempo para se preparar;
-- uma derrota não elimina a colônia do dia para a noite;
-- o atacante pode escolher itens/recursos para tentar roubar;
-- o defensor pode manter um estoque seguro, limitado por peso e por tipos de itens;
-- combate é essencial ao produto;
-- a invasão termina quando os combatentes designados são derrotados e os sistemas de segurança são desativados.
-
-### Decisões ainda pendentes
-
-1. **Autonomia:** quais interações serão automáticas, quais terão controle manual e quando o jogador poderá substituir a colônia. Isso será definido depois do inventário completo de interações.
-2. **Qualidade da autonomia:** prioridades usadas quando duas necessidades competirem. A proposta segurança → necessidades → estabilidade → políticas → eficiência aguarda validação no inventário de interações.
-3. **Ciclo detalhado:** o mundo será contínuo em tempo real, mas ainda faltam durações de tarefas, eventos, viagens, combates e tratamento offline.
-4. **Finanças:** emissão, destruição, taxas, sinks, reservas, escrow e separação do dinheiro real.
-5. **Mercado:** regras finais de ordens, cancelamentos, disputas, taxas e quando cada mercado será liberado.
-6. **PvP:** custo depois dos 7 dias gratuitos, duração das proteções pagas, cooldowns e regras de ativação/desativação.
-7. **Saque e destruição:** quais recursos, itens, prédios e condições podem ser afetados permanentemente.
-8. **Anti-snowball:** calibrar limites de dano, proteção de iniciantes, custos de guerra e recuperação.
-9. **Primeiro ciclo jogável:** sequência mínima que prova governança, autonomia e defesa básica.
-10. **Operação:** relatórios obrigatórios, ferramentas de recuperação, métricas e conteúdo configurável.
-
-## 10. Recorte recomendado para a próxima etapa
-
-Não é uma task de implementação; é uma proposta de foco para a revisão humana.
-
-### Núcleo de validação da visão
-
-Validar primeiro um ciclo conceitual com:
-
-```text
-colônia
-→ colonos e necessidades
-→ demanda
-→ job autônomo
-→ produção/consumo
-→ armazenamento
-→ política do jogador
-→ nova decisão da colônia
-```
-
-Esse núcleo deve permitir responder:
-
-- a autonomia é compreensível?
-- prioridades do jogador produzem diferenças reais?
-- o estado da colônia é observável?
-- falhas têm causas e alternativas?
-- a individualidade dos colonos agrega valor?
-
-Depois disso, a segunda camada natural é logística local, energia e defesa básica. O combate entra no núcleo porque é essencial à visão; mercado/ledger e invasões PvP completas podem entrar depois que localização, reserva, tempo e ownership estiverem conceitualmente estáveis.
-
-O inventário detalhado das interações está em [interaction-inventory.md](./interaction-inventory.md). Ele é a base para decidir quais ações serão manuais, automáticas, híbridas ou críticas.
-
-## 11. Mermaid inicial — mapa conceitual de sistemas
-
-```mermaid
-flowchart LR
-    Player[Jogador]
-    Client[Cliente e UX]
-    Identity[Identidade e permissões]
-    Colony[Colônia e governança]
-    World[Mundo, regiões e tempo]
-    Population[População e sociedade]
-    Autonomy[Autonomia: demandas, jobs e planejamento]
-    Infra[Infraestrutura]
-    Energy[Energia]
-    Resources[Recursos e consumo]
-    Production[Produção e cadeias]
-    Inventory[Itens, inventário e custody]
-    Logistics[Logística e transporte]
-    Research[Pesquisa e tecnologia]
-    Market[Mercados]
-    Finance[Ledger e finanças internas]
-    Institutions[Corporações e diplomacia]
-    Defense[Defesa, invasões e combate]
-    Events[Eventos e hazards]
-    Ops[Auditoria, observabilidade e operação]
-
-    subgraph Governance[Governança e contexto]
-        Identity
-        Colony
-        World
-    end
-
-    subgraph ColonyLoop[Ciclo autônomo da colônia]
-        Population
-        Autonomy
-        Infra
-        Energy
-        Resources
-        Production
-        Inventory
-        Logistics
-    end
-
-    subgraph SharedWorld[Interação no mundo compartilhado]
-        Research
-        Market
-        Finance
-        Institutions
-        Defense
-        Events
-    end
-
-    Player --> Client
-    Client --> Identity
-    Client --> Colony
-    Client --> Market
-    Client --> Research
-    Client --> Institutions
-    Client --> Defense
-
-    Identity --> Colony
-    World --> Colony
-    World --> Events
-    World --> Logistics
-    World --> Defense
-
-    Colony --> Population
-    Colony --> Infra
-    Colony --> Autonomy
-    Population --> Autonomy
-    Autonomy --> Infra
-    Autonomy --> Production
-    Autonomy --> Logistics
-    Infra --> Energy
-    Energy --> Production
-    Energy --> Population
-    Resources --> Production
-    Production --> Resources
-    Production --> Inventory
-    Inventory --> Logistics
-    Logistics --> Inventory
-    Inventory --> Resources
-    Resources --> Population
-    Population --> Resources
-
-    Research --> Production
-    Research --> Infra
-    Research --> Population
-    Market --> Resources
-    Market --> Inventory
-    Market --> Logistics
-    Market --> Finance
-    Finance --> Market
-    Finance --> Institutions
-    Institutions --> Colony
-    Institutions --> Market
-    Institutions --> Defense
-    Events --> Resources
-    Events --> Infra
-    Events --> Population
-    Events --> Logistics
-    Defense --> Population
-    Defense --> Infra
-    Defense --> Logistics
-
-    Client -.-> Ops
-    Colony -.-> Ops
-    Autonomy -.-> Ops
-    Market -.-> Ops
-    Finance -.-> Ops
-    Defense -.-> Ops
-```
-
-## 12. Resultado da etapa
-
-Frontier tem uma visão promissora, mas ainda não está pronto para gerar tasks de implementação. As decisões com maior poder de alterar a arquitetura são: modelo de tempo, limites da autonomia, escala de colonos, ownership entre simulação e economia, tratamento offline, liquidez do mercado, perdas de conflito, permanência do mundo e objetivo de longo prazo.
-
-O próximo artefato recomendado, após a revisão humana deste documento, é uma decisão de produto sobre o **menor ciclo jogável** e um mapa de contextos limitado a esse ciclo. Só então vale iniciar o Macro System Design.
-
-## 13. Revisão v0.3 — respostas do fundador
-
-Esta seção consolida as respostas mais recentes. “Confirmado” significa intenção atual do produto; “proposta” significa uma forma de transformar essa intenção em regra.
-
-### 13.1 Direção do produto
+### 8.1 Direção do produto
 
 Prioridade da experiência principal:
 
@@ -659,117 +378,130 @@ Prioridade da experiência principal:
 3. construir uma economia;
 4. contar histórias de colonos.
 
-O sucesso não será uma condição única de vitória. Colônias poderão buscar papéis diferentes, como exportar soldados, fornecer comida, produzir armas ou especializar-se em outros setores. Isso aponta para um modelo de sucesso relativo, baseado em estratégia, reputação, influência e especialização.
+Não haverá uma condição única de vitória. Colônias poderão buscar papéis diferentes, como exportar soldados, fornecer comida, produzir armas ou especializar-se em outros setores. O sucesso é relativo e baseado em estratégia, reputação, influência e especialização.
 
-**Implicação:** “poder” não deve ser apenas força militar. Pode ser uma combinação de capacidade produtiva, influência, logística, tecnologia, alianças e defesa. Um ranking único de poder provavelmente reduziria a variedade desejada.
+**Implicação:** “poder” não deve ser apenas força militar. Pode combinar capacidade produtiva, influência, logística, tecnologia e defesa. Um ranking único de poder provavelmente reduziria a variedade desejada.
 
-### 13.2 Ritmo de participação
-
-Requisitos atuais:
+### 8.2 Ritmo de participação
 
 - organização mínima da colônia em até aproximadamente 40 minutos por dia;
 - possibilidade de jogar adequadamente entrando pelo menos 3 vezes por semana;
 - jogadores que desejarem competir por poder podem investir mais tempo e atenção;
-- velocidade do mundo fixa;
 - a colônia continua funcionando sem o jogador;
-- decisões críticas não são tomadas automaticamente.
+- decisões críticas, como iniciar uma invasão, não são tomadas automaticamente;
+- comércio automático só poderá acontecer no futuro, por rotas comerciais previamente configuradas.
 
 **Consequência de design:** o jogo precisa privilegiar planejamento, filas, políticas, alertas e relatórios. Não pode depender de reação em tempo real ou de presença contínua para evitar uma catástrofe.
 
-### 13.3 PvP e invasões
+### 8.3 Tempo
 
-O PvP deve ser opcional. Uma colônia precisa se liberar para invasões para poder invadir outras colônias. A invasão deve ser anunciada e oferecer tempo real de preparação. O jogador não deve perder a colônia de um dia para o outro.
+- relógio global contínuo, **1:1 com o tempo real**: um dia no jogo dura 24 horas reais;
+- velocidade fixa, sem pause ou aceleração por jogador;
+- ações possuem duração real;
+- decisões críticas ficam pendentes até o jogador ou uma política autorizada resolvê-las;
+- relatórios resumem o que ocorreu desde o último acesso.
 
-Regras desejadas até aqui:
+O tamanho dos ciclos internos de processamento é uma decisão técnica posterior. Para o jogador, o tempo é contínuo e observável; “tick interno” não aparece como pausa ou aceleração.
 
-- a colônia pode sofrer invasão;
-- uma invasão deve ser uma ação preparada, não um ataque instantâneo;
-- o alvo recebe aviso e tem uma janela para reagir;
-- a derrota não transfere automaticamente a propriedade da colônia;
-- uma fábrica pode parar por falta de recursos, mas a colônia não deve ser apagada;
+As consequências dessa escolha estão em §11.2.
+
+### 8.4 Mundo e topologia
+
+- mundo persistente, sem reset ou temporadas por enquanto;
+- cada colônia ocupa um **lote** do tamanho aproximado de um mapa de *RimWorld*; o mundo inteiro é muito maior que um lote;
+- lotes são ligados por **espaços de conexão**; a distância entre colônias é física e real;
+- o posicionamento é semialeatório dentro do espaço do mundo: uma colônia pode ficar perto de algumas e longe de outras;
+- capacidade provisória de **aproximadamente 5.000 colônias por mundo**;
+- alcance, escolha de alvos e distância de invasão dependem da posição física, não de matchmaking abstrato.
+
+### 8.5 Escala
+
+| Dimensão | Direção atual |
+| --- | --- |
+| Colônia | Uma única colônia por jogador; prédios limitados pelo território do lote |
+| População | Normalmente até aproximadamente 40 colonos; limite absoluto de 100 |
+| Lote | Aproximadamente o tamanho de um mapa de *RimWorld* |
+| Mundo | Aproximadamente 5.000 lotes ligados por espaços de conexão |
+| Simulação | 3 colonos no início, com crescimento gradual; simulação contínua mesmo offline |
+
+Frontier deve otimizar a profundidade de uma colônia pequena/média, e não simular milhares de colonos por jogador. Ainda assim, o mundo inteiro pode chegar a centenas de milhares de colonos simulados continuamente (5.000 × até 100). Esses limites precisam ser validados com testes de jogabilidade e performance.
+
+### 8.6 População
+
+- cada nova colônia começa com 3 colonos básicos gerados aleatoriamente;
+- a geração deve garantir capacidade mínima para iniciar: obter alimento, água, abrigo e manutenção básica;
+- nenhum colono inicial pode nascer com condição que impeça o começo;
+- população cresce por reprodução;
+- satisfação alta pode gerar imigração espontânea;
+- o território limita prédios; não há limite artificial fixo de quantidade de prédios.
+
+### 8.7 NPCs, fauna e clãs
+
+- **não haverá NPCs agindo no mundo** (colonos, colônias ou facções controlados pelo sistema);
+- existem apenas **NPCs de sistema**, que funcionam como serviços sem presença física: o mercado de último recurso (§10.2) e o vendedor de proteção PvP (§8.9);
+- fauna pode existir;
+- não haverá corporações nem clãs na v1; clãs formados por jogadores podem ser adicionados depois.
+
+### 8.8 Saúde e mortalidade
+
+O modelo desejado é de mortalidade indireta e consequência persistente, não de morte frequente como em *RimWorld*.
+
+- invasões recebidas e invasões malsucedidas podem causar condições: lesões, doenças ou cicatrizes;
+- condições não tratadas podem piorar e gerar debuffs;
+- tratamento pode reduzir ou recuperar condições;
+- **três condições graves simultâneas causam a morte** do colono; não é um contador irreversível ao longo da vida.
+
+Terminologia adotada:
+
+- **temporária:** desaparece com tempo ou tratamento;
+- **persistente:** pode ser tratada e reduzida, mas deixa risco ou sequela;
+- **grave:** estágio que ocupa capacidade de saúde e conta para mortalidade;
+- **fatal:** estado terminal quando a regra de mortalidade é atingida.
+
+### 8.9 PvP — o que está confirmado
+
+As regras detalhadas de invasão estão **em revisão** (§11.1). O que permanece confirmado:
+
+- PvP é opcional; uma colônia precisa estar aberta a invasões para poder invadir outras;
+- invasões são preparadas e avisadas com antecedência, e o defensor tem tempo real para se preparar;
+- uma derrota não elimina a colônia nem transfere sua propriedade;
+- uma fábrica pode parar por falta de recursos, mas a colônia não é apagada;
 - o atacante pode escolher o que tenta roubar;
 - o defensor pode manter um estoque seguro, limitado por peso e por tipos de itens;
-- combate é essencial ao produto, mas não deve permitir snowball ou griefing sem contramedidas.
+- combate é essencial ao produto, mas não pode permitir snowball ou griefing sem contramedidas;
+- proteção inicial gratuita de 7 dias; depois, proteção pode ser comprada do NPC de sistema com créditos;
+- proteção paga deve ser interessante para colônias lucrativas e pouco militares, como fazendas;
+- a proteção pode ser desativada permanentemente.
 
-**Modelo aprovado como base:** três estados de PvP por colônia — `PROTECTED`, `OPEN` e `ENGAGED`.
+**Modelo base aprovado:** três estados de PvP por colônia.
 
 - `PROTECTED`: não pode iniciar nem receber invasões; possui limitações para competir por certos benefícios de guerra;
 - `OPEN`: pode iniciar e receber invasões; a troca para este estado tem cooldown e não pode ser usada para escapar de uma guerra;
 - `ENGAGED`: está em uma invasão declarada e permanece vulnerável até o encerramento da operação.
 
-A proteção contra PvP poderá ser comprada de um NPC. A proteção inicial será gratuita por 7 dias. Depois disso, uma colônia poderá pagar pela proteção, o que deve ser economicamente interessante para operações lucrativas e pouco militares, como fazendas. Também será possível desativar a proteção permanentemente.
+### 8.10 Pesquisa
 
-As colônias ocupam espaço real em um servidor. Portanto, alcance, escolha de alvos e distância de invasão dependem da posição física e dos espaços disponíveis para colônias; não são regras abstratas de matchmaking.
+- pesquisa e tecnologia são **essenciais** e fazem parte do núcleo jogável;
+- o ciclo mínimo jogável (§10.5) inclui pelo menos uma pesquisa básica que altera a colônia.
 
-Uma invasão poderia seguir:
+### 8.11 Contratos de colonos
 
-```text
-declaração → janela de preparação → deslocamento → combate → breach/defesa
-→ saque ou falha → recuperação e cooldown
-```
+- contratos fazem parte da **v1 do produto**, mas não do primeiro ciclo jogável;
+- um contrato é um acordo de trabalho, serviço, empréstimo ou transferência temporária entre colônias, não a venda de uma pessoa;
+- reprodução e imigração continuam sendo as formas de crescimento populacional.
 
-O custo após a proteção inicial, os cooldowns, os alvos permitidos, o limite de saque e a proteção de iniciantes continuam abertos.
+### 8.12 Combate
 
-### 13.4 Mundo e população inicial
+- o combate é modelado como confronto entre `CombatEntity`, e não como regra especial de “colônia contra colônia”;
+- a invasão termina quando os combatentes designados são derrotados e os sistemas de segurança são desativados.
 
-Decisões atuais:
+### 8.13 Localização e custody
 
-- mundo persistente, sem reset ou temporada por enquanto;
-- sem NPCs e sem facções externas;
-- fauna pode existir;
-- não haverá corporações na v1; um sistema de clãs pode ser considerado depois;
-- cada jogador poderá possuir apenas uma colônia;
-- cada mapa terá aproximadamente o tamanho de um mapa de *RimWorld*;
-- o território é o limite físico para prédios, sem um limite artificial fixo de quantidade;
-- a população madura ficará normalmente abaixo de 40 colonos, com limite máximo de 100;
-- cada nova colônia começa com 3 colonos básicos;
-- os 3 colonos são gerados aleatoriamente;
-- a geração deve garantir capacidade mínima para iniciar;
-- a população começa com funções básicas e não pode nascer com uma condição que impeça o começo;
-- população cresce por reprodução;
-- satisfação alta pode gerar imigração espontânea.
+Localização e custody devem ser informados explicitamente em tempo real. Recursos fungíveis podem ser agregados por estoque quando isso não esconder a posição relevante; itens únicos, colonos e carregamentos precisam de rastreamento individual.
 
-**Regra adicional recomendada:** a geração aleatória deve validar um conjunto mínimo de cobertura, por exemplo capacidade de obter alimento, água, abrigo e manutenção básica. Isso preserva variedade sem criar uma abertura impossível. O limite de 100 é de população; prédios continuam limitados pelo espaço físico disponível.
+## 9. Conceitos de referência
 
-### 13.5 Saúde e mortalidade
-
-O modelo desejado é de mortalidade indireta e consequência persistente, não de morte frequente como em *RimWorld*.
-
-- invasões recebidas e invasões malsucedidas podem causar condições;
-- condições podem ser cicatrizes, doenças ou lesões;
-- condições não tratadas podem piorar;
-- uma condição grave pode ocupar mais de um espaço/nível de gravidade;
-- tratamento pode reduzir ou recuperar condições;
-- três condições permanentes graves podem causar a morte do colono.
-
-Há uma tensão terminológica entre “condição permanente” e “condição tratável”. A formulação mais clara para o sistema seria:
-
-- **temporária:** desaparece com tempo ou tratamento;
-- **persistente:** pode ser tratada e reduzida, mas deixa risco ou sequela;
-- **grave:** estágio que ocupa capacidade de saúde e pode contribuir para mortalidade;
-- **fatal:** estado terminal quando as regras de mortalidade são atingidas.
-
-**Regra provisória aprovada:** contam três condições graves simultâneas. Assim, tratamento e prevenção continuam tendo valor e a morte não vira uma contagem inevitável ao longo da vida.
-
-### 13.6 Conceitos que ficaram pouco claros
-
-#### Escala definida
-
-Escala não é somente tamanho do mapa. É o conjunto de limites que o sistema precisa suportar. As decisões atuais são:
-
-| Dimensão | Exemplo da pergunta |
-| --- | --- |
-| Dimensão | Direção atual |
-| --- | --- |
-| Colônia | Uma única colônia por jogador; prédios limitados pelo território disponível |
-| População | Normalmente até aproximadamente 40 colonos; limite absoluto de 100 |
-| Mundo | Mapa aproximadamente do tamanho de um mapa de *RimWorld* |
-| Interação | Colônias ocupam posições reais e têm distância entre si |
-| Simulação | 3 colonos no início, com crescimento gradual |
-
-Isso significa que Frontier deve otimizar a profundidade de uma colônia pequena/média, e não tentar simular milhares de colonos por jogador. O limite de 100 ainda precisa ser validado com testes de jogabilidade e performance, mas já pode orientar o desenho conceitual.
-
-#### Explicabilidade da autonomia
+### 9.1 Explicabilidade da autonomia
 
 É o sistema mostrar por que algo aconteceu. Exemplos:
 
@@ -780,9 +512,9 @@ Isso significa que Frontier deve otimizar a profundidade de uma colônia pequena
 
 Isso não exige mostrar cálculo técnico interno; exige uma explicação útil para o jogador investigar e decidir.
 
-#### Qualidade da autonomia
+### 9.2 Qualidade da autonomia
 
-É definir o que o sistema prioriza quando não consegue fazer tudo ao mesmo tempo. Por exemplo, ele pode priorizar:
+É definir o que o sistema prioriza quando não consegue fazer tudo ao mesmo tempo. Proposta mantida:
 
 1. sobrevivência e segurança;
 2. necessidades básicas;
@@ -791,20 +523,18 @@ Isso não exige mostrar cálculo técnico interno; exige uma explicação útil 
 5. eficiência e lucro;
 6. conveniência ou melhoria de longo prazo.
 
-**Proposta mantida:** essa hierarquia, com as políticas do jogador podendo alterar prioridades dentro de limites seguros. A escolha final será feita depois do inventário de todas as interações do jogo; não é necessário decidir a lista de controles antes de conhecer essas interações.
+Políticas do jogador podem alterar prioridades dentro de limites seguros. A escolha final será feita depois do inventário de interações.
 
-#### Localização e custody em tempo real
-
-É decidir o nível de precisão necessário para saber onde um ativo está. Exemplos:
+### 9.3 Precisão de localização
 
 - minério fungível pode ser controlado como “500 ferro no armazém A”;
 - uma arma única precisa ter localização e identidade próprias;
 - um colono precisa existir em uma localização exata ou em trânsito;
 - um carregamento precisa indicar origem, destino e rota.
 
-**Requisito confirmado:** localização e custody devem ser informados explicitamente em tempo real. Recursos fungíveis podem ser agregados por estoque quando isso não esconder a posição relevante; itens únicos, colonos e carregamentos precisam de rastreamento individual. A definição do nível exato de precisão será um dos maiores desafios técnicos do projeto.
+A definição do nível exato de precisão será um dos maiores desafios técnicos do projeto.
 
-#### Ownership durante uma operação
+### 9.4 Ownership, custody e reservation
 
 Ownership é quem tem o direito sobre o ativo. Custody é quem o guarda ou transporta. Reservation é quem tem aquele ativo separado para uma operação.
 
@@ -829,105 +559,25 @@ créditos pertencem ao comprador
 
 Essa separação evita que “estar dentro de uma fábrica”, “estar em uma carroça” ou “estar reservado” crie duplicação ou transferência indevida.
 
-#### Clãs e ownership coletivo
+### 9.5 Clãs e ownership coletivo
 
-Clãs seriam organizações criadas por jogadores, equivalentes a guildas ou companhias. Eles poderiam ter membros, cargos, tesouraria, instalações compartilhadas, contratos, projetos e relações diplomáticas.
+Clãs seriam organizações criadas por jogadores, equivalentes a guildas ou companhias, com membros, cargos, tesouraria, instalações compartilhadas, contratos, projetos e relações diplomáticas. Não fazem parte da v1, mas a arquitetura de combate não deve assumir que toda unidade de combate é uma colônia (§10.4).
 
-Clãs não fazem parte da v1. A arquitetura de combate, porém, não deve assumir que toda unidade de combate é uma colônia: ela deve permitir a composição de uma `CombatEntity` por colonos, reforços e outras entidades combatentes. Isso permite adicionar clãs depois sem reescrever o núcleo do combate.
+### 9.6 Autoridade única sobre estado
 
-#### Contratos de colonos
+Produção, inventário, logística, colonos e energia atravessam simulação e economia. Cada agregado mutável deve ter uma única autoridade; outros componentes publicam comandos ou recebem snapshots/eventos. Cálculo paralelo não deve significar dupla escrita concorrente. A escolha de linguagens e runtimes fica para o Macro System Design.
 
-Contrato não significa necessariamente vender uma pessoa. Seria um acordo entre colônias para um colono trabalhar, ser emprestado ou prestar serviço por determinado período, com salário, duração, transporte, direitos e condições de retorno.
+## 10. Propostas de design aprovadas como direção
 
-**Decisão atual:** o sistema entra na v1. Reprodução e imigração continuam sendo formas de crescimento, enquanto contratos representam trabalho, serviço, empréstimo ou transferência temporária entre colônias. Direitos, duração, pagamento, transporte, retorno e impacto sobre famílias ainda precisam ser especificados.
-
-## 14. Propostas para decisões ainda abertas
-
-### 14.1 Ciclo de tempo
-
-Para combinar mundo persistente, velocidade fixa e três acessos semanais, a regra aprovada é:
-
-- relógio global contínuo em tempo real, com progressão em segundos;
-- sem pause ou aceleração por jogador;
-- ações possuem duração real;
-- a colônia continua operando enquanto o jogador está offline;
-- decisões críticas ficam pendentes até o jogador ou uma política autorizada resolvê-las;
-- relatórios resumem o que ocorreu desde o último acesso.
-
-O tamanho dos ciclos internos de processamento ainda será uma decisão técnica posterior. Para o jogador, o tempo deve ser contínuo e observável; “tick interno” não deve aparecer como uma pausa ou aceleração artificial.
-
-### 14.2 Mercado inspirado no Bazaar
-
-Uma boa referência conceitual para o mercado de recursos é um bazar com ordens:
-
-- ordem de compra com preço e quantidade;
-- ordem de venda com preço e quantidade;
-- compra/venda imediata contra ordens existentes;
-- saldo e mercadoria reservados enquanto a ordem está ativa;
-- taxa de operação e regras de cancelamento;
-- histórico de preço e volume;
-- mercados regionais, quando a logística física estiver pronta.
-
-Para não criar uma economia vazia no começo, o mercado terá um comprador e vendedor NPC de último recurso. O NPC compra por um valor baixo e vende por um valor alto, incentivando o jogador a negociar com outros jogadores sempre que houver alternativa. O Bazaar de jogadores continua sendo o mercado preferencial.
-
-Isso mantém a colônia operando quando não há contraparte disponível, mas evita que o NPC seja a opção economicamente mais eficiente. O preço, a disponibilidade e as taxas ainda precisarão ser balanceados.
-
-### 14.3 Anti-snowball e proteção contra abuso
-
-“Snowball” significa que quem está na frente acumula tanta força, território e recursos que os demais deixam de ter uma resposta possível. As alternativas apresentadas foram aprovadas como direção de design:
-
-- proteção inicial para colônias novas;
-- invasões com declaração, custo e tempo de preparação;
-- limite de dano e de saque por operação;
-- estoque seguro limitado, nunca uma invulnerabilidade total;
-- custos logísticos crescentes para operações distantes;
-- recuperação e reconstrução após derrota;
-- mais de um eixo de poder, permitindo competir por comida, tecnologia, defesa, logística ou comércio;
-- nenhuma transferência instantânea da propriedade da colônia.
-
-Os números e limites ainda precisam ser balanceados, mas a direção está definida: proteção não será uma invulnerabilidade absoluta, invasões terão custo/aviso/limite e nenhuma derrota apagará a colônia.
-
-### 14.4 Arquitetura conceitual de combate
-
-O combate deve ser modelado como confronto entre entidades combatentes, e não como uma regra especial de “colônia 1 contra colônia 2”. Uma `CombatEntity` pode ser composta por:
-
-- colonos da própria colônia;
-- reforços contratados ou aliados;
-- unidades de defesa;
-- drones, fauna ou outras entidades combatentes futuras.
-
-Isso permite que uma batalha seja formada por diferentes reforços sem criar dependência do futuro sistema de clãs. Clãs podem ser adicionados posteriormente como uma origem de reforços, ownership ou comando coletivo.
-
-### 14.5 Menor ciclo jogável recomendado
-
-Como combate é essencial, o menor ciclo não precisa começar com PvP completo. Ele pode provar a governança e a defesa básica:
-
-```text
-3 colonos aleatórios válidos
-→ necessidades de água/comida/abrigo
-→ prioridades do jogador
-→ demandas e jobs autônomos
-→ extração e produção simples
-→ armazenamento e consumo
-→ energia e manutenção básica
-→ fauna/hazard ou incidente local
-→ preparação de defesa
-→ relatório de consequências
-```
-
-Esse recorte responde se Frontier é divertido como colônia governada antes de adicionar mercado entre jogadores, corporações e invasões completas.
-
-### 14.6 Plano inicial para a economia e as finanças
-
-Para evitar que o sistema financeiro fique grande demais antes de existir uma economia jogável, a proposta é evoluir em camadas:
+### 10.1 Economia e finanças em camadas
 
 #### Camada 1 — crédito interno e NPC de último recurso
 
 - uma moeda interna chamada provisoriamente `credits`;
-- carteira do jogador/colônia registrada em ledger;
+- carteira da colônia registrada em ledger;
 - crédito inicial para fundar a colônia;
-- NPC compra recursos por preço baixo e vende por preço alto;
-- compras e vendas do NPC têm limites ou preço variável para não criar dinheiro infinito sem controle;
+- NPC de sistema compra recursos por preço baixo e vende por preço alto;
+- compras e vendas do NPC têm limites ou preço variável para não criar dinheiro infinito;
 - sinks iniciais: construção, manutenção, transporte, reparos, taxas de mercado e proteção contra PvP;
 - nenhum dinheiro real e nenhum saque financeiro entre jogadores.
 
@@ -939,7 +589,7 @@ Para evitar que o sistema financeiro fique grande demais antes de existir uma ec
 - o vendedor mantém ownership até a entrega confirmada;
 - o comprador mantém os créditos em escrow até a liquidação;
 - cancelamento, falha, atraso e reembolso têm estados explícitos;
-- taxa deve ser cobrada apenas em eventos definidos, para não esconder o custo real.
+- taxa cobrada apenas em eventos definidos, para não esconder o custo real.
 
 #### Camada 3 — contratos de colonos
 
@@ -947,22 +597,290 @@ Para evitar que o sistema financeiro fique grande demais antes de existir uma ec
 - salário e custos de transporte passam pelo ledger;
 - o colono continua sendo uma entidade individual rastreável;
 - família, consentimento, deserção, doença e encerramento antecipado precisam de regras próprias;
-- contratos não transferem automaticamente a propriedade da pessoa.
+- contratos não transferem a propriedade da pessoa.
 
 #### Camada 4 — crédito avançado
 
-Crédito, empréstimos e garantias só devem entrar se houver uma necessidade clara de gameplay. Escrow e reconciliação de transações são necessários para o mercado; crédito bancário não é necessário para provar o primeiro ciclo.
+Crédito, empréstimos e garantias só entram se houver necessidade clara de gameplay. Escrow e reconciliação são necessários para o mercado; crédito bancário não é necessário para provar o primeiro ciclo.
 
-### 14.7 Plano para decidir a autonomia
+### 10.2 Mercado inspirado no Bazaar
 
-Você está correto em adiar a lista de controles até mapear todas as interações. O processo recomendado é:
+- ordem de compra com preço e quantidade;
+- ordem de venda com preço e quantidade;
+- compra/venda imediata contra ordens existentes;
+- saldo e mercadoria reservados enquanto a ordem está ativa;
+- taxa de operação e regras de cancelamento;
+- histórico de preço e volume;
+- mercados regionais, quando a logística física estiver pronta.
 
-1. listar todas as interações do jogador, da colônia, dos colonos, da infraestrutura, do mercado e do combate;
+O NPC de sistema é comprador e vendedor de último recurso: mantém a colônia operando quando não há contraparte, sem ser a opção economicamente mais eficiente. O Bazaar de jogadores continua sendo o mercado preferencial.
+
+### 10.3 Anti-snowball e proteção contra abuso
+
+“Snowball” significa que quem está na frente acumula tanta força, território e recursos que os demais deixam de ter resposta possível. Direção aprovada:
+
+- proteção inicial para colônias novas;
+- invasões com declaração, custo e tempo de preparação;
+- limite de dano e de saque por operação;
+- estoque seguro limitado, nunca invulnerabilidade total;
+- custos logísticos crescentes para operações distantes;
+- recuperação e reconstrução após derrota;
+- mais de um eixo de poder: comida, tecnologia, defesa, logística ou comércio;
+- nenhuma transferência instantânea da propriedade da colônia.
+
+### 10.4 Arquitetura conceitual de combate
+
+Uma `CombatEntity` pode ser composta por:
+
+- colonos da própria colônia;
+- reforços contratados ou aliados;
+- unidades de defesa;
+- drones, fauna ou outras entidades combatentes futuras.
+
+Isso permite batalhas com diferentes reforços sem depender do futuro sistema de clãs. Clãs podem ser adicionados depois como origem de reforços, ownership ou comando coletivo.
+
+### 10.5 Menor ciclo jogável
+
+```text
+3 colonos aleatórios válidos
+→ necessidades de água/comida/abrigo
+→ prioridades do jogador
+→ demandas e jobs autônomos
+→ extração e produção simples
+→ armazenamento e consumo
+→ energia e manutenção básica
+→ pesquisa básica que desbloqueia uma melhoria
+→ fauna/hazard ou incidente local
+→ preparação de defesa
+→ relatório de consequências
+```
+
+Esse recorte responde se Frontier é divertido como colônia governada antes de adicionar mercado entre jogadores, contratos e invasões completas.
+
+### 10.6 Processo para decidir a autonomia
+
+1. listar todas as interações do jogador, da colônia, dos colonos, da infraestrutura, da pesquisa, do mercado e do combate;
 2. para cada interação, identificar quem pode iniciar, cancelar, alterar e concluir;
-3. classificar cada ação como **automática**, **manual**, **manual com sugestão** ou **crítica com confirmação**;
+3. classificar cada ação como **automática**, **manual**, **híbrida**, **sugestão** ou **crítica**;
 4. definir o que acontece quando o jogador não responde;
 5. definir a prioridade quando duas ações competem;
 6. simular uma semana de jogo com apenas 40 minutos de organização diária;
 7. revisar se a autonomia cria decisões estratégicas ou apenas corrige falhas irritantes.
 
-Esse inventário deve vir antes da escolha entre Utility AI, GOAP, HTN ou qualquer implementação específica. Primeiro se define o comportamento desejado; depois se escolhe a técnica adequada para cada tipo de decisão.
+Esse inventário vem antes da escolha entre Utility AI, GOAP, HTN ou qualquer técnica. O inventário está em [interaction-inventory.md](./interaction-inventory.md).
+
+## 11. Questões em aberto
+
+### 11.1 Regras de invasão (em revisão)
+
+Proposta inicial do fundador: **5 dias** entre a decisão de invadir e o combate efetivo. O próprio fundador considera o prazo longo demais e pediu para repensar o modelo.
+
+Sequência base ainda válida:
+
+```text
+declaração → janela de preparação → deslocamento → combate → breach/defesa
+→ saque ou falha → recuperação e cooldown
+```
+
+Restrições que qualquer modelo precisa respeitar:
+
+- o jogador pode entrar só 3 vezes por semana, então o intervalo entre acessos pode passar de 2–3 dias;
+- nenhum aviso de duração fixa garante sozinho que o defensor verá a invasão; a defesa offline precisa funcionar razoavelmente sem ele;
+- janela longa demais esfria o conflito e permite esconder todo o saque;
+- janela curta demais pune quem joga pouco.
+
+Alternativas em discussão:
+
+- **A. Janela fixa longa** (ex.: 5 dias): simples, mas lenta e fácil de explorar.
+- **B. Aviso pela distância física:** o tempo de deslocamento pelos espaços de conexão define o aviso, com um piso mínimo. Colônias próximas são mais expostas; ataques distantes são mais lentos e caros.
+- **C. Janela de vulnerabilidade escolhida pelo defensor:** ao entrar em `OPEN`, a colônia define um horário diário em que combates podem acontecer.
+- **D. Doutrina de defesa obrigatória:** entrar em `OPEN` exige uma doutrina configurada, executada automaticamente se o defensor estiver offline.
+- **E. Alvos de saque fixados na declaração:** o que o atacante escolheu fica registrado no momento da declaração, limitando a fuga de estoque durante o aviso.
+
+Também seguem abertos: custo de proteção após os 7 dias, duração das proteções pagas, cooldowns, regras de ativação/desativação, alvos permitidos, limites de saque e destruição permanente.
+
+### 11.2 Consequências do tempo 1:1
+
+- **Durações de ações:** construções, receitas, viagens, pesquisas e tratamentos precisam de durações em horas/minutos reais compatíveis com 40 min/dia e 3 acessos por semana.
+- **Processos biológicos:** gestação, crescimento, envelhecimento e cura não podem seguir o calendário real (um ano de idade por ano real). Precisam de escala própria.
+- **Dia/noite e fusos horários:** com um relógio global, jogadores em fusos diferentes veem a colônia sempre no mesmo período (por exemplo, sempre de noite). É preciso decidir se o dia/noite é global, por posição no mundo ou desacoplado.
+- **Estações e clima:** um ano real por ciclo de estações pode ser lento demais para gerar variação perceptível.
+- **Ritmo logístico:** transporte físico entre lotes em tempo real pode deixar o comércio lento demais (Pilar 3).
+
+### 11.3 Topologia do mundo
+
+- como os espaços de conexão são representados: grafo de rotas, grade contínua ou zonas;
+- se os espaços de conexão têm recursos, fauna, hazards ou exploração próprios;
+- se o jogador escolhe a região do lote ou recebe um lote aleatório;
+- se uma colônia pode se mudar de lote;
+- o que acontece com o lote de uma colônia abandonada ou inativa;
+- densidade de vizinhos e equilíbrio entre colônias próximas e isoladas;
+- como o mundo cresce ou é particionado quando os 5.000 lotes forem ocupados.
+
+### 11.4 Autonomia versus controle direto
+
+Quais interações serão automáticas, quais terão controle manual e quando o jogador poderá substituir a colônia. Pode o jogador comandar um colono, cancelar um job, mover um item ou ordenar uma unidade diretamente? Controle direto irrestrito invalida a autonomia; autonomia irrestrita reduz a agência do jogador. Será decidido a partir do inventário de interações.
+
+### 11.5 Individualidade versus escala
+
+Com até 100 colonos por colônia e cerca de 5.000 colônias, a simulação contínua é grande. Recomendação provisória: manter identidade individual com níveis de fidelidade — colonos em atividade relevante recebem simulação detalhada; colônias sem observação podem usar agregação até que uma interação exija detalhe.
+
+### 11.6 Pesquisa
+
+- formato: árvore, rede ou especializações exclusivas;
+- se pesquisa é por colônia ou se conhecimento pode ser negociado/transferido;
+- durações em tempo real e quantas pesquisas cabem na primeira semana;
+- papel dos colonos pesquisadores e das skills.
+
+### 11.7 Economia e finanças
+
+- emissão, destruição, taxas, sinks, reservas e escrow;
+- regras finais de ordens, cancelamentos, disputas e taxas;
+- quando cada camada de mercado será liberada;
+- preço, disponibilidade e limites do NPC de sistema.
+
+### 11.8 Contratos de colonos
+
+Direitos, consentimento, duração, pagamento, transporte, retorno, deserção e impacto sobre famílias.
+
+### 11.9 Combate e fidelidade
+
+O jogador controla composição e doutrina, ou também formações e alvos? Recomendação provisória: o jogador define objetivos, regras de engajamento e doutrina; o sistema executa e gera um relatório auditável.
+
+### 11.10 Operação
+
+Relatórios obrigatórios, ferramentas de recuperação, métricas e conteúdo configurável.
+
+## 12. Recorte e próximo passo
+
+Frontier ainda não está pronto para gerar tasks de implementação. As decisões com maior poder de alterar a arquitetura e que continuam abertas são: regras de invasão, consequências do tempo 1:1, representação da topologia, limites da autonomia, fidelidade da simulação em escala e autoridade sobre estado entre simulação e economia.
+
+Validar primeiro o ciclo de §10.5. Esse núcleo deve permitir responder:
+
+- a autonomia é compreensível?
+- prioridades do jogador produzem diferenças reais?
+- pesquisa muda de forma perceptível o que a colônia consegue fazer?
+- o estado da colônia é observável?
+- falhas têm causas e alternativas?
+- a individualidade dos colonos agrega valor?
+
+Depois disso, a segunda camada natural é logística local, energia avançada e defesa básica. Mercado/ledger, contratos e invasões PvP completas entram depois que localização, reserva, tempo e ownership estiverem conceitualmente estáveis.
+
+Próximos artefatos:
+
+1. revisão do [interaction-inventory.md](./interaction-inventory.md) com as classificações confirmadas;
+2. decisão sobre as regras de invasão (§11.1) e as durações principais (§11.2);
+3. Macro System Design do núcleo da colônia.
+
+## 13. Mapa conceitual de sistemas
+
+```mermaid
+flowchart LR
+    Player[Jogador]
+    Client[Cliente e UX]
+    Identity[Identidade e permissões]
+    Colony[Colônia e governança]
+    World[Mundo, lotes e tempo]
+    Population[População e sociedade]
+    Autonomy[Autonomia: demandas, jobs e planejamento]
+    Infra[Infraestrutura]
+    Energy[Energia]
+    Resources[Recursos e consumo]
+    Production[Produção e cadeias]
+    Inventory[Itens, inventário e custody]
+    Logistics[Logística e transporte]
+    Research[Pesquisa e tecnologia]
+    Market[Mercados]
+    Finance[Ledger e finanças internas]
+    Clans[Clãs e diplomacia - futuro]
+    Defense[Defesa, invasões e combate]
+    Events[Eventos e hazards]
+    Ops[Auditoria, observabilidade e operação]
+
+    subgraph Governance[Governança e contexto]
+        Identity
+        Colony
+        World
+    end
+
+    subgraph ColonyLoop[Ciclo autônomo da colônia]
+        Population
+        Autonomy
+        Infra
+        Energy
+        Resources
+        Production
+        Inventory
+        Logistics
+        Research
+    end
+
+    subgraph SharedWorld[Interação no mundo compartilhado]
+        Market
+        Finance
+        Clans
+        Defense
+        Events
+    end
+
+    Player --> Client
+    Client --> Identity
+    Client --> Colony
+    Client --> Market
+    Client --> Research
+    Client --> Defense
+
+    Identity --> Colony
+    World --> Colony
+    World --> Events
+    World --> Logistics
+    World --> Defense
+
+    Colony --> Population
+    Colony --> Infra
+    Colony --> Autonomy
+    Population --> Autonomy
+    Autonomy --> Infra
+    Autonomy --> Production
+    Autonomy --> Logistics
+    Autonomy --> Research
+    Infra --> Energy
+    Energy --> Production
+    Energy --> Population
+    Resources --> Production
+    Production --> Resources
+    Production --> Inventory
+    Inventory --> Logistics
+    Logistics --> Inventory
+    Inventory --> Resources
+    Resources --> Population
+    Population --> Resources
+
+    Research --> Production
+    Research --> Infra
+    Research --> Population
+    Research --> Defense
+    Market --> Resources
+    Market --> Inventory
+    Market --> Logistics
+    Market --> Finance
+    Finance --> Market
+    Finance --> Clans
+    Clans --> Colony
+    Clans --> Market
+    Clans --> Defense
+    Events --> Resources
+    Events --> Infra
+    Events --> Population
+    Events --> Logistics
+    Defense --> Population
+    Defense --> Infra
+    Defense --> Logistics
+
+    Client -.-> Ops
+    Colony -.-> Ops
+    Autonomy -.-> Ops
+    Market -.-> Ops
+    Finance -.-> Ops
+    Defense -.-> Ops
+```

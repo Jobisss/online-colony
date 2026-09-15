@@ -1,7 +1,7 @@
 # Frontier — Interaction Inventory
 
 **Status:** rascunho para revisão de produto  
-**Versão:** v0.1  
+**Versão:** v0.2  
 **Objetivo:** mapear as interações do núcleo jogável antes de decidir autonomia, ownership e boundaries técnicos  
 **Fora do escopo:** implementação, escolha de linguagem, APIs, banco de dados e desenho final de serviços
 
@@ -22,7 +22,7 @@ Este documento não decide silenciosamente o que será automático. A coluna **C
 
 O primeiro ciclo deve representar uma colônia pequena e funcional:
 
-- uma colônia por jogador;
+- uma colônia por jogador, ocupando um lote do tamanho de um mapa de *RimWorld*;
 - 3 colonos iniciais;
 - população com limite absoluto de 100;
 - necessidades básicas;
@@ -31,9 +31,11 @@ O primeiro ciclo deve representar uma colônia pequena e funcional:
 - produção e consumo;
 - armazenamento;
 - manutenção e condições de saúde;
+- energia básica;
+- pesquisa básica;
 - fauna ou incidente local;
 - preparação de defesa;
-- tempo contínuo em velocidade fixa;
+- tempo contínuo 1:1 com o real (um dia no jogo = 24 horas);
 - operação enquanto o jogador está offline.
 
 Mercado de jogadores, contratos de colonos e invasões completas fazem parte do produto, mas não precisam bloquear a validação do ciclo básico de governança. O mercado NPC de último recurso e contratos serão tratados como interações de produto da v1, mesmo que sua implementação seja posterior ao núcleo.
@@ -55,13 +57,13 @@ Uma ação pode mudar de classificação após os testes. Por exemplo, “tratar
 
 ```mermaid
 flowchart LR
-    P[Jogador define intenção\nprioridades, metas e políticas]
-    S[Estado da colônia\nnecessidades, estoques, saúde e energia]
-    D[Demand System\nidentifica déficits e oportunidades]
-    J[Job System\ncria e prioriza jobs]
-    A[Colonos autônomos\nescolhem e executam tarefas]
-    W[Mundo alterado\nrecursos, prédios, pessoas e rotas]
-    R[Relatórios e alertas\ncausas, falhas e consequências]
+    P["Jogador define intenção<br/>prioridades, metas, políticas e pesquisa"]
+    S["Estado da colônia<br/>necessidades, estoques, saúde e energia"]
+    D["Demand System<br/>identifica déficits e oportunidades"]
+    J["Job System<br/>cria e prioriza jobs"]
+    A["Colonos autônomos<br/>escolhem e executam tarefas"]
+    W["Mundo alterado<br/>recursos, prédios, pessoas e rotas"]
+    R["Relatórios e alertas<br/>causas, falhas e consequências"]
 
     P --> S
     S --> D
@@ -185,6 +187,8 @@ Este diagrama mostra responsabilidades conceituais, não serviços. Um mesmo pro
 | PROD-08 | Reparar prédio | Colono/colônia | Híbrido | Recupera capacidade | Recursos e urgência |
 | PROD-09 | Armazenar recurso | Colono/sistema | Automático | Move recurso para estoque válido | Capacidade e rota |
 | PROD-10 | Gerenciar energia | Rede/colônia | Automático | Distribui geração e consumo | Prioridade, bateria e apagão |
+| PROD-11 | Definir prioridade de energia | Jogador | Manual | Ordena quais consumidores recebem energia primeiro | Padrão seguro sem configuração |
+| PROD-12 | Racionar energia | Sistema | Automático | Desliga consumidores de baixa prioridade em déficit | Aviso, explicação e retomada |
 
 ### 6.5 Localização, custody e logística
 
@@ -201,19 +205,22 @@ Este diagrama mostra responsabilidades conceituais, não serviços. Um mesmo pro
 
 ### 6.6 Eventos, fauna e defesa
 
+As interações de invasão (DEF-05, DEF-07, DEF-08, DEF-10) estão **em revisão**, junto com as regras de invasão do discovery (§11.1).
+
 | ID | Interação | Iniciador | Controle inicial | Efeito principal | Falhas/decisões abertas |
 | --- | --- | --- | --- | --- | --- |
 | DEF-01 | Detectar ameaça | Sistema | Automático | Cria alerta e demanda | Antecedência e informação |
 | DEF-02 | Configurar defesa | Jogador | Manual | Define combatentes e doutrina | Regras de composição |
 | DEF-03 | Preparar combat entity | Colônia | Híbrido | Compõe unidade com colonos/reforços | Ownership e comando |
 | DEF-04 | Resolver fauna/incidente | Colônia | Híbrido | Protege colônia e recursos | Escala do incidente |
-| DEF-05 | Declarar invasão | Jogador | Crítico | Inicia operação preparada | Custo, alcance e aviso |
-| DEF-06 | Aceitar proteção NPC | Jogador | Manual | Ativa proteção contra PvP | 7 dias grátis, preço e cooldown |
+| DEF-05 | Declarar invasão | Jogador | Crítico | Inicia operação preparada | Custo, alcance e duração do aviso |
+| DEF-06 | Comprar/renovar proteção NPC | Jogador | Manual | Mantém proteção contra PvP após o período gratuito | Preço, duração e cooldown |
 | DEF-07 | Desativar proteção | Jogador | Crítico | Abre colônia para risco PvP | Irreversibilidade e aviso |
-| DEF-08 | Receber invasão | Sistema/atacante | Crítico | Inicia janela de preparação | Proteção offline |
+| DEF-08 | Receber aviso de invasão | Sistema | Automático | Notifica o defensor e inicia janela de preparação | Defensor não confirma; reage via DEF-02 ou doutrina offline |
 | DEF-09 | Executar combate | Combat entities | Automático | Resolve confronto por ticks internos | Regras e autoridade |
 | DEF-10 | Saquear alvo permitido | Atacante | Híbrido | Transfere carga limitada | Estoque seguro e limites |
 | DEF-11 | Recuperar defesa | Colônia | Automático | Remove estado de breach e repara | Tempo e custo |
+| DEF-12 | Receber proteção inicial | Sistema | Automático | Ativa 7 dias de proteção gratuita na criação da colônia | Aviso antes do fim |
 
 ### 6.7 Economia, NPC e contratos
 
@@ -229,6 +236,30 @@ Este diagrama mostra responsabilidades conceituais, não serviços. Um mesmo pro
 | ECO-08 | Aceitar contrato | Jogador | Crítico | Compromete colono e pagamento | Família, saúde e retorno |
 | ECO-09 | Cumprir contrato | Colono/colônia | Híbrido | Executa serviço e recebe pagamento | Falha e abandono |
 | ECO-10 | Encerrar contrato | Jogador/sistema | Crítico | Retorna ou substitui colono | Penalidade e transporte |
+
+### 6.8 Pesquisa e tecnologia
+
+| ID | Interação | Iniciador | Controle inicial | Efeito principal | Falhas/decisões abertas |
+| --- | --- | --- | --- | --- | --- |
+| RES-01 | Escolher pesquisa | Jogador | Manual | Define o próximo objetivo tecnológico | Formato da árvore ou rede |
+| RES-02 | Enfileirar pesquisas | Jogador | Manual | Mantém progresso enquanto o jogador está offline | Tamanho da fila |
+| RES-03 | Sugerir pesquisa | Sistema | Sugestão | Recomenda pesquisa com base em gargalos observados | Evitar decidir pelo jogador |
+| RES-04 | Alocar pesquisador | Colônia | Híbrido | Vincula colono e laboratório à pesquisa | Skill, prioridade e necessidades |
+| RES-05 | Progredir pesquisa | Sistema | Automático | Acumula progresso em tempo real | Duração real e insumos |
+| RES-06 | Bloquear pesquisa | Sistema | Automático | Pausa por falta de pesquisador, energia ou insumo | Explicação da causa |
+| RES-07 | Concluir pesquisa | Sistema | Automático | Desbloqueia prédios, receitas, políticas ou defesas | Notificação e relatório |
+| RES-08 | Cancelar/trocar pesquisa | Jogador | Manual | Interrompe pesquisa atual | Progresso perdido ou mantido |
+
+### 6.9 Mundo e tempo
+
+| ID | Interação | Iniciador | Controle inicial | Efeito principal | Falhas/decisões abertas |
+| --- | --- | --- | --- | --- | --- |
+| WLD-01 | Atribuir lote de colônia | Sistema | Automático | Posiciona a colônia no mundo de forma semialeatória | Escolha de região pelo jogador |
+| WLD-02 | Avançar dia/noite | Sistema | Automático | Altera rotinas, luz, energia e riscos | Relógio global e fusos horários |
+| WLD-03 | Gerar evento climático/hazard | Sistema | Automático | Cria risco ou oportunidade local | Aviso, escala e frequência |
+| WLD-04 | Explorar espaço de conexão | Jogador/colônia | Híbrido | Revela recursos, rotas ou ameaças | Existência de conteúdo fora dos lotes |
+| WLD-05 | Viajar entre lotes | Colônia | Híbrido | Move colonos ou carga pelos espaços de conexão | Duração real e risco |
+| WLD-06 | Liberar lote inativo | Sistema | Automático | Recupera lote de colônia abandonada | Critério de inatividade e destino dos ativos |
 
 ## 7. Ciclo de vida de um job
 
@@ -286,6 +317,8 @@ Após revisar este inventário, o próximo artefato deve ser o **Macro System De
 - Autonomy;
 - Infrastructure;
 - Resources and Production;
+- Energy;
+- Research;
 - Inventory and Local Logistics;
 - World/Time;
 - Basic Defense.
