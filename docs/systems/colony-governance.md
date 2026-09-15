@@ -9,6 +9,8 @@
 
 Colony Governance é o sistema que transforma decisões do jogador em instruções duráveis para a colônia.
 
+O catálogo transversal de setores, configurações e trade-offs está em [Policy Matrix](./policy-matrix.md).
+
 O jogador não deve precisar escolher cada colono ou controlar cada deslocamento. Ele define intenção por meio de metas, políticas, ordens, planos e decisões críticas. As prioridades operacionais são derivadas dessas configurações; os sistemas autônomos usam o resultado para decidir como executar o trabalho.
 
 O sistema precisa responder de forma clara:

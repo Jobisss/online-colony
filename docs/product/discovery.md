@@ -789,8 +789,9 @@ Próximos artefatos:
 
 1. revisão do [interaction-inventory.md](./interaction-inventory.md) com as classificações confirmadas;
 2. decisão sobre dia/noite, fusos horários e durações principais (§11.2);
-3. [Macro System Design de Colony Governance](../systems/colony-governance.md);
-4. Macro System Design de Autonomy, que consumirá as directives de Governance.
+3. [Policy Matrix](../systems/policy-matrix.md) com políticas, dependências e especializações;
+4. [Macro System Design de Colony Governance](../systems/colony-governance.md);
+5. Macro System Design de Autonomy, que consumirá as directives de Governance.
 
 ## 13. Mapa conceitual de sistemas
 
