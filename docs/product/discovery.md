@@ -526,6 +526,8 @@ Esse núcleo deve permitir responder:
 
 Depois disso, a segunda camada natural é logística local, energia e defesa básica. O combate entra no núcleo porque é essencial à visão; mercado/ledger e invasões PvP completas podem entrar depois que localização, reserva, tempo e ownership estiverem conceitualmente estáveis.
 
+O inventário detalhado das interações está em [interaction-inventory.md](./interaction-inventory.md). Ele é a base para decidir quais ações serão manuais, automáticas, híbridas ou críticas.
+
 ## 11. Mermaid inicial — mapa conceitual de sistemas
 
 ```mermaid
