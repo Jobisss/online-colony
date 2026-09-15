@@ -83,7 +83,7 @@ O pipeline é comum, mas a forma como cada setor calcula capacidade, risco, qual
 | Energia | fontes, produção, reserva, consumidores | vida, saúde, segurança, produção e conforto | energia, calor, apagões | rede compartilhada e cascata de falhas | Piloto 2 |
 | Produção | armas, roupas, armaduras, comida, medicina, materiais | consumo interno, ordens, exportação, pesquisa | produtos, subprodutos, resíduos | cadeias e gargalos | Piloto 2 |
 | Descanso | trabalho, sono, recreação, fadiga | recuperação, produtividade e segurança | disponibilidade e saúde | efeito acumulado no agente | Posterior |
-| Fauna | criação, alimentação, reprodução, abate, manejo | alimento, materiais, espaço e risco | comida, materiais, animais | seres vivos e reprodução | Posterior |
+| Fauna | criação, alimentação, reprodução, abate, manejo e interação com fauna regional | alimento, materiais, espaço, risco e oportunidades | comida, materiais, animais e capacidades futuras | seres vivos, comportamento regional e capacidades variáveis | Posterior |
 | Comércio | produtos, serviços, preços, reservas, contrapartes | consumo interno, liquidez e margem | transações e compromissos | dependência externa e risco econômico | Posterior |
 | Educação | treinamento, transmissão de skills, foco de formação | skills críticas, pesquisa e sucessão | especialistas e progresso | desenvolvimento lento e irreversível parcial | Piloto 1/3 |
 
@@ -199,7 +199,7 @@ O pipeline é comum, mas a forma como cada setor calcula capacidade, risco, qual
 
 ### 4.8 Fauna
 
-**Objetivo:** transformar fauna e gado em parte administrável da economia e do ecossistema da colônia.
+**Objetivo:** transformar animais de criação e fauna regional em partes administráveis da economia, do ecossistema e, quando desbloqueado, da defesa da colônia. Nem todo animal regional é gado, e o sistema não deve assumir que uma espécie é permanentemente impossível de domesticar ou treinar.
 
 **Configurações possíveis:**
 
@@ -208,10 +208,15 @@ O pipeline é comum, mas a forma como cada setor calcula capacidade, risco, qual
 - abate;
 - uso para transporte ou materiais;
 - manejo de fauna selvagem;
+- presença de espécies por região;
+- risco, comportamento e distância da base;
+- capacidades graduais de criação, domesticação, treinamento, transporte e combate;
 - tolerância a risco e proximidade da base;
 - reserva de animais reprodutores.
 
-**Trade-offs:** gado gera alimento e materiais, mas consome espaço, comida, água e trabalho. Fauna selvagem pode ser ameaça, recurso ou parte do ambiente.
+Cada espécie deve possuir capacidades configuráveis por dados. Um valor `0` significa que a capacidade não está disponível no conteúdo/regras atuais; não significa uma impossibilidade permanente. Por exemplo, um urso regional pode começar com `domesticação = 0` e `treinamento de infantaria = 0`, enquanto uma atualização futura pode habilitar essas capacidades por pesquisa, evento ou novo conteúdo.
+
+**Trade-offs:** gado gera alimento e materiais, mas consome espaço, comida, água e trabalho. Fauna regional pode ser ameaça, recurso, animal domesticável ou unidade de combate futura.
 
 **Dependências:** alimentação, saúde, produção, território e pesquisa.
 

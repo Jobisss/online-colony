@@ -147,7 +147,7 @@ Este diagrama mostra responsabilidades conceituais, não serviços. Um mesmo pro
 | GOV-11 | Criar ordem de produto/serviço | Jogador | Manual | Solicita quantidade, qualidade, prazo e restrições | Reserva, orçamento e substitutos |
 | GOV-12 | Aprovar proposta de ambiente | Jogador | Crítico | Autoriza layout de base gerado pelo planner | Critérios de aprovação e custo |
 | GOV-13 | Definir política de construção | Jogador | Manual | Orienta expansão e sugestões de layout | Quando a IA pode propor/construir |
-| GOV-14 | Configurar manejo de fauna | Jogador | Manual | Define criação, alimentação, reprodução e abate | Limites de espaço e prioridade |
+| GOV-14 | Configurar política de fauna | Jogador | Manual | Define criação, alimentação, reprodução, manejo e interação regional | Capacidades da espécie, espaço e risco |
 | GOV-15 | Usar capacidade desbloqueada | Jogador/colônia | Híbrido | Ativa opção de política liberada por pesquisa | Pesquisa pode liberar, mas não ativar sozinha |
 
 ### 6.2 População e saúde
@@ -230,6 +230,10 @@ As interações de invasão seguem o modelo aprovado no discovery (§8.14): avis
 | DEF-12 | Receber proteção inicial | Sistema | Automático | Ativa 7 dias de proteção gratuita na criação da colônia | Aviso antes do fim |
 | DEF-13 | Definir horário de vulnerabilidade | Jogador | Manual | Define quando combates podem ocorrer em `OPEN` | Duração e cooldown de alteração |
 | DEF-14 | Executar doutrina offline | Colônia | Automático | Defende conforme doutrina sem o jogador | Conteúdo mínimo da doutrina |
+| FAU-01 | Encontrar fauna regional | Sistema | Automático | Registra espécie, localização, comportamento e risco | Frequência e informação disponível |
+| FAU-02 | Manejar animal | Colônia/colono | Híbrido | Alimenta, afasta, captura ou protege um animal | Capacidade atual da espécie |
+| FAU-03 | Domesticar/treinar animal | Jogador/colônia | Híbrido | Usa uma capacidade disponível da espécie | Valor `0` bloqueia agora, mas não permanentemente |
+| FAU-04 | Usar fauna em `CombatEntity` | Jogador/colônia | Futuro | Compõe reforço animal em uma entidade combatente | Pesquisa, treinamento e regras de segurança |
 
 ### 6.7 Economia, NPC e contratos
 

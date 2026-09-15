@@ -179,7 +179,7 @@ As políticas precisam ter limites explícitos. Uma política não pode autoriza
 | Energia | fontes permitidas, produção, reserva e prioridade de consumo | altera custo, confiabilidade, apagões e produção |
 | Produção | armas, roupas, armaduras, comida, medicina e materiais básicos | altera cadeias produtivas, capacidade e especialização |
 | Descanso | tempo de trabalho, recreação, sono e tolerância à fadiga | altera produtividade, moral, saúde e segurança |
-| Fauna | criação de gado, abate, reprodução, alimentação e manejo | altera alimento, materiais, espaço, risco e trabalho |
+| Fauna | criação de gado, interação com fauna regional, abate, reprodução, alimentação e manejo | altera alimento, materiais, espaço, risco, trabalho e capacidades futuras |
 | Comércio | produtos/serviços autorizados, preços, reservas e contrapartes | altera liquidez, estoques, risco e dependência externa |
 | Educação | treinamento, transmissão de skills e foco de formação | altera evolução dos colonos, pesquisa e disponibilidade de especialistas |
 
@@ -427,7 +427,7 @@ Os nomes abaixo são comandos de domínio, não endpoints de API.
 | `RejectPendingDecision` | Jogador | Impede ação crítica | Crítico |
 | `ConfigureSecureStock` | Jogador | Define reserva protegida | Manual |
 | `ConfigureDefenseDoctrine` | Jogador | Define orientação de defesa | Manual |
-| `ConfigureLivestockPolicy` | Jogador | Define manejo, reprodução e abate de fauna domesticada | Manual |
+| `ConfigureFaunaPolicy` | Jogador | Define manejo de gado e interação com fauna regional | Manual |
 | `ConfigureMedicalPolicy` | Jogador | Define regras de prioridade para medicina, cirurgia e tratamentos | Manual |
 | `ConfigureEducationPolicy` | Jogador | Define treinamento, transmissão de skills e foco de formação | Manual |
 | `SetWorkRestSchedule` | Jogador | Define trabalho, sono e recreação | Manual |

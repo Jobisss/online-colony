@@ -44,7 +44,7 @@ O jogador deve sentir que:
 - os colonos são agentes com história e capacidade de agir, não apenas números de produção;
 - produção e comércio têm geografia, dependências e riscos reais;
 - o mundo continua evoluindo sem exigir presença constante;
-- problemas podem ser entendidos e resolvidos por meio de políticas e prioridades;
+- problemas podem ser entendidos e resolvidos por meio de políticas e prioridades derivadas;
 - histórias emergentes surgem da interação entre pessoas, recursos, instituições e eventos.
 
 ### 2.2 O que Frontier não pretende ser, por enquanto
@@ -180,7 +180,7 @@ As prioridades operacionais não são criadas livremente pelo jogador. Elas são
 
 - catálogo de recursos, receitas e produtos;
 - extração;
-- agricultura, pecuária e alimentos;
+- agricultura, pecuária, fauna regional e alimentos;
 - indústria, refino e componentes;
 - consumo da população e da infraestrutura;
 - qualidade, perdas, resíduos e transformação;
@@ -442,7 +442,10 @@ Frontier deve otimizar a profundidade de uma colônia pequena/média, e não sim
 
 - **não haverá NPCs agindo no mundo** (colonos, colônias ou facções controlados pelo sistema);
 - existem apenas **NPCs de sistema**, que funcionam como serviços sem presença física: o mercado de último recurso (§10.2) e o vendedor de proteção PvP (§8.9);
-- fauna pode existir;
+- fauna regional existe de acordo com cada região, além dos animais de criação;
+- espécies podem ser ameaça, recurso, animal domesticável ou unidade de combate futura;
+- capacidades como criação, domesticação, treinamento e combate são valores/configurações de conteúdo: `0` significa indisponível no estado atual, não impossibilidade permanente;
+- um urso pode começar com domesticação e treinamento de infantaria em `0`, sem impedir que uma atualização futura habilite essas capacidades;
 - não haverá corporações nem clãs na v1; clãs formados por jogadores podem ser adicionados depois.
 
 ### 8.8 Saúde e mortalidade
@@ -527,6 +530,7 @@ declaração (alvos fixados) → deslocamento pelos espaços de conexão
 - o sistema deriva a prioridade de demandas e jobs a partir dessas políticas, necessidades, ordens e regras de segurança;
 - cada política deve produzir consequências e trade-offs perceptíveis na colônia;
 - pesquisa desbloqueia novas capacidades de política, especializações e automações, mas não ativa essas opções automaticamente;
+- pesquisa ou conteúdo futuro pode alterar capacidades de espécies de fauna sem exigir uma regra rígida de “impossível de domesticar”;
 - medicina, educação, militar, produção, energia e outros setores competem pelo mesmo potencial de pesquisa;
 - é intencionalmente impossível pesquisar tudo em um horizonte relevante: especializações devem levar tempo suficiente para tornar a escolha estratégica;
 - não deve existir uma configuração universalmente ótima; colônias especializadas devem depender de outras especializações por meio de comércio, contratos e alianças.
@@ -676,7 +680,7 @@ Isso permite batalhas com diferentes reforços sem depender do futuro sistema de
 ```text
 3 colonos aleatórios válidos
 → necessidades de água/comida/abrigo
-→ prioridades do jogador
+→ políticas do jogador e prioridades derivadas
 → demandas e jobs autônomos
 → extração e produção simples
 → armazenamento e consumo
@@ -777,7 +781,7 @@ Frontier ainda não está pronto para gerar tasks de implementação. As decisõ
 Validar primeiro o ciclo de §10.5. Esse núcleo deve permitir responder:
 
 - a autonomia é compreensível?
-- prioridades do jogador produzem diferenças reais?
+- políticas do jogador produzem diferenças reais?
 - pesquisa muda de forma perceptível o que a colônia consegue fazer?
 - o estado da colônia é observável?
 - falhas têm causas e alternativas?
