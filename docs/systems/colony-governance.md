@@ -224,7 +224,7 @@ Exemplos:
 - educação avançada → treinamento de skills e formação de especialistas;
 - doutrina militar → novas regras de armamento e composição de `CombatEntity`.
 
-Uma pesquisa desbloqueia uma **capacidade de política** para a colônia; isso não ensina automaticamente todos os colonos. O jogador ainda decide se, quando e onde usá-la, e a Educação precisa formar indivíduos compatíveis nessa capacidade. Por exemplo, pesquisar Neurologia libera o campo, mas um médico precisa ser educado para aprender a aplicá-lo. O sistema não deve ativar automaticamente toda opção recém-desbloqueada.
+Uma pesquisa desbloqueia uma **capacidade de política** para a colônia; isso não ensina automaticamente todos os colonos. O jogador ainda decide se, quando e onde usá-la, e a Educação precisa formar indivíduos compatíveis nessa capacidade. Por exemplo, pesquisar Neurologia libera o campo, mas um médico precisa ser educado para aprender a aplicá-lo. Para transmitir a capacidade, o professor precisa tê-la aprendido individualmente e possuir a skill de Ensino. O sistema não deve ativar automaticamente toda opção recém-desbloqueada.
 
 ```mermaid
 flowchart TD
@@ -243,7 +243,7 @@ flowchart TD
     Energy -. compete por tempo .- Logistics
 ```
 
-O grafo representa competição por capacidade e tempo, não necessariamente bloqueios permanentes. O conhecimento adquirido pela colônia é permanente e não é transferido diretamente por contratos ou comércio. A capacidade individual também permanece depois de aprendida, mas sua proficiência pode diminuir quando a skill fica sem uso, como no RimWorld; Educação e prática podem mantê-la ou recuperá-la. A colônia pode trocar sua especialização ativa, mas a redistribuição tem custo e tempo de transição: a área antiga perde eficiência gradualmente, a nova começa com baixa eficiência e exige educação individual.
+O grafo representa competição por capacidade e tempo, não necessariamente bloqueios permanentes. O conhecimento adquirido pela colônia é permanente e não é transferido diretamente por contratos ou comércio. A capacidade individual também permanece depois de aprendida, mas sua proficiência (`actualSkill`) pode diminuir quando a skill fica sem uso, como no RimWorld. O pico histórico (`maxSkillReached`) é preservado; Educação e prática recuperam a proficiência até esse pico 1,5× mais rápido que o aprendizado além dele. O limiar de inatividade e as velocidades variam por skill. Para transmitir uma capacidade, o professor precisa ter a pesquisa/capacidade aprendida e a skill de Ensino. A colônia pode trocar sua especialização ativa, mas a redistribuição tem custo e tempo de transição: a área antiga perde eficiência gradualmente, a nova começa com baixa eficiência e exige educação individual.
 
 #### 5.5.3 Política como cadeia de consequências
 

@@ -534,9 +534,11 @@ declaração (alvos fixados) → deslocamento pelos espaços de conexão
 - pesquisa desbloqueia novas capacidades de política, especializações e automações, mas não ativa essas opções automaticamente;
 - uma pesquisa libera uma capacidade para a colônia aprender, mas não concede esse conhecimento a todos os colonos;
 - a educação precisa formar cada colono na capacidade específica antes que ele possa usá-la; por exemplo, pesquisar Neurologia desbloqueia o campo e um médico precisa ser educado para aprender Neurologia;
+- para ensinar uma capacidade, o professor precisa ter a pesquisa/capacidade aprendida individualmente e também possuir a skill de Ensino;
 - a colônia pode trocar sua especialização ativa sem perder conhecimento pesquisado, mas a mudança tem custo e tempo de transição;
 - durante a transição, a área antiga perde eficiência gradualmente e a nova começa com baixa eficiência; colonos precisam ser educados individualmente na nova capacidade;
 - a proficiência individual dos colonos pode diminuir quando uma skill fica sem uso, como no RimWorld; isso não apaga o conhecimento da colônia, e educação/prática podem manter ou recuperar a proficiência;
+- o comportamento de cada skill varia por dados da própria skill: o decaimento começa quando ela deixa de ser usada, `maxSkillReached` é preservado, e a recuperação de `actualSkill` até esse pico ocorre 1,5× mais rápido que o aprendizado além do pico;
 - pesquisa ou conteúdo futuro pode alterar capacidades de espécies de fauna sem exigir uma regra rígida de “impossível de domesticar”;
 - medicina, educação, militar, produção, energia e outros setores competem pelo mesmo potencial de pesquisa;
 - é intencionalmente impossível pesquisar tudo em um horizonte relevante: especializações devem levar tempo suficiente para tornar a escolha estratégica;
