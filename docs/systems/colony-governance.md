@@ -243,7 +243,7 @@ flowchart TD
     Energy -. compete por tempo .- Logistics
 ```
 
-O grafo representa competição por capacidade e tempo, não necessariamente bloqueios permanentes. O conhecimento adquirido pela colônia é permanente e não é transferido diretamente por contratos ou comércio. A capacidade individual também permanece depois de aprendida; a Educação é necessária para formar novos colonos. A colônia pode trocar sua especialização ativa, mas a redistribuição tem custo e tempo de transição: a área antiga perde eficiência gradualmente, a nova começa com baixa eficiência e exige educação individual. A recuperação de skills perdidas continua sendo uma decisão futura.
+O grafo representa competição por capacidade e tempo, não necessariamente bloqueios permanentes. O conhecimento adquirido pela colônia é permanente e não é transferido diretamente por contratos ou comércio. A capacidade individual também permanece depois de aprendida, mas sua proficiência pode diminuir quando a skill fica sem uso, como no RimWorld; Educação e prática podem mantê-la ou recuperá-la. A colônia pode trocar sua especialização ativa, mas a redistribuição tem custo e tempo de transição: a área antiga perde eficiência gradualmente, a nova começa com baixa eficiência e exige educação individual.
 
 #### 5.5.3 Política como cadeia de consequências
 

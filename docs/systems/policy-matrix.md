@@ -251,13 +251,14 @@ Cada espécie deve possuir capacidades configuráveis por dados. Um valor `0` si
 - professores e mentores;
 - educação militar, médica, industrial ou científica;
 - tempo de educação versus produção imediata;
+- manutenção e recuperação de proficiência individual quando uma skill fica sem uso;
 - retenção e sucessão de conhecimento.
 
 **Trade-offs:** educar reduz produção no curto prazo, mas aumenta capacidade futura. Uma colônia sem educação pode depender de contratos ou imigração para manter especialistas.
 
 **Dependências:** saúde, descanso, pesquisa, população, produção e contratos.
 
-Pesquisa não ensina automaticamente todos os colonos. Ela libera uma capacidade para a colônia aprender; a Educação transmite essa capacidade para indivíduos compatíveis. Por exemplo, pesquisar **Neurologia** torna o campo disponível, mas um médico ainda precisa passar por educação específica antes de tratar neurologia.
+Pesquisa não ensina automaticamente todos os colonos. Ela libera uma capacidade para a colônia aprender; a Educação transmite essa capacidade para indivíduos compatíveis. Por exemplo, pesquisar **Neurologia** torna o campo disponível, mas um médico ainda precisa passar por educação específica antes de tratar neurologia. A proficiência individual pode diminuir quando fica sem uso, mas educação e prática podem mantê-la ou recuperá-la.
 
 ```mermaid
 flowchart LR
@@ -391,7 +392,7 @@ Cada piloto deve ser especificado com o template comum, mas preservar suas regra
 1. **Resolvido:** no máximo 5 parâmetros principais por setor entram na v1; detalhes avançados podem ser liberados por pesquisa.
 2. **Resolvido:** cada colônia possui uma fila única e apenas uma pesquisa ativa por vez; não há pesquisas paralelas na v1.
 3. **Resolvido:** o conhecimento adquirido é permanente. A colônia pode trocar sua especialização ativa, mas a redistribuição exige custo e tempo de transição; a área antiga perde eficiência gradualmente, a nova começa com baixa eficiência e os colonos precisam ser educados individualmente.
-4. **Resolvido:** Educação forma novas capacidades individuais; a pesquisa apenas libera a capacidade para a colônia aprender. Um colono não sabe automaticamente uma área pesquisada — ele precisa ser educado nela. Recuperação de uma skill perdida fica fora dessa decisão e pode ser definida posteriormente.
+4. **Resolvido:** Educação forma novas capacidades individuais; a pesquisa apenas libera a capacidade para a colônia aprender. Um colono não sabe automaticamente uma área pesquisada — ele precisa ser educado nela. A proficiência individual pode diminuir quando a skill fica sem uso, e educação/prática podem mantê-la ou recuperá-la; isso não remove o conhecimento permanente da colônia.
 5. **Resolvido:** a pesquisa em si não é transferível por contratos ou comércio; cada colônia desenvolve seu próprio conhecimento.
 6. **Resolvido:** o primeiro ciclo prioriza Produção, Energia e Educação. Saúde entra depois do fluxo inicial do core loop.
 7. **Resolvido:** quando o mercado de serviços médicos e educacionais existir, ele exige pacientes e estudantes externos reais, não apenas demanda abstrata.

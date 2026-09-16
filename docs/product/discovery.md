@@ -536,6 +536,7 @@ declaração (alvos fixados) → deslocamento pelos espaços de conexão
 - a educação precisa formar cada colono na capacidade específica antes que ele possa usá-la; por exemplo, pesquisar Neurologia desbloqueia o campo e um médico precisa ser educado para aprender Neurologia;
 - a colônia pode trocar sua especialização ativa sem perder conhecimento pesquisado, mas a mudança tem custo e tempo de transição;
 - durante a transição, a área antiga perde eficiência gradualmente e a nova começa com baixa eficiência; colonos precisam ser educados individualmente na nova capacidade;
+- a proficiência individual dos colonos pode diminuir quando uma skill fica sem uso, como no RimWorld; isso não apaga o conhecimento da colônia, e educação/prática podem manter ou recuperar a proficiência;
 - pesquisa ou conteúdo futuro pode alterar capacidades de espécies de fauna sem exigir uma regra rígida de “impossível de domesticar”;
 - medicina, educação, militar, produção, energia e outros setores competem pelo mesmo potencial de pesquisa;
 - é intencionalmente impossível pesquisar tudo em um horizonte relevante: especializações devem levar tempo suficiente para tornar a escolha estratégica;
