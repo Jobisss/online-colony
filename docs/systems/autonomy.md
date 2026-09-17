@@ -109,11 +109,13 @@ Uma política inicia um ciclo contínuo quando fica ativa e o encerra quando é 
 
 ### 6.1 Prioridade como decisão estratégica
 
-O jogador configura prioridades por uma escala numérica de `1` a `4` no nível da colônia, inspirada no modelo de prioridades do RimWorld. `1` representa a prioridade mais alta e `4` a mais baixa.
+O jogador configura prioridades em uma única linha arrastável no nível da colônia, inspirada na leitura visual do modelo de prioridades do RimWorld. A esquerda representa a maior prioridade e a direita a menor. O sistema pode converter as posições internamente em níveis `1` a `4`, mas esses números não são a interface principal nem são digitados pelo jogador.
 
 A prioridade é aplicada a políticas e subpolíticas, não a colonos ou jobs individuais. O jogador não diz “o colono A deve tratar o paciente B”; ele define como a colônia deve ordenar seus objetivos. A Autonomy combina essa configuração com skill, disponibilidade, distância, recursos, reservas, risco e condições de execução para escolher os executores.
 
-Cada política pode possuir subpolíticas específicas. Saúde, por exemplo, pode conter “tratamento importante”, “tratamento de rotina”, “cirurgia”, “prevenção”, “colonos próprios” e “pacientes externos”. A mesma estrutura vale para Produção, Educação, Energia, Estoques, Segurança e os demais setores.
+Cada política pode possuir subpolíticas específicas, mas todas as subpolíticas ativas competem em uma única linha global de prioridade da colônia. Saúde, por exemplo, pode conter “tratamento importante”, “tratamento de rotina”, “cirurgia”, “prevenção”, “colonos próprios” e “pacientes externos”. A mesma estrutura vale para Produção, Educação, Energia, Estoques, Segurança, Construção civil e os demais setores.
+
+O jogador pode misturar cartões de setores diferentes na mesma linha. Por exemplo, “tratamento importante”, “construção civil”, “comida”, “produção de armas” e “educação de neurologia” podem ocupar posições intercaladas. O setor apenas define o significado e as consequências do cartão; não define uma fila separada.
 
 ```mermaid
 flowchart TD
@@ -140,6 +142,13 @@ flowchart TD
     Demand --> Priority
     Colonists --> Jobs
     Priority --> Jobs
+```
+
+Visualmente, a configuração pode ser representada assim:
+
+```text
+[Tratamento importante] → [Construção civil] → [Comida] → [Produção de armas] → [Educação de neurologia]
+                  maior prioridade                              menor prioridade
 ```
 
 Exemplos válidos:

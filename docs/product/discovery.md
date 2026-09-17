@@ -535,7 +535,8 @@ declaração (alvos fixados) → deslocamento pelos espaços de conexão
 - o jogador configura políticas de Segurança, Alimentação, Saúde, Energia, Produção, Descanso, Fauna, Comércio e Educação;
 - o jogador não cria uma fila de prioridades livre;
 - políticas setoriais definem prioridades por contexto, como “médicos tratam primeiro colonos próprios” ou “consumo interno vem antes de exportação”;
-- prioridades são configuradas numericamente no nível da colônia, com subpolíticas dentro de cada setor; por exemplo, Saúde pode separar tratamento importante, tratamento de rotina, cirurgia, prevenção, colonos próprios e pacientes externos;
+- prioridades são configuradas em uma linha arrastável no nível da colônia, com subpolíticas dentro de cada setor; a esquerda representa maior prioridade e o sistema pode derivar níveis numéricos internamente;
+- a configuração final usa uma única linha global: subpolíticas de setores diferentes podem ser intercaladas, como Tratamento importante → Construção civil → Comida → Produção de armas;
 - o sistema deriva a prioridade de demandas e jobs a partir dessas políticas, necessidades, ordens e regras de segurança;
 - uma mudança de política dispara o recálculo das prioridades de todos os colonos e entidades afetados; o jogador não cancela jobs prioritários individualmente;
 - selecionar linhas de produção, prioridades de tratamento e regras de movimentação de estoque é função das políticas; o jogador não precisa iniciar cada receita, atendimento ou transporte individualmente;

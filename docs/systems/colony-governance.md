@@ -158,7 +158,7 @@ Uma meta gera demanda; ela não cria recursos instantaneamente.
 
 ### 5.5 Policy
 
-Regra que limita ou orienta decisões autônomas. Políticas são a principal superfície de customização da colônia: duas colônias podem possuir os mesmos prédios e ainda operar de maneiras muito diferentes por causa das suas políticas. Cada política pertence à colônia e pode conter subpolíticas com prioridades numéricas; essas prioridades não são configuradas por colono individual nem por job individual.
+Regra que limita ou orienta decisões autônomas. Políticas são a principal superfície de customização da colônia: duas colônias podem possuir os mesmos prédios e ainda operar de maneiras muito diferentes por causa das suas políticas. Cada política pertence à colônia e pode conter subpolíticas posicionadas na linha global de prioridade; o sistema pode derivar níveis numéricos internamente, mas essas prioridades não são configuradas por colono individual nem por job individual.
 
 Exemplos conceituais:
 
@@ -187,7 +187,7 @@ As políticas precisam ter limites explícitos. Uma política não pode autoriza
 
 Cada setor deve possuir parâmetros com custo e efeito observáveis. “Produzir comida” não é uma única opção: tipo de alimento, conservação, prioridade, mão de obra, energia e estoque-alvo devem criar escolhas diferentes.
 
-As prioridades podem ser configuradas dentro de uma política setorial e comparadas entre setores, sem permitir uma ordenação arbitrária de indivíduos ou jobs. A tabela abaixo contém exemplos de configurações possíveis, não uma hierarquia fixa imposta pelo sistema:
+As prioridades podem ser configuradas dentro de uma política setorial e comparadas entre setores, sem permitir uma ordenação arbitrária de indivíduos ou jobs. A configuração final é uma única linha global de políticas e subpolíticas ativas: “Construção civil” pode ficar entre “Tratamento importante” e “Comida”. A tabela abaixo contém exemplos de configurações possíveis, não uma hierarquia fixa imposta pelo sistema:
 
 | Setor | Política de prioridade | Resultado possível |
 | --- | --- | --- |
