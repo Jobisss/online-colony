@@ -401,6 +401,7 @@ Não haverá uma condição única de vitória. Colônias poderão buscar papéi
 - relógio global contínuo com escala fixa: **1 dia real equivale a 4 dias de jogo**;
 - um dia de jogo dura 6 horas reais, e uma hora real equivale a 4 horas de jogo;
 - o ciclo de dia/noite é global: todas as colônias vivem o mesmo horário e o mesmo período simultaneamente, sem fusos horários na simulação;
+- cada dia de jogo possui 16 horas de dia e 8 horas de noite;
 - a noite é um Day Event especial e recorrente; chuva, tempestade e outros eventos ambientais usam o mesmo modelo modular de efeitos;
 - na v1, noite, chuva e tempestade são Day Events globais; variantes regionais ou locais podem ser adicionadas futuramente;
 - Day Events publicam modificadores que podem ser interpretados por Produção, Descanso, Iluminação, Energia Solar, Fauna, Segurança, Plantio, Spawn de Monstros, Logística e outros módulos;
@@ -743,9 +744,10 @@ O modelo de invasão está aprovado em §8.14. Seguem abertos:
 ### 11.2 Consequências da escala de tempo
 
 - **Resolvido — escala e duração das ações:** 1 dia real equivale a 4 dias de jogo; um dia de jogo dura 6 horas reais. Construções, receitas, viagens, pesquisas e tratamentos usam durações em horas/dias de jogo; uma construção de aproximadamente 5 horas de jogo dura 1 hora e 15 minutos reais.
-- **Processos biológicos:** gestação, crescimento, envelhecimento e cura não podem seguir o calendário real (um ano de idade por ano real). Precisam de escala própria.
+- **Resolvido — processos biológicos:** gestação dura 30 dias de jogo, crescimento dura 15 dias de jogo, envelhecimento ocorre a cada 200 dias de jogo e a cura varia conforme a lesão.
 - **Resolvido — dia/noite e fusos horários:** o dia/noite é global. Todas as colônias vivem o mesmo horário de jogo e o mesmo período simultaneamente; o fuso real do jogador não altera a simulação. A noite é um Day Event especial e recorrente.
-- **Estações e clima:** um ano real por ciclo de estações pode ser lento demais para gerar variação perceptível.
+- **Resolvido — duração do dia/noite:** cada dia de jogo possui 16 horas de dia e 8 horas de noite; isso corresponde a 4 horas reais de dia e 2 horas reais de noite.
+- **Resolvido — calendário:** meses possuem 30 dias de jogo, estações possuem 4 meses e os nomes dos meses/estações serão fictícios. Estações ficam apenas documentadas e não entram na simulação da v1.
 - **Ritmo logístico:** transporte físico entre lotes em tempo real pode deixar o comércio lento demais (Pilar 3).
 
 ### 11.3 Topologia do mundo
@@ -798,7 +800,7 @@ Relatórios obrigatórios, ferramentas de recuperação, métricas e conteúdo c
 
 ## 12. Recorte e próximo passo
 
-Frontier ainda não está pronto para gerar tasks de implementação. As decisões com maior poder de alterar a arquitetura e que continuam abertas são: escala dos processos biológicos, estações e clima, representação da topologia, ritmo logístico, limites da autonomia, fidelidade da simulação em escala e autoridade sobre estado entre simulação e economia.
+Frontier ainda não está pronto para gerar tasks de implementação. As decisões com maior poder de alterar a arquitetura e que continuam abertas são: efeitos ambientais sobre processos biológicos, clima e Day Events, representação da topologia, ritmo logístico, limites da autonomia, fidelidade da simulação em escala e autoridade sobre estado entre simulação e economia.
 
 Validar primeiro o ciclo de §10.5. Esse núcleo deve permitir responder:
 

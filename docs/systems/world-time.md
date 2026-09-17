@@ -10,10 +10,13 @@ World/Time fornece o relógio global, o ciclo de dia/noite e os eventos ambienta
 - 1 dia real equivale a 4 dias de jogo;
 - 1 dia de jogo possui 24 horas de jogo e dura 6 horas reais;
 - 1 hora real equivale a 4 horas de jogo;
+- cada dia de jogo possui 16 horas de dia e 8 horas de noite;
 - a velocidade é fixa, sem pause ou aceleração por jogador;
 - todas as colônias compartilham o mesmo horário de jogo;
 - não existem fusos horários na simulação;
 - ações usam durações em horas/dias de jogo e são convertidas pela escala global.
+
+Os tempos-base dos processos biológicos também estão definidos: gestação dura 30 dias de jogo, crescimento dura 15 dias de jogo, envelhecimento ocorre a cada 200 dias de jogo e a cura varia conforme a lesão. Ainda falta decidir como Day Events ambientais modificam esses processos.
 
 ## 3. Dia/noite como Day Event especial
 
@@ -41,6 +44,12 @@ flowchart LR
 ```
 
 Todos os eventos temporais usam o mesmo horário global. Portanto, quando o mundo entra na noite, todas as colônias entram na noite simultaneamente. Na v1, noite, chuva e tempestade são eventos globais e afetam todas as colônias; variantes regionais ou locais ficam disponíveis para uma versão futura.
+
+Com a escala aprovada, um período de 16 horas de dia dura 4 horas reais e um período de 8 horas de noite dura 2 horas reais.
+
+## 3.1 Calendário e estações documentais
+
+O calendário conceitual mantém meses de 30 dias e nomes fictícios. Uma estação possui 4 meses, totalizando 120 dias de jogo e 30 dias reais. As estações não participam da simulação da v1; ficam documentadas para orientar a expansão futura de clima e Day Events.
 
 ## 4. Day Event modular
 
@@ -126,13 +135,24 @@ Eventos e efeitos entram no histórico e nos relatórios offline. Um evento glob
 
 ## 8. Questões seguintes
 
-- quantas horas de jogo correspondem ao período de dia e ao período de noite;
 - quais efeitos mínimos da noite entram na primeira versão;
 - quais eventos climáticos existem na v1 e qual é sua frequência;
 - como introduzir variantes regionais ou locais de chuva e tempestade em uma versão futura;
-- como estações alteram a geração e a intensidade de Day Events;
+- como estações documentadas poderão alterar a geração e a intensidade de Day Events em uma versão futura;
 - como o sistema limita combinações simultâneas de eventos;
 - quais modificadores podem ser empilhados e quais substituem outro evento;
-- como processos biológicos interpretam clima e ciclo de dia/noite.
+- como processos biológicos interpretam clima e ciclo de dia/noite;
+- qual estratégia de atualização interna será usada: orientada a eventos, ticks fixos ou um modelo híbrido;
+- quais mudanças de política precisam de recálculo imediato e quais podem aguardar um ponto seguro do job.
+
+### 8.1 Exemplos para a atualização interna
+
+Essas opções são de implementação, mas possuem efeitos observáveis:
+
+- **orientada a eventos:** recalcula quando algo muda, como entrada da noite, início de uma tempestade ou alteração de política;
+- **tick fixo:** verifica o mundo em intervalos regulares, por exemplo a cada minuto de jogo;
+- **híbrida:** usa eventos para mudanças importantes e ticks menores para necessidades contínuas, como consumo, fadiga e crescimento.
+
+“Ciclo” significa aqui um ciclo de atualização ou reavaliação do sistema, não um novo ciclo de dia/noite. Por exemplo, se a política mudar às 10:37 do jogo, a decisão a definir é se os afetados são recalculados imediatamente ou no próximo ponto seguro da tarefa atual.
 
 O princípio central permanece: World/Time publica condições temporais; os módulos transformam essas condições em consequências específicas.

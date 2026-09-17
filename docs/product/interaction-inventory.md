@@ -53,7 +53,7 @@ Mercado de jogadores, contratos de colonos e invasões completas fazem parte do 
 | Crítico | A ação pode continuar preparada, mas exige confirmação para produzir efeito irreversível |
 | Futuro | Interação reconhecida, mas fora do ciclo atual |
 
-Uma ação pode mudar de classificação após os testes. Por exemplo, “tratar doença” pode ser manual no começo e tornar-se híbrida quando o jogador definir uma política médica.
+Uma ação pode mudar de classificação após os testes, mas a regra atual de Saúde é automática: o jogador define a política médica e o sistema seleciona e executa os tratamentos conforme as prioridades derivadas.
 
 ## 4. Visão visual do ciclo principal
 
@@ -273,7 +273,7 @@ As interações de invasão seguem o modelo aprovado no discovery (§8.14): avis
 | ID | Interação | Iniciador | Controle inicial | Efeito principal | Falhas/decisões abertas |
 | --- | --- | --- | --- | --- | --- |
 | WLD-01 | Atribuir lote de colônia | Sistema | Automático | Posiciona a colônia no mundo de forma semialeatória | Escolha de região pelo jogador |
-| WLD-02 | Avançar ciclo global de dia/noite | Sistema | Automático | Publica o Day Event de dia ou noite para todas as colônias simultaneamente | Duração do período e efeitos mínimos |
+| WLD-02 | Avançar ciclo global de dia/noite | Sistema | Automático | Publica o Day Event de dia ou noite para todas as colônias simultaneamente; cada dia possui 16 horas de dia e 8 de noite | Efeitos mínimos do período |
 | WLD-03 | Gerar/aplicar Day Event ambiental | Sistema | Automático | Publica chuva, tempestade ou hazard com modificadores modulares | Escopo, aviso, duração e frequência |
 | WLD-04 | Explorar espaço de conexão | Jogador/colônia | Híbrido | Revela recursos, rotas ou ameaças | Existência de conteúdo fora dos lotes |
 | WLD-05 | Viajar entre lotes | Colônia | Híbrido | Move colonos ou carga pelos espaços de conexão | Duração real e risco |
