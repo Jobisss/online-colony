@@ -400,6 +400,7 @@ Não haverá uma condição única de vitória. Colônias poderão buscar papéi
 
 - relógio global contínuo com escala fixa: **1 dia real equivale a 4 dias de jogo**;
 - um dia de jogo dura 6 horas reais, e uma hora real equivale a 4 horas de jogo;
+- o ciclo de dia/noite é global: todas as colônias vivem o mesmo horário e o mesmo período simultaneamente, sem fusos horários na simulação;
 - velocidade fixa, sem pause ou aceleração por jogador;
 - ações possuem duração em horas/dias de jogo, convertida pela escala global; por exemplo, uma construção de 5 horas de jogo dura 1 hora e 15 minutos reais;
 - decisões críticas ficam pendentes até o jogador ou uma política autorizada resolvê-las;
@@ -740,7 +741,7 @@ O modelo de invasão está aprovado em §8.14. Seguem abertos:
 
 - **Resolvido — escala e duração das ações:** 1 dia real equivale a 4 dias de jogo; um dia de jogo dura 6 horas reais. Construções, receitas, viagens, pesquisas e tratamentos usam durações em horas/dias de jogo; uma construção de aproximadamente 5 horas de jogo dura 1 hora e 15 minutos reais.
 - **Processos biológicos:** gestação, crescimento, envelhecimento e cura não podem seguir o calendário real (um ano de idade por ano real). Precisam de escala própria.
-- **Dia/noite e fusos horários:** com um relógio global, jogadores em fusos diferentes veem a colônia sempre no mesmo período (por exemplo, sempre de noite). É preciso decidir se o dia/noite é global, por posição no mundo ou desacoplado.
+- **Resolvido — dia/noite e fusos horários:** o dia/noite é global. Todas as colônias vivem o mesmo horário de jogo e o mesmo período simultaneamente; o fuso real do jogador não altera a simulação.
 - **Estações e clima:** um ano real por ciclo de estações pode ser lento demais para gerar variação perceptível.
 - **Ritmo logístico:** transporte físico entre lotes em tempo real pode deixar o comércio lento demais (Pilar 3).
 
@@ -794,7 +795,7 @@ Relatórios obrigatórios, ferramentas de recuperação, métricas e conteúdo c
 
 ## 12. Recorte e próximo passo
 
-Frontier ainda não está pronto para gerar tasks de implementação. As decisões com maior poder de alterar a arquitetura e que continuam abertas são: dia/noite e fusos horários, escala dos processos biológicos, representação da topologia, limites da autonomia, fidelidade da simulação em escala e autoridade sobre estado entre simulação e economia.
+Frontier ainda não está pronto para gerar tasks de implementação. As decisões com maior poder de alterar a arquitetura e que continuam abertas são: escala dos processos biológicos, estações e clima, representação da topologia, ritmo logístico, limites da autonomia, fidelidade da simulação em escala e autoridade sobre estado entre simulação e economia.
 
 Validar primeiro o ciclo de §10.5. Esse núcleo deve permitir responder:
 
@@ -810,7 +811,7 @@ Depois disso, a segunda camada natural é logística local, energia avançada e 
 Próximos artefatos:
 
 1. revisão do [interaction-inventory.md](./interaction-inventory.md) com as classificações confirmadas;
-2. decisão sobre dia/noite, fusos horários e durações principais (§11.2);
+2. decisão sobre processos biológicos, estações, clima e ritmo logístico (§11.2);
 3. [Policy Matrix](../systems/policy-matrix.md) com políticas, dependências e especializações;
 4. [Macro System Design de Colony Governance](../systems/colony-governance.md);
 5. [Macro System Design de Autonomy](../systems/autonomy.md), que consumirá as directives de Governance.

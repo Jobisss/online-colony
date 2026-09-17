@@ -273,7 +273,7 @@ As interações de invasão seguem o modelo aprovado no discovery (§8.14): avis
 | ID | Interação | Iniciador | Controle inicial | Efeito principal | Falhas/decisões abertas |
 | --- | --- | --- | --- | --- | --- |
 | WLD-01 | Atribuir lote de colônia | Sistema | Automático | Posiciona a colônia no mundo de forma semialeatória | Escolha de região pelo jogador |
-| WLD-02 | Avançar dia/noite | Sistema | Automático | Altera rotinas, luz, energia e riscos | Relógio global e fusos horários |
+| WLD-02 | Avançar dia/noite | Sistema | Automático | Altera rotinas, luz, energia e riscos em todas as colônias simultaneamente | Relógio global; não há fusos na simulação |
 | WLD-03 | Gerar evento climático/hazard | Sistema | Automático | Cria risco ou oportunidade local | Aviso, escala e frequência |
 | WLD-04 | Explorar espaço de conexão | Jogador/colônia | Híbrido | Revela recursos, rotas ou ameaças | Existência de conteúdo fora dos lotes |
 | WLD-05 | Viajar entre lotes | Colônia | Híbrido | Move colonos ou carga pelos espaços de conexão | Duração real e risco |
