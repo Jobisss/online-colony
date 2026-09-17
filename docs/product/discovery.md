@@ -80,7 +80,7 @@ Recursos, itens e pessoas ocupam localizações e percorrem rotas. Capacidade, d
 
 **Critério de sucesso:** uma escassez ou atraso pode ser rastreado até a cadeia que o causou e pode ser mitigado por decisões alternativas.
 
-**Risco:** deslocamento excessivamente lento ou burocrático pode transformar o jogo em uma tela de espera — risco ampliado pelo tempo 1:1 com o real (§8.3).
+**Risco:** deslocamento excessivamente lento ou burocrático pode transformar o jogo em uma tela de espera — ainda relevante com a escala acelerada de §8.3.
 
 ### Pilar 4 — Economia emergente entre jogadores
 
@@ -141,7 +141,7 @@ As prioridades operacionais não são criadas livremente pelo jogador. Elas são
 - lotes de colônia, espaços de conexão e posicionamento;
 - biomas, recursos, clima e hazards;
 - topologia, distância e adjacência entre colônias;
-- tempo contínuo 1:1 com o real e simulação offline;
+- tempo contínuo acelerado e simulação offline;
 - ciclo dia/noite;
 - eventos regionais e globais.
 
@@ -398,9 +398,10 @@ Não haverá uma condição única de vitória. Colônias poderão buscar papéi
 
 ### 8.3 Tempo
 
-- relógio global contínuo, **1:1 com o tempo real**: um dia no jogo dura 24 horas reais;
+- relógio global contínuo com escala fixa: **1 dia real equivale a 4 dias de jogo**;
+- um dia de jogo dura 6 horas reais, e uma hora real equivale a 4 horas de jogo;
 - velocidade fixa, sem pause ou aceleração por jogador;
-- ações possuem duração real;
+- ações possuem duração em horas/dias de jogo, convertida pela escala global; por exemplo, uma construção de 5 horas de jogo dura 1 hora e 15 minutos reais;
 - decisões críticas ficam pendentes até o jogador ou uma política autorizada resolvê-las;
 - relatórios resumem o que ocorreu desde o último acesso.
 
@@ -735,9 +736,9 @@ O modelo de invasão está aprovado em §8.14. Seguem abertos:
 - alvos permitidos, limites de saque e destruição permanente;
 - o que acontece com recursos vendidos ou consumidos durante o aviso que estavam entre os alvos fixados.
 
-### 11.2 Consequências do tempo 1:1
+### 11.2 Consequências da escala de tempo
 
-- **Resolvido — duração das ações:** nenhuma política central deve exigir semanas de tempo real. Construções, receitas, viagens, pesquisas e tratamentos usam durações em horas/dias de jogo; uma construção pode durar aproximadamente 5 horas no jogo, mesmo que levasse meses no mundo real.
+- **Resolvido — escala e duração das ações:** 1 dia real equivale a 4 dias de jogo; um dia de jogo dura 6 horas reais. Construções, receitas, viagens, pesquisas e tratamentos usam durações em horas/dias de jogo; uma construção de aproximadamente 5 horas de jogo dura 1 hora e 15 minutos reais.
 - **Processos biológicos:** gestação, crescimento, envelhecimento e cura não podem seguir o calendário real (um ano de idade por ano real). Precisam de escala própria.
 - **Dia/noite e fusos horários:** com um relógio global, jogadores em fusos diferentes veem a colônia sempre no mesmo período (por exemplo, sempre de noite). É preciso decidir se o dia/noite é global, por posição no mundo ou desacoplado.
 - **Estações e clima:** um ano real por ciclo de estações pode ser lento demais para gerar variação perceptível.

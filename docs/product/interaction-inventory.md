@@ -37,7 +37,7 @@ O primeiro ciclo deve representar uma colônia pequena e funcional:
 - saúde básica como suporte, sem entrar ainda como especialização principal do core loop;
 - fauna ou incidente local;
 - preparação de defesa;
-- tempo contínuo 1:1 com o real (um dia no jogo = 24 horas), com ações medidas em horas/dias de jogo;
+- tempo contínuo acelerado: 1 dia real equivale a 4 dias de jogo; um dia de jogo dura 6 horas reais, com ações medidas em horas/dias de jogo;
 - operação enquanto o jogador está offline.
 
 Mercado de jogadores, contratos de colonos e invasões completas fazem parte do produto, mas não precisam bloquear a validação do ciclo básico de governança. O mercado NPC de último recurso e contratos serão tratados como interações de produto da v1, mesmo que sua implementação seja posterior ao núcleo.

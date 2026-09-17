@@ -418,7 +418,7 @@ Cada piloto deve ser especificado com o template comum, mas preservar suas regra
 5. **Resolvido:** a pesquisa em si não é transferível por contratos ou comércio; cada colônia desenvolve seu próprio conhecimento.
 6. **Resolvido:** o primeiro ciclo prioriza Produção, Energia e Educação. Saúde entra depois do fluxo inicial do core loop.
 7. **Resolvido:** quando o mercado de serviços médicos e educacionais existir, ele exige pacientes e estudantes externos reais, não apenas demanda abstrata.
-8. **Resolvido:** nenhuma política central depende de semanas de tempo real. Consequências podem ser imediatas ou ocorrer em horas/dias de jogo; por exemplo, uma construção pode durar aproximadamente 5 horas no jogo.
+8. **Resolvido:** a escala global é fixa: 1 dia real equivale a 4 dias de jogo, portanto um dia de jogo dura 6 horas reais. Consequências podem ser imediatas ou ocorrer em horas/dias de jogo; por exemplo, uma construção de 5 horas de jogo dura 1 hora e 15 minutos reais.
 
 ## 10. Critério de pronto
 
