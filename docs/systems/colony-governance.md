@@ -158,7 +158,7 @@ Uma meta gera demanda; ela não cria recursos instantaneamente.
 
 ### 5.5 Policy
 
-Regra que limita ou orienta decisões autônomas. Políticas são a principal superfície de customização da colônia: duas colônias podem possuir os mesmos prédios e ainda operar de maneiras muito diferentes por causa das suas políticas.
+Regra que limita ou orienta decisões autônomas. Políticas são a principal superfície de customização da colônia: duas colônias podem possuir os mesmos prédios e ainda operar de maneiras muito diferentes por causa das suas políticas. Cada política pertence à colônia e pode conter subpolíticas com prioridades numéricas; essas prioridades não são configuradas por colono individual nem por job individual.
 
 Exemplos conceituais:
 

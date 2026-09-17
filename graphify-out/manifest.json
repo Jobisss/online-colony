@@ -1,20 +1,20 @@
 {
   "docs/product/discovery.md": {
-    "mtime": 1789655413.992761,
-    "seen": 1789655458.7283692,
-    "ast_hash": "e9eebbde0dd20501319d5175a3cab744",
+    "mtime": 1789663649.2657402,
+    "seen": 1789663698.8758051,
+    "ast_hash": "b730c92e9c61c46d53913f5dc8bbec5c",
     "semantic_hash": ""
   },
   "docs/product/interaction-inventory.md": {
-    "mtime": 1789655416.2016666,
-    "seen": 1789655458.7283692,
-    "ast_hash": "6a24d4660129677750adf1dbf4d5dfaa",
+    "mtime": 1789655694.8749056,
+    "seen": 1789663698.8758051,
+    "ast_hash": "017ce06b406252c653ad837a33bfbfca",
     "semantic_hash": ""
   },
   "docs/systems/colony-governance.md": {
-    "mtime": 1789649414.5051217,
-    "seen": 1789655458.7283692,
-    "ast_hash": "67a734e1a0aeec81e4e93c70d0799f1d",
+    "mtime": 1789663640.422693,
+    "seen": 1789663698.8758051,
+    "ast_hash": "907e08dad186f09e5d79e423e690a833",
     "semantic_hash": ""
   },
   "docs/systems/policy-matrix.md": {
@@ -36,15 +36,15 @@
     "semantic_hash": ""
   },
   "docs/systems/autonomy.md": {
-    "mtime": 1789649391.2320676,
-    "seen": 1789655458.7283692,
-    "ast_hash": "8e7be17a4213f87c3102707cce713698",
+    "mtime": 1789663661.2347095,
+    "seen": 1789663698.8758051,
+    "ast_hash": "4165ff2534e4a510815928f3d1ba9b76",
     "semantic_hash": ""
   },
   "docs/systems/world-time.md": {
-    "mtime": 1789655411.7341008,
-    "seen": 1789655458.7283692,
-    "ast_hash": "2f49269bf5733e09db406e6dd242dc45",
+    "mtime": 1789655699.23502,
+    "seen": 1789663698.8758051,
+    "ast_hash": "ba025f28fe90d864b6a4eea7ea0b295f",
     "semantic_hash": ""
   }
 }

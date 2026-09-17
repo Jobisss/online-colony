@@ -109,7 +109,38 @@ Uma política inicia um ciclo contínuo quando fica ativa e o encerra quando é 
 
 ### 6.1 Prioridade como decisão estratégica
 
-O jogador pode configurar prioridades relativas entre setores, contextos e objetivos. Essa configuração não escolhe um job específico nem um executor específico; ela define o tipo de colônia que está sendo governada.
+O jogador configura prioridades por uma escala numérica de `1` a `4` no nível da colônia, inspirada no modelo de prioridades do RimWorld. `1` representa a prioridade mais alta e `4` a mais baixa.
+
+A prioridade é aplicada a políticas e subpolíticas, não a colonos ou jobs individuais. O jogador não diz “o colono A deve tratar o paciente B”; ele define como a colônia deve ordenar seus objetivos. A Autonomy combina essa configuração com skill, disponibilidade, distância, recursos, reservas, risco e condições de execução para escolher os executores.
+
+Cada política pode possuir subpolíticas específicas. Saúde, por exemplo, pode conter “tratamento importante”, “tratamento de rotina”, “cirurgia”, “prevenção”, “colonos próprios” e “pacientes externos”. A mesma estrutura vale para Produção, Educação, Energia, Estoques, Segurança e os demais setores.
+
+```mermaid
+flowchart TD
+    ColonyPolicy[Políticas da colônia]
+    Health[Saúde]
+    Important[Tratamento importante: 1]
+    Routine[Tratamento de rotina: 3]
+    Surgery[Cirurgia: 2]
+    External[Pacientes externos: 4]
+    Demand[Demandas da colônia]
+    Priority[Prioridades derivadas]
+    Colonists[Colonos compatíveis]
+    Jobs[Jobs escolhidos pelo sistema]
+
+    ColonyPolicy --> Health
+    Health --> Important
+    Health --> Routine
+    Health --> Surgery
+    Health --> External
+    Important --> Demand
+    Routine --> Demand
+    Surgery --> Demand
+    External --> Demand
+    Demand --> Priority
+    Colonists --> Jobs
+    Priority --> Jobs
+```
 
 Exemplos válidos:
 

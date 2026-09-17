@@ -1,19 +1,19 @@
 # Graph Report - online-colony  (2026-09-17)
 
 ## Corpus Check
-- 8 files · ~20,821 words
+- 8 files · ~21,692 words
 - Verdict: corpus is large enough that graph structure adds value.
 - Unclassified: 1 file(s) not represented in the graph (top: (none) 1)
 
 ## Summary
-- 122 nodes · 154 edges · 14 communities (10 shown, 4 thin omitted)
+- 125 nodes · 157 edges · 14 communities (10 shown, 4 thin omitted)
 - Extraction: 83% EXTRACTED · 15% INFERRED · 2% AMBIGUOUS · INFERRED: 23 edges (avg confidence: 0.82)
 - Token cost: 0 input · 0 output
 
 ## Community Hubs (Navigation)
 - Research and Technology
 - Frontier
-- Individual Colonist
+- Education
 - Policy
 - Combat
 - Permanent Acquired Knowledge
@@ -29,14 +29,14 @@
 ## God Nodes (most connected - your core abstractions)
 1. `Research and Technology` - 12 edges
 2. `Macro System Design — Autonomy` - 10 edges
-3. `Frontier` - 10 edges
-4. `Macro System Design — World/Time` - 9 edges
+3. `Macro System Design — World/Time` - 10 edges
+4. `Frontier` - 10 edges
 5. `Combat` - 9 edges
 6. `Production` - 7 edges
 7. `Approved Specialization-Switch Rule` - 6 edges
 8. `Active Specialization` - 5 edges
 9. `Autonomy and Execution` - 5 edges
-10. `Individual Colonist` - 5 edges
+10. `Job System` - 5 edges
 
 ## Surprising Connections (you probably didn't know these)
 - `Real-time game clock and bounded action durations` --conceptually_related_to--> `Open interaction decisions`  [AMBIGUOUS]
@@ -47,7 +47,7 @@
   docs/systems/policy-matrix.md → docs/systems/colony-governance.md
 - `Health sequencing after the initial core loop` --conceptually_related_to--> `Health policy`  [INFERRED]
   docs/product/discovery.md → docs/systems/policy-matrix.md
-- `Individual Colonist` --conceptually_related_to--> `Health policy`  [EXTRACTED]
+- `Production–Infrastructure–Energy–Education core loop` --rationale_for--> `Production + Energy + Education Pilot`  [INFERRED]
   docs/product/discovery.md → docs/systems/policy-matrix.md
 
 ## Hyperedges (group relationships)
@@ -60,12 +60,12 @@ Cohesion: 0.24
 Nodes (14): Energy, Health, Acquired Knowledge, Active Specialization, Initial Core Loop, Individual Education for New Capability, Low Initial Efficiency in New Area, Gradual Efficiency Loss in Old Area (+6 more)
 
 ### Community 1 - "Frontier"
-Cohesion: 0.18
-Nodes (16): Autonomy and Execution, Frontier, Logistics and Transport, Sector Policies, Production, Real-Time 1:1 Clock, BuildPlan, ColonyOrder (+8 more)
+Cohesion: 0.14
+Nodes (20): Health sequencing after the initial core loop, Autonomy and Execution, Individual Colonist, Frontier, Logistics and Transport, Sector Policies, Production, Real-Time 1:1 Clock (+12 more)
 
-### Community 2 - "Individual Colonist"
-Cohesion: 0.12
-Nodes (18): Health sequencing after the initial core loop, Production–Infrastructure–Energy–Education core loop, Individual Colonist, Colony Research Capability, Production–Energy–Education Core Loop, Neurology, Policy Capability, Research as Policy Expansion and Specialization (+10 more)
+### Community 2 - "Education"
+Cohesion: 0.16
+Nodes (14): Production–Infrastructure–Energy–Education core loop, Colony Research Capability, Production–Energy–Education Core Loop, Neurology, Policy Capability, Research as Policy Expansion and Specialization, Individual Skill Formation, Initial Production–Infrastructure–Energy–Education chain (+6 more)
 
 ### Community 3 - "Policy"
 Cohesion: 0.29
@@ -88,12 +88,12 @@ Cohesion: 0.50
 Nodes (5): Real-time game clock and bounded action durations, Open product questions, Game-time durations in interactions, Open interaction decisions, Policy Matrix cross-document reference
 
 ### Community 11 - "Macro System Design — World/Time"
-Cohesion: 0.15
-Nodes (12): Interaction Inventory, Colony Governance, Policy Matrix, 1. Objetivo, 2. Escala temporal aprovada, 3. Dia/noite como Day Event especial, 4. Day Event modular, 5. Módulos afetados (+4 more)
+Cohesion: 0.13
+Nodes (14): Interaction Inventory, Colony Governance, Policy Matrix, 1. Objetivo, 2. Escala temporal aprovada, 3.1 Calendário e estações documentais, 3. Dia/noite como Day Event especial, 4. Day Event modular (+6 more)
 
 ### Community 13 - "Macro System Design — Autonomy"
-Cohesion: 0.18
-Nodes (11): 1. Objetivo, 2. Princípios aprovados, 3. Fronteira de controle, 4. Educação como escola, 5.1 Estados mínimos de um job, 5. Pipeline de autonomia, 6. Políticas e consequências, 7. Intervenção do jogador (+3 more)
+Cohesion: 0.17
+Nodes (12): 1. Objetivo, 2. Princípios aprovados, 3. Fronteira de controle, 4. Educação como escola, 5.1 Estados mínimos de um job, 5. Pipeline de autonomia, 6.1 Prioridade como decisão estratégica, 6. Políticas e consequências (+4 more)
 
 ## Ambiguous Edges - Review These
 - `Real-time game clock and bounded action durations` → `Open interaction decisions`  [AMBIGUOUS]
@@ -104,8 +104,8 @@ Nodes (11): 1. Objetivo, 2. Princípios aprovados, 3. Fronteira de controle, 4. 
   docs/systems/policy-matrix.md · relation: conceptually_related_to
 
 ## Knowledge Gaps
-- **24 isolated node(s):** `Pré-requisito`, `Fluxo para mudanças`, `Artefatos`, `1. Objetivo`, `2. Princípios aprovados` (+19 more)
-  These have ≤1 connection - possible missing edges or undocumented components. (Counts symbols only; 45 node(s) total have ≤1 connection when file, concept and rationale nodes are included.)
+- **25 isolated node(s):** `Pré-requisito`, `Fluxo para mudanças`, `Artefatos`, `1. Objetivo`, `2. Princípios aprovados` (+20 more)
+  These have ≤1 connection - possible missing edges or undocumented components. (Counts symbols only; 46 node(s) total have ≤1 connection when file, concept and rationale nodes are included.)
 - **4 thin communities (<3 nodes) omitted from report** — run `graphify query` to explore isolated nodes.
 
 ## Suggested Questions
@@ -117,11 +117,11 @@ _Questions this graph is uniquely positioned to answer:_
   _Edge tagged AMBIGUOUS (relation: conceptually_related_to) - confidence is low._
 - **What is the exact relationship between `Unresolved Active Capacity Redistribution` and `Production-Energy-Education Pilot`?**
   _Edge tagged AMBIGUOUS (relation: conceptually_related_to) - confidence is low._
-- **Why does `Frontier` connect `Frontier` to `Research and Technology`, `Individual Colonist`, `Macro System Design — World/Time`, `Combat`?**
-  _High betweenness centrality (0.278) - this node is a cross-community bridge._
+- **Why does `Frontier` connect `Frontier` to `Research and Technology`, `Macro System Design — World/Time`, `Combat`?**
+  _High betweenness centrality (0.290) - this node is a cross-community bridge._
 - **Why does `Interaction Inventory` connect `Macro System Design — World/Time` to `Frontier`?**
-  _High betweenness centrality (0.239) - this node is a cross-community bridge._
-- **Why does `Research and Technology` connect `Research and Technology` to `Frontier`, `Individual Colonist`, `Policy`, `Combat`?**
-  _High betweenness centrality (0.237) - this node is a cross-community bridge._
+  _High betweenness centrality (0.259) - this node is a cross-community bridge._
+- **Why does `Research and Technology` connect `Research and Technology` to `Frontier`, `Education`, `Policy`, `Combat`?**
+  _High betweenness centrality (0.236) - this node is a cross-community bridge._
 - **Are the 2 inferred relationships involving `Research and Technology` (e.g. with `Health` and `Real-Time 1:1 Clock`) actually correct?**
   _`Research and Technology` has 2 INFERRED edges - model-reasoned connections that need verification._
