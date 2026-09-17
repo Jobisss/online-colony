@@ -530,6 +530,7 @@ declaração (alvos fixados) → deslocamento pelos espaços de conexão
 - o jogador não cria uma fila de prioridades livre;
 - políticas setoriais definem prioridades por contexto, como “médicos tratam primeiro colonos próprios” ou “consumo interno vem antes de exportação”;
 - o sistema deriva a prioridade de demandas e jobs a partir dessas políticas, necessidades, ordens e regras de segurança;
+- uma mudança de política dispara o recálculo das prioridades de todos os colonos e entidades afetados; o jogador não cancela jobs prioritários individualmente;
 - selecionar linhas de produção, prioridades de tratamento e regras de movimentação de estoque é função das políticas; o jogador não precisa iniciar cada receita, atendimento ou transporte individualmente;
 - cada política deve produzir consequências e trade-offs perceptíveis na colônia;
 - pesquisa desbloqueia novas capacidades de política, especializações e automações, mas não ativa essas opções automaticamente;
@@ -754,7 +755,7 @@ O modelo de invasão está aprovado em §8.14. Seguem abertos:
 
 ### 11.4 Autonomia versus controle direto
 
-Quais interações serão automáticas, quais terão controle manual e quando o jogador poderá substituir a colônia. Pode o jogador comandar um colono, cancelar um job, mover um item ou ordenar uma unidade diretamente? Controle direto irrestrito invalida a autonomia; autonomia irrestrita reduz a agência do jogador. Será decidido a partir do inventário de interações.
+**Parcialmente resolvido:** o jogador governa por políticas e não cancela jobs prioritários individualmente. Uma mudança de política recalcula as prioridades dos colonos e entidades afetados, e a Autonomy replaneja os jobs derivados. Permanece aberta apenas a decisão sobre controle direto temporário em casos críticos, como comandar um colono ou ordenar uma unidade; controle direto irrestrito invalida a autonomia, enquanto autonomia irrestrita reduz a agência do jogador.
 
 ### 11.5 Individualidade versus escala
 

@@ -60,6 +60,7 @@ Regras:
 - o professor precisa ter aprendido a capacidade pesquisada e possuir a skill de Ensino;
 - a escola organiza a transmissão, o tempo e os jobs, sem criar um vínculo de controle permanente entre professor e aluno;
 - desativar ou remover a política encerra a escola daquela formação e cancela automaticamente os jobs educacionais em andamento;
+- quando a política de formação muda, a escola é atualizada como unidade: os alunos deixam de estudar a capacidade anterior e os professores deixam de ministrar aquela formação; todos os colonos afetados passam pelo recálculo de prioridades e retornam ao fluxo normal;
 - a proficiência do aluno segue `actualSkill`, `maxSkillReached`, decaimento por skill e recuperação 1,5× mais rápida até o pico histórico.
 
 ## 5. Pipeline de autonomia
@@ -75,6 +76,8 @@ flowchart TD
     Execute[Execução offline]
     Outcome[Resultado auditável]
     Blocked[Bloqueio explicado]
+    PolicyChanged[Mudança de política]
+    Recalculate[Recalcular prioridades afetadas]
 
     Policy --> Demand
     State --> Demand
@@ -86,6 +89,9 @@ flowchart TD
     Reserve -->|recurso, energia ou rota indisponível| Blocked
     Blocked --> State
     Outcome --> State
+    PolicyChanged --> Recalculate
+    Recalculate --> Priority
+    Recalculate --> State
 ```
 
 ### 5.1 Estados mínimos de um job
@@ -96,7 +102,7 @@ Um job também pode ir para `BLOCKED`, `INTERRUPTED`, `CANCELED` ou `FAILED`. Ca
 
 ## 6. Políticas e consequências
 
-Uma política inicia um ciclo contínuo quando fica ativa e o encerra quando é removida ou desativada. O jogador não precisa iniciar e finalizar cada execução derivada.
+Uma política inicia um ciclo contínuo quando fica ativa e o encerra quando é removida ou desativada. O jogador não precisa iniciar e finalizar cada execução derivada. Quando uma política muda, a Autonomy identifica os colonos, prédios, escolas, estoques e jobs afetados, recalcula suas prioridades e replaneja a execução automaticamente.
 
 | Decisão | Forma correta de controle |
 | --- | --- |
@@ -109,16 +115,15 @@ Uma política inicia um ciclo contínuo quando fica ativa e o encerra quando é 
 
 ## 7. Intervenção do jogador
 
-Na v1, a intervenção deve operar sobre a intenção ou política, não sobre uma fila secreta de cada colono:
+Na v1, a intervenção deve operar sobre a intenção ou política, não sobre uma fila secreta de cada colono. O jogador não cancela um job prioritário individualmente:
 
 - alterar ou remover a política;
-- criar, alterar ou cancelar uma ordem;
+- criar, alterar ou cancelar uma ordem ou plano criado diretamente pelo jogador, sem cancelar manualmente os jobs derivados;
 - aprovar ou rejeitar uma proposta crítica;
-- cancelar um plano ainda não executado, liberando reservas quando possível;
 - bloquear temporariamente uma capacidade, prédio, recurso ou tipo de job;
-- inspecionar por que um job foi criado, priorizado, executado, bloqueado ou cancelado.
+- inspecionar por que uma política foi alterada e por que um job foi criado, priorizado, replanejado, executado, bloqueado ou encerrado.
 
-Uma intervenção manual precisa deixar histórico e possuir duração ou condição de expiração. Controle direto permanente de movimento, alvo ou executor permanece uma decisão aberta do produto e não deve ser introduzido por acidente como microgerenciamento.
+Uma mudança de política precisa deixar histórico. O recálculo e o replanejamento são automáticos e podem encerrar jobs derivados que deixaram de ser autorizados pela política. Controle direto permanente de movimento, alvo ou executor permanece uma decisão aberta do produto e não deve ser introduzido por acidente como microgerenciamento.
 
 ## 8. Emergências
 
@@ -133,7 +138,7 @@ O sistema não deve esconder essas etapas em uma ação genérica chamada “rea
 ## 9. Questões que permanecem abertas
 
 - se o jogador poderá comandar diretamente um colono durante uma janela temporária;
-- quais jobs podem ser cancelados durante a execução e quais só podem ser bloqueados para o próximo ciclo;
+- quais mudanças de política exigem replanejamento imediato e quais aguardam o fim do ciclo atual;
 - quais intervenções exigem confirmação crítica;
 - qual nível de detalhe será simulado para colônias não observadas;
 - como conflitos entre duas políticas serão apresentados e resolvidos;

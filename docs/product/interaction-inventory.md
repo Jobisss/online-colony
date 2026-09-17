@@ -144,7 +144,7 @@ Este diagrama mostra responsabilidades conceituais, não serviços. Um mesmo pro
 | GOV-06 | Habilitar/desabilitar prédio | Jogador | Manual | Abre ou fecha capacidade produtiva | Efeito sobre jobs e reservas |
 | GOV-07 | Inspecionar estado | Jogador | Manual | Mostra causas, previsão e consequências | Nível de explicabilidade |
 | GOV-08 | Receber relatório offline | Sistema | Automático | Resume alterações desde o último acesso | Agrupamento e severidade |
-| GOV-09 | Cancelar plano | Jogador | Híbrido | Remove intenção ainda não executada | O que acontece com reservas |
+| GOV-09 | Cancelar ordem/plano do jogador | Jogador | Híbrido | Remove uma intenção criada diretamente pelo jogador; jobs derivados são reavaliados pelo sistema | O que acontece com reservas |
 | GOV-10 | Configurar política setorial | Jogador | Manual | Altera segurança, alimentação, saúde, energia, produção, descanso, fauna, comércio ou educação; pode definir qual capacidade profissional a colônia formará | Parâmetros, limites e pesquisa necessária |
 | GOV-11 | Criar ordem de produto/serviço | Jogador | Manual | Solicita quantidade, qualidade, prazo e restrições | Reserva, orçamento e substitutos |
 | GOV-12 | Aprovar proposta de ambiente | Jogador | Crítico | Autoriza layout de base gerado pelo planner | Critérios de aprovação e custo |
@@ -180,8 +180,8 @@ A escola é a unidade de educação: não existe uma relação de controle diret
 | AUT-04 | Criar job | Sistema | Automático | Converte demanda em trabalho executável | Decomposição de tarefas |
 | AUT-05 | Reservar capacidade | Sistema | Automático | Separa colono, prédio, item ou energia | Concorrência e expiração |
 | AUT-06 | Alocar job | Sistema/colono | Automático | Vincula agente e job | Regras de desempate |
-| AUT-07 | Aceitar intervenção | Jogador | Manual | Substitui ou orienta uma decisão | Duração da intervenção |
-| AUT-08 | Replanejar | Sistema | Automático | Troca de job após mudança de estado | Evitar thrashing |
+| AUT-07 | Reprocessar política alterada | Sistema | Automático | Recalcula prioridades de todos os colonos e entidades afetadas por uma mudança de política | Escopo da atualização e consistência |
+| AUT-08 | Replanejar | Sistema | Automático | Troca ou encerra jobs derivados após mudança de estado ou de política | Evitar thrashing |
 | AUT-09 | Explicar decisão | Sistema | Automático | Mostra motivo de escolha, espera ou falha | Linguagem compreensível |
 
 ### 6.4 Recursos, produção e infraestrutura
@@ -291,9 +291,9 @@ stateDiagram-v2
     EXECUTING --> COMPLETED: resultado confirmado
     EXECUTING --> BLOCKED: recurso, energia ou caminho indisponível
     BLOCKED --> QUEUED: estado alterado
-    EXECUTING --> INTERRUPTED: risco, prioridade ou intervenção
+    EXECUTING --> INTERRUPTED: risco, prioridade ou política alterada
     INTERRUPTED --> QUEUED: replanejamento
-    RESERVED --> CANCELED: plano cancelado
+    RESERVED --> CANCELED: política desativada ou ordem/plano cancelado
     ASSIGNED --> CANCELED: agente retirado
     EXECUTING --> FAILED: falha não recuperável
     COMPLETED --> [*]
@@ -316,9 +316,9 @@ stateDiagram-v2
 O inventário revela que ainda não devemos escolher a técnica de IA. Primeiro precisamos decidir:
 
 1. quais itens da tabela serão manuais, automáticos, híbridos ou críticos;
-2. quais ações o jogador pode cancelar depois que começaram;
+2. **Resolvido:** o jogador não cancela jobs prioritários individualmente; altera a política ou uma ordem/plano próprio, e a Autonomy reprocessa os jobs afetados;
 3. quais ações podem continuar sem resposta do jogador;
-4. como o jogador substitui uma decisão autônoma;
+4. como o jogador substitui uma decisão autônoma em casos críticos, sem criar microgerenciamento de jobs normais;
 5. quais políticas podem alterar a ordem de prioridade;
 6. quais eventos exigem confirmação e quais apenas geram relatório; “reagir a emergências” não deve ser uma interação genérica: cada emergência precisa ser decomposta em detecção, demanda, prioridade, execução e resultado;
 7. quais operações são locais à colônia e quais cruzam regiões;

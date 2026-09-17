@@ -139,6 +139,8 @@ Uma prioridade derivada precisa ter:
 - origem (jogador, política ou segurança);
 - explicação visível.
 
+Quando uma política muda, a alteração deve ser propagada para todos os colonos e entidades afetados. A Autonomy recalcula as prioridades e replaneja os jobs derivados; o jogador não precisa cancelar cada trabalho individualmente. Se a política de uma escola for removida ou trocada, a escola encerra ou reorganiza a formação, e professores e alunos deixam automaticamente aquelas tarefas.
+
 Exemplo: o jogador não arrasta “tratar colono A” para o topo de uma lista. Ele configura a política de Saúde para priorizar colonos próprios em relação a pacientes externos; o sistema deriva a prioridade de cada atendimento, executa o tratamento automaticamente e explica a decisão.
 
 ### 5.4 StockGoal
