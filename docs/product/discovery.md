@@ -530,11 +530,14 @@ declaração (alvos fixados) → deslocamento pelos espaços de conexão
 - o jogador não cria uma fila de prioridades livre;
 - políticas setoriais definem prioridades por contexto, como “médicos tratam primeiro colonos próprios” ou “consumo interno vem antes de exportação”;
 - o sistema deriva a prioridade de demandas e jobs a partir dessas políticas, necessidades, ordens e regras de segurança;
+- selecionar linhas de produção, prioridades de tratamento e regras de movimentação de estoque é função das políticas; o jogador não precisa iniciar cada receita, atendimento ou transporte individualmente;
 - cada política deve produzir consequências e trade-offs perceptíveis na colônia;
 - pesquisa desbloqueia novas capacidades de política, especializações e automações, mas não ativa essas opções automaticamente;
 - uma pesquisa libera uma capacidade para a colônia aprender, mas não concede esse conhecimento a todos os colonos;
-- a educação precisa formar cada colono na capacidade específica antes que ele possa usá-la; por exemplo, pesquisar Neurologia desbloqueia o campo e um médico precisa ser educado para aprender Neurologia;
+- a educação acontece por meio de uma escola: o jogador define qual capacidade profissional a colônia deve formar, e o sistema escolhe professores e alunos compatíveis;
+- a educação precisa formar cada colono na capacidade específica antes que ele possa usá-la; por exemplo, pesquisar Neurologia desbloqueia o campo e um médico precisa aprender Neurologia em uma escola;
 - para ensinar uma capacidade, o professor precisa ter a pesquisa/capacidade aprendida individualmente e também possuir a skill de Ensino;
+- remover ou desativar a política de formação cancela automaticamente a educação em andamento; o jogador inicia e encerra o ciclo pela política, não por cada relação professor-aluno;
 - a colônia pode trocar sua especialização ativa sem perder conhecimento pesquisado, mas a mudança tem custo e tempo de transição;
 - durante a transição, a área antiga perde eficiência gradualmente e a nova começa com baixa eficiência; colonos precisam ser educados individualmente na nova capacidade;
 - a proficiência individual dos colonos pode diminuir quando uma skill fica sem uso, como no RimWorld; isso não apaga o conhecimento da colônia, e educação/prática podem manter ou recuperar a proficiência;
@@ -709,9 +712,9 @@ Esse recorte responde se Frontier é divertido como colônia governada antes de 
 ### 10.6 Processo para decidir a autonomia
 
 1. listar todas as interações do jogador, da colônia, dos colonos, da infraestrutura, da pesquisa, do mercado e do combate;
-2. para cada interação, identificar quem pode iniciar, cancelar, alterar e concluir;
+2. para cada interação, identificar quem pode iniciar, cancelar, alterar e concluir; em ciclos contínuos, o início e o fim devem ser derivados da política;
 3. classificar cada ação como **automática**, **manual**, **híbrida**, **sugestão** ou **crítica**;
-4. definir o que acontece quando o jogador não responde;
+4. definir o que acontece quando o jogador não responde; jobs normais continuam conforme as políticas ativas, enquanto decisões críticas aguardam confirmação ou seguem a doutrina previamente autorizada;
 5. definir a prioridade quando duas ações competem;
 6. simular uma semana de jogo com apenas 40 minutos de organização diária;
 7. revisar se a autonomia cria decisões estratégicas ou apenas corrige falhas irritantes.

@@ -247,6 +247,7 @@ Cada espécie deve possuir capacidades configuráveis por dados. Um valor `0` si
 
 - skills prioritárias;
 - formação de novos colonos;
+- capacidade profissional que a colônia se compromete a formar;
 - treinamento durante o trabalho;
 - professores e mentores;
 - educação militar, médica, industrial ou científica;
@@ -258,7 +259,9 @@ Cada espécie deve possuir capacidades configuráveis por dados. Um valor `0` si
 
 **Dependências:** saúde, descanso, pesquisa, população, produção e contratos.
 
-Pesquisa não ensina automaticamente todos os colonos. Ela libera uma capacidade para a colônia aprender; a Educação transmite essa capacidade para indivíduos compatíveis. Por exemplo, pesquisar **Neurologia** torna o campo disponível, mas um médico ainda precisa passar por educação específica antes de tratar neurologia. A proficiência individual pode diminuir quando fica sem uso, mas educação e prática podem mantê-la ou recuperá-la.
+Pesquisa não ensina automaticamente todos os colonos. Ela libera uma capacidade para a colônia aprender; a Educação transmite essa capacidade por meio de uma escola para indivíduos compatíveis. O jogador define qual capacidade profissional a colônia formará; o sistema seleciona professores e alunos. Por exemplo, pesquisar **Neurologia** torna o campo disponível, mas um médico ainda precisa aprender neurologia em uma escola antes de tratar neurologia. A proficiência individual pode diminuir quando fica sem uso, mas educação e prática podem mantê-la ou recuperá-la. Remover a política de formação cancela automaticamente a educação em andamento.
+
+A mesma separação vale para os demais setores: o jogador define políticas de produção, Saúde e estoque; o sistema deriva os jobs. Assim, selecionar uma linha de produção é uma decisão de política, tratar pacientes é automático segundo a prioridade médica, e mover recursos é automático segundo metas, reservas e prioridades de estoque.
 
 #### 4.10.1 Proficiência individual por skill
 

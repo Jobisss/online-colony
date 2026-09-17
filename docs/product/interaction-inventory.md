@@ -145,7 +145,7 @@ Este diagrama mostra responsabilidades conceituais, não serviços. Um mesmo pro
 | GOV-07 | Inspecionar estado | Jogador | Manual | Mostra causas, previsão e consequências | Nível de explicabilidade |
 | GOV-08 | Receber relatório offline | Sistema | Automático | Resume alterações desde o último acesso | Agrupamento e severidade |
 | GOV-09 | Cancelar plano | Jogador | Híbrido | Remove intenção ainda não executada | O que acontece com reservas |
-| GOV-10 | Configurar política setorial | Jogador | Manual | Altera segurança, alimentação, saúde, energia, produção, descanso, fauna, comércio ou educação | Parâmetros, limites e pesquisa necessária |
+| GOV-10 | Configurar política setorial | Jogador | Manual | Altera segurança, alimentação, saúde, energia, produção, descanso, fauna, comércio ou educação; pode definir qual capacidade profissional a colônia formará | Parâmetros, limites e pesquisa necessária |
 | GOV-11 | Criar ordem de produto/serviço | Jogador | Manual | Solicita quantidade, qualidade, prazo e restrições | Reserva, orçamento e substitutos |
 | GOV-12 | Aprovar proposta de ambiente | Jogador | Crítico | Autoriza layout de base gerado pelo planner | Critérios de aprovação e custo |
 | GOV-13 | Definir política de construção | Jogador | Manual | Orienta expansão e sugestões de layout | Quando a IA pode propor/construir |
@@ -163,12 +163,14 @@ Este diagrama mostra responsabilidades conceituais, não serviços. Um mesmo pro
 | POP-05 | Reproduzir | Colonos/colônia | Automático | Gera novo colono após condições | Capacidade populacional e cuidados |
 | POP-06 | Atrair imigrante | Colônia/mundo | Sugestão | Oferece possibilidade de entrada | Aceite automático ou confirmação |
 | POP-07 | Aceitar imigrante | Jogador | Crítico | Adiciona novo colono | Capacidade, perfil e custo |
-| POP-08 | Tratar condição | Colono/colônia | Híbrido | Reduz severidade ou risco | Prioridade médica e recursos |
+| POP-08 | Tratar condição | Colônia/sistema | Automático | Executa tratamento conforme a política de Saúde e reduz severidade ou risco | Prioridade médica derivada, capacidade clínica e recursos |
 | POP-09 | Piorar condição | Sistema | Automático | Cria debuff ou novo estágio | Tempo, negligência e tratamento |
 | POP-10 | Morrer | Sistema | Automático | Remove colono após regra fatal | Três condições graves simultâneas |
-| POP-11 | Educar/treinar colono | Colônia/colono | Híbrido | Desenvolve ou recupera `actualSkill` em uma capacidade desbloqueada pela pesquisa | Professor com a capacidade pesquisada e aprendida, skill de Ensino, tempo, talento, especialização, prática, `maxSkillReached` e capacidade liberada |
+| POP-11 | Operar escola de formação | Colônia/escola | Híbrido | Desenvolve ou recupera `actualSkill` de alunos em uma capacidade desbloqueada pela pesquisa | Política de formação ativa; professores com a capacidade aprendida e skill de Ensino; alunos compatíveis; tempo, prática e `maxSkillReached` |
 
 ### 6.3 Demandas, jobs e autonomia
+
+A escola é a unidade de educação: não existe uma relação de controle direto e permanente entre um professor e um aluno. O jogador define, pela política de Educação, qual capacidade profissional a colônia deve formar; o sistema escolhe professores e alunos compatíveis, organiza os jobs e mantém a formação enquanto a política estiver ativa. Remover ou desativar essa política cancela automaticamente a formação em andamento e seus jobs educacionais.
 
 | ID | Interação | Iniciador | Controle inicial | Efeito principal | Falhas/decisões abertas |
 | --- | --- | --- | --- | --- | --- |
@@ -188,7 +190,7 @@ Este diagrama mostra responsabilidades conceituais, não serviços. Um mesmo pro
 | --- | --- | --- | --- | --- | --- |
 | PROD-01 | Extrair recurso | Colono/prédio | Automático | Adiciona recurso ao estoque | Ferramenta, skill e rendimento |
 | PROD-02 | Construir prédio | Jogador/colônia | Híbrido | Converte materiais em infraestrutura | Ordem e cancelamento |
-| PROD-03 | Iniciar receita | Prédio/colônia | Híbrido | Reserva entradas e inicia produção | Meta, fila e prioridade |
+| PROD-03 | Iniciar receita | Prédio/colônia | Híbrido | Reserva entradas e inicia produção selecionada pela política ou por uma ordem | Meta, política de produção, fila e prioridade |
 | PROD-04 | Completar receita | Prédio | Automático | Remove entradas e cria saída | Falha durante processamento |
 | PROD-05 | Consumir recurso | População/prédio | Automático | Reduz estoque por necessidade | Reserva e prioridade |
 | PROD-06 | Manter prédio | Colono/colônia | Híbrido | Evita degradação | Quando manutenção é obrigatória |
@@ -204,7 +206,7 @@ Este diagrama mostra responsabilidades conceituais, não serviços. Um mesmo pro
 | ID | Interação | Iniciador | Controle inicial | Efeito principal | Falhas/decisões abertas |
 | --- | --- | --- | --- | --- | --- |
 | LOG-01 | Reservar recurso | Produção/mercado | Automático | Impede dupla utilização | Expiração e cancelamento |
-| LOG-02 | Mover recurso | Job logístico | Automático | Transfere entre localizações | Distância e interrupção |
+| LOG-02 | Mover recurso | Job logístico | Automático | Transfere entre localizações conforme políticas de estoque, demandas e reservas | Distância, custody e interrupção |
 | LOG-03 | Transferir custody | Sistema/transporte | Automático | Atualiza quem guarda o ativo | Momento exato da transferência |
 | LOG-04 | Confirmar entrega | Destino | Automático | Finaliza transporte e obrigação | Falha, perda e duplicação |
 | LOG-05 | Perder carga | Evento/combate | Automático | Altera estoque e contrato | Seguro e compensação |
@@ -318,11 +320,13 @@ O inventário revela que ainda não devemos escolher a técnica de IA. Primeiro 
 3. quais ações podem continuar sem resposta do jogador;
 4. como o jogador substitui uma decisão autônoma;
 5. quais políticas podem alterar a ordem de prioridade;
-6. quais eventos exigem confirmação e quais apenas geram relatório;
+6. quais eventos exigem confirmação e quais apenas geram relatório; “reagir a emergências” não deve ser uma interação genérica: cada emergência precisa ser decomposta em detecção, demanda, prioridade, execução e resultado;
 7. quais operações são locais à colônia e quais cruzam regiões;
 8. quando localização e custody mudam durante um job;
 9. qual é a unidade real de tempo de cada interação;
-10. quais interações precisam de histórico e replay.
+10. quais interações precisam de histórico e replay;
+11. quais políticas iniciam ou encerram ciclos contínuos, como uma escola, em vez de o jogador iniciar e finalizar cada execução;
+12. **Resolvido:** jobs normais continuam conforme as políticas ativas quando o jogador está ausente.
 
 ## 9. Próximo passo
 

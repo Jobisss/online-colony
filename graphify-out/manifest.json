@@ -1,38 +1,38 @@
 {
-  "E:\\jobisss\\online-colony\\docs\\product\\discovery.md": {
-    "mtime": 1789504827.8489146,
-    "seen": 1789505203.4492083,
-    "ast_hash": "58fa1acda954c56e2426aaeb17c609c5",
-    "semantic_hash": "58fa1acda954c56e2426aaeb17c609c5"
+  "docs/product/discovery.md": {
+    "mtime": 1789647826.8535268,
+    "seen": 1789647886.6412327,
+    "ast_hash": "5b0e4907c6dd04c431cfd094f34e2f6f",
+    "semantic_hash": ""
   },
-  "E:\\jobisss\\online-colony\\docs\\product\\interaction-inventory.md": {
-    "mtime": 1789501869.1702302,
-    "seen": 1789502311.79951,
-    "ast_hash": "c8dbcd2f817a3bf5e81dec033705e556",
-    "semantic_hash": "c8dbcd2f817a3bf5e81dec033705e556"
+  "docs/product/interaction-inventory.md": {
+    "mtime": 1789647819.7513745,
+    "seen": 1789647886.6412327,
+    "ast_hash": "0c0406e26e2599940302fe5def2394db",
+    "semantic_hash": ""
   },
-  "E:\\jobisss\\online-colony\\docs\\systems\\colony-governance.md": {
-    "mtime": 1789504832.8536046,
-    "seen": 1789505203.4492083,
-    "ast_hash": "b415c8671a3b63bda3813a5f9679d22d",
-    "semantic_hash": "b415c8671a3b63bda3813a5f9679d22d"
+  "docs/systems/colony-governance.md": {
+    "mtime": 1789647822.2238863,
+    "seen": 1789647886.6412327,
+    "ast_hash": "a87051589cb3e34ed7d536e7407ff02e",
+    "semantic_hash": ""
   },
-  "E:\\jobisss\\online-colony\\docs\\systems\\policy-matrix.md": {
-    "mtime": 1789504830.3591187,
-    "seen": 1789505203.4492083,
-    "ast_hash": "d8555685bd2e079186f97040ccaea63b",
-    "semantic_hash": "d8555685bd2e079186f97040ccaea63b"
+  "docs/systems/policy-matrix.md": {
+    "mtime": 1789647824.5438187,
+    "seen": 1789647886.6412327,
+    "ast_hash": "6b1860a52ba152f02150966450db2caa",
+    "semantic_hash": ""
   },
-  "E:\\jobisss\\online-colony\\AGENTS.md": {
-    "mtime": 1789502092.2247403,
-    "seen": 1789502311.79951,
-    "ast_hash": "2b50d27ae8af98fc7218184fa6d3e01d",
-    "semantic_hash": "2b50d27ae8af98fc7218184fa6d3e01d"
+  "AGENTS.md": {
+    "mtime": 1789556843.9275966,
+    "seen": 1789647886.6412327,
+    "ast_hash": "c22ee7525e1609340d0bd7de19e1bfcd",
+    "semantic_hash": ""
   },
-  "E:\\jobisss\\online-colony\\docs\\architecture\\graph-traceability.md": {
-    "mtime": 1789498625.059507,
-    "seen": 1789500675.5685606,
-    "ast_hash": "b1302b1f7a651eecf7f9e5229a8b7a15",
-    "semantic_hash": "b1302b1f7a651eecf7f9e5229a8b7a15"
+  "docs/architecture/graph-traceability.md": {
+    "mtime": 1789505920.6068594,
+    "seen": 1789647886.6412327,
+    "ast_hash": "f11b32daa8b3df0c2cabf0c9ee1d7be9",
+    "semantic_hash": ""
   }
 }

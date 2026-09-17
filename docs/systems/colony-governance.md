@@ -139,7 +139,7 @@ Uma prioridade derivada precisa ter:
 - origem (jogador, política ou segurança);
 - explicação visível.
 
-Exemplo: o jogador não arrasta “tratar colono A” para o topo de uma lista. Ele configura a política de Saúde para priorizar colonos próprios em relação a pacientes externos; o sistema deriva a prioridade de cada atendimento e explica a decisão.
+Exemplo: o jogador não arrasta “tratar colono A” para o topo de uma lista. Ele configura a política de Saúde para priorizar colonos próprios em relação a pacientes externos; o sistema deriva a prioridade de cada atendimento, executa o tratamento automaticamente e explica a decisão.
 
 ### 5.4 StockGoal
 
@@ -167,7 +167,7 @@ Exemplos conceituais:
 - interromper produção quando o armazenamento atingir certo limite;
 - manter uma reserva de emergência.
 
-As políticas precisam ter limites explícitos. Uma política não pode autorizar uma ação proibida pelo estado do mundo ou por uma regra de segurança.
+As políticas precisam ter limites explícitos. Uma política não pode autorizar uma ação proibida pelo estado do mundo ou por uma regra de segurança. Selecionar quais linhas de produção ficam disponíveis é uma política; iniciar cada receita é consequência automática de demandas, ordens, reservas e prioridades.
 
 #### 5.5.1 Catálogo inicial de políticas
 
@@ -181,7 +181,7 @@ As políticas precisam ter limites explícitos. Uma política não pode autoriza
 | Descanso | tempo de trabalho, recreação, sono e tolerância à fadiga | altera produtividade, moral, saúde e segurança |
 | Fauna | criação de gado, interação com fauna regional, abate, reprodução, alimentação e manejo | altera alimento, materiais, espaço, risco, trabalho e capacidades futuras |
 | Comércio | produtos/serviços autorizados, preços, reservas e contrapartes | altera liquidez, estoques, risco e dependência externa |
-| Educação | treinamento, transmissão de skills e foco de formação | altera evolução dos colonos, pesquisa e disponibilidade de especialistas |
+| Educação | escola de formação, transmissão de skills e capacidade profissional escolhida | altera evolução dos colonos, pesquisa e disponibilidade de especialistas |
 
 Cada setor deve possuir parâmetros com custo e efeito observáveis. “Produzir comida” não é uma única opção: tipo de alimento, conservação, prioridade, mão de obra, energia e estoque-alvo devem criar escolhas diferentes.
 
@@ -224,7 +224,7 @@ Exemplos:
 - educação avançada → treinamento de skills e formação de especialistas;
 - doutrina militar → novas regras de armamento e composição de `CombatEntity`.
 
-Uma pesquisa desbloqueia uma **capacidade de política** para a colônia; isso não ensina automaticamente todos os colonos. O jogador ainda decide se, quando e onde usá-la, e a Educação precisa formar indivíduos compatíveis nessa capacidade. Por exemplo, pesquisar Neurologia libera o campo, mas um médico precisa ser educado para aprender a aplicá-lo. Para transmitir a capacidade, o professor precisa tê-la aprendido individualmente e possuir a skill de Ensino. O sistema não deve ativar automaticamente toda opção recém-desbloqueada.
+Uma pesquisa desbloqueia uma **capacidade de política** para a colônia; isso não ensina automaticamente todos os colonos. O jogador define, pela política de Educação, qual capacidade profissional a colônia formará. A escola então organiza a formação de indivíduos compatíveis: o sistema escolhe professores e alunos, e não cria uma relação direta de controle entre os dois. Por exemplo, pesquisar Neurologia libera o campo, mas um médico precisa aprender neurologia em uma escola antes de aplicá-la. Para ensinar a capacidade, o professor precisa tê-la aprendido individualmente e possuir a skill de Ensino. Remover a política de formação cancela automaticamente a educação em andamento.
 
 ```mermaid
 flowchart TD
