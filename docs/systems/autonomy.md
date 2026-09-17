@@ -9,8 +9,11 @@ O objetivo não é retirar agência do jogador, mas impedir que a administraçã
 ## 2. Princípios aprovados
 
 - o jogador define políticas setoriais, metas e decisões estratégicas;
+- o jogador configura a ordem relativa entre setores e contextos, inclusive aceitando riscos de gestão;
 - o jogador não cria uma fila livre de prioridades para cada colono ou job;
 - o sistema deriva prioridades a partir de políticas, necessidades, risco, recursos, reservas e ordens;
+- não existe uma hierarquia universal escondida que sempre coloque sobrevivência acima de toda escolha do jogador;
+- o sistema mantém apenas restrições físicas, legais e de capacidade; ele não transforma uma preferência de segurança em prioridade obrigatória;
 - jobs normais continuam enquanto o jogador está offline;
 - remover ou desativar uma política encerra o ciclo contínuo que ela autorizava;
 - decisões críticas não são tomadas automaticamente sem uma regra previamente autorizada;
@@ -21,10 +24,10 @@ O objetivo não é retirar agência do jogador, mas impedir que a administraçã
 
 | Sistema | O jogador controla | O sistema controla | Comportamento offline |
 | --- | --- | --- | --- |
-| Educação | qual capacidade profissional a colônia formará e quais políticas de formação estão ativas | escola, seleção de professores e alunos, agenda e jobs educacionais | mantém a escola funcionando; remover a política cancela a formação em andamento |
-| Produção | linhas de produção, receitas permitidas, metas e ordens | seleção da receita aplicável, reservas, alocação e execução | continua produzindo conforme política, metas, ordens e recursos |
-| Saúde | política médica e prioridades, como colonos próprios antes de pacientes externos | seleção do paciente, tratamento e uso de recursos disponíveis | trata automaticamente conforme a política; condições podem piorar se não houver capacidade ou recursos |
-| Estoques e logística | metas, reservas, estoque seguro, tipos de item e prioridades | reserva, criação de transporte, movimentação e confirmação de custody | mantém estoques e transportes enquanto houver rota, capacidade e recursos |
+| Educação | qual capacidade profissional a colônia formará, prioridades e políticas de formação | escola, seleção de professores e alunos, agenda e jobs educacionais | mantém a escola funcionando; remover a política cancela a formação em andamento |
+| Produção | linhas de produção, receitas permitidas, metas, ordens e prioridade do setor | seleção da receita aplicável, reservas, alocação e execução | continua produzindo conforme política, metas, ordens e recursos |
+| Saúde | política médica, prioridades e posição da Saúde diante dos demais setores | seleção do paciente, tratamento e uso de recursos disponíveis | trata automaticamente conforme a política; condições podem piorar se não houver capacidade ou recursos |
+| Estoques e logística | metas, reservas, estoque seguro, tipos de item e prioridades do transporte | reserva, criação de transporte, movimentação e confirmação de custody | mantém estoques e transportes enquanto houver rota, capacidade e recursos |
 | Construção | intenção, política de construção e aprovação de `BuildPlan` | decomposição em jobs, reservas, alocação e execução | continua construindo planos aprovados |
 | Energia | fontes permitidas, reserva e prioridade de consumidores | distribuição, racionamento e retomada | mantém a rede e aplica racionamento conforme a política |
 | Pesquisa | pesquisa ativa, fila e especialização | alocação de pesquisador, progresso e bloqueios | continua uma pesquisa por vez, se houver capacidade e insumos |
@@ -103,6 +106,22 @@ Um job também pode ir para `BLOCKED`, `INTERRUPTED`, `CANCELED` ou `FAILED`. Ca
 ## 6. Políticas e consequências
 
 Uma política inicia um ciclo contínuo quando fica ativa e o encerra quando é removida ou desativada. O jogador não precisa iniciar e finalizar cada execução derivada. Quando uma política muda, a Autonomy identifica os colonos, prédios, escolas, estoques e jobs afetados, recalcula suas prioridades e replaneja a execução automaticamente.
+
+### 6.1 Prioridade como decisão estratégica
+
+O jogador pode configurar prioridades relativas entre setores, contextos e objetivos. Essa configuração não escolhe um job específico nem um executor específico; ela define o tipo de colônia que está sendo governada.
+
+Exemplos válidos:
+
+- priorizar produção militar acima de saúde não urgente;
+- priorizar educação acima da produção imediata para formar especialistas;
+- priorizar energia e infraestrutura acima de exportação;
+- priorizar pacientes externos pagantes acima de colonos próprios, assumindo o risco político e social;
+- priorizar descanso e recuperação, aceitando menor produção.
+
+Essas escolhas podem gerar sucesso ou fracasso. Se o jogador reduzir demais a prioridade de alimentação, saúde ou segurança, a colônia deve sofrer as consequências em vez de ser protegida por uma regra invisível do sistema.
+
+O sistema só impede uma ação quando ela viola uma restrição física, legal ou de capacidade — por exemplo, não há recurso, rota, energia, executor compatível ou autorização necessária. Isso não é uma prioridade superior; é uma condição de execução.
 
 | Decisão | Forma correta de controle |
 | --- | --- |

@@ -570,16 +570,11 @@ Isso não exige mostrar cálculo técnico interno; exige uma explicação útil 
 
 ### 9.2 Qualidade da autonomia
 
-É definir o que o sistema prioriza quando não consegue fazer tudo ao mesmo tempo. Proposta mantida:
+É definir o que o sistema prioriza quando não consegue fazer tudo ao mesmo tempo. Não existe uma hierarquia universal escondida: o jogador configura a ordem relativa entre setores e contextos, e essa escolha pode produzir sucesso ou fracasso.
 
-1. sobrevivência e segurança;
-2. necessidades básicas;
-3. estabilidade da infraestrutura;
-4. políticas e metas do jogador;
-5. eficiência e lucro;
-6. conveniência ou melhoria de longo prazo.
+O sistema não cria uma fila livre de jobs ou colonos. Ele aplica as prioridades configuradas às demandas elegíveis e respeita apenas restrições físicas, legais e de capacidade. Uma colônia pode priorizar produção militar acima de saúde não urgente, educação acima de produção imediata ou exportação acima de reservas — e deve sofrer as consequências dessa decisão quando ela for ruim.
 
-Políticas do jogador definem prioridades por setor e contexto dentro de limites seguros. A ordenação operacional final é derivada pelo sistema depois do inventário de interações.
+A ordenação operacional final é derivada pelo sistema depois do inventário de interações.
 
 ### 9.3 Precisão de localização
 

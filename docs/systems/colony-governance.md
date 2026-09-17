@@ -187,17 +187,17 @@ As políticas precisam ter limites explícitos. Uma política não pode autoriza
 
 Cada setor deve possuir parâmetros com custo e efeito observáveis. “Produzir comida” não é uma única opção: tipo de alimento, conservação, prioridade, mão de obra, energia e estoque-alvo devem criar escolhas diferentes.
 
-As prioridades podem ser configuradas dentro de uma política setorial, sem permitir uma ordenação arbitrária de indivíduos ou jobs. Exemplos:
+As prioridades podem ser configuradas dentro de uma política setorial e comparadas entre setores, sem permitir uma ordenação arbitrária de indivíduos ou jobs. A tabela abaixo contém exemplos de configurações possíveis, não uma hierarquia fixa imposta pelo sistema:
 
 | Setor | Política de prioridade | Resultado possível |
 | --- | --- | --- |
 | Saúde | próprios colonos antes de pacientes externos | o sistema usa médicos e remédios primeiro na população da colônia |
 | Saúde | emergência antes de rotina | condições graves interrompem atendimentos menos urgentes |
 | Produção | consumo interno antes de exportação | a colônia repõe suas metas antes de vender excedentes |
-| Energia | vida/sistema médico antes de indústria | déficit desliga consumidores menos críticos primeiro |
+| Energia | vida/sistema médico antes de indústria | déficit desliga consumidores menos prioritários segundo a configuração |
 | Alimentação | população antes de comércio | alimentos necessários não são enviados para venda |
 | Segurança | defesa da colônia antes de escolta | combatentes permanecem disponíveis para proteger o território |
-| Descanso | recuperação de fadiga antes de horas extras | trabalho adicional não ignora limites de saúde e segurança |
+| Descanso | recuperação de fadiga antes de horas extras | trabalho adicional pode ser priorizado se o jogador assumir esse risco |
 
 Uma política pode definir ordem entre categorias, mas não deve criar microgerenciamento disfarçado. A escolha individual de cada executor continua pertencendo à Autonomy.
 
