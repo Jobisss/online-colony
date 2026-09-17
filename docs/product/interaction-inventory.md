@@ -330,7 +330,7 @@ O inventário revela que ainda não devemos escolher a técnica de IA. Primeiro 
 
 ## 9. Próximo passo
 
-Após revisar este inventário, a próxima referência transversal é a [Policy Matrix](../systems/policy-matrix.md). Em seguida, o próximo artefato de domínio deve ser o **Macro System Design do núcleo da colônia**, limitado inicialmente a:
+Após revisar este inventário, a próxima referência transversal é a [Policy Matrix](../systems/policy-matrix.md). Em seguida, o próximo artefato de domínio deve ser o [Macro System Design de Autonomy](../systems/autonomy.md), limitado inicialmente a:
 
 - Colony Governance;
 - Population;

@@ -811,7 +811,7 @@ Próximos artefatos:
 2. decisão sobre dia/noite, fusos horários e durações principais (§11.2);
 3. [Policy Matrix](../systems/policy-matrix.md) com políticas, dependências e especializações;
 4. [Macro System Design de Colony Governance](../systems/colony-governance.md);
-5. Macro System Design de Autonomy, que consumirá as directives de Governance.
+5. [Macro System Design de Autonomy](../systems/autonomy.md), que consumirá as directives de Governance.
 
 ## 13. Mapa conceitual de sistemas
 
