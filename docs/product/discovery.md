@@ -401,6 +401,9 @@ Não haverá uma condição única de vitória. Colônias poderão buscar papéi
 - relógio global contínuo com escala fixa: **1 dia real equivale a 4 dias de jogo**;
 - um dia de jogo dura 6 horas reais, e uma hora real equivale a 4 horas de jogo;
 - o ciclo de dia/noite é global: todas as colônias vivem o mesmo horário e o mesmo período simultaneamente, sem fusos horários na simulação;
+- a noite é um Day Event especial e recorrente; chuva, tempestade e outros eventos ambientais usam o mesmo modelo modular de efeitos;
+- na v1, noite, chuva e tempestade são Day Events globais; variantes regionais ou locais podem ser adicionadas futuramente;
+- Day Events publicam modificadores que podem ser interpretados por Produção, Descanso, Iluminação, Energia Solar, Fauna, Segurança, Plantio, Spawn de Monstros, Logística e outros módulos;
 - velocidade fixa, sem pause ou aceleração por jogador;
 - ações possuem duração em horas/dias de jogo, convertida pela escala global; por exemplo, uma construção de 5 horas de jogo dura 1 hora e 15 minutos reais;
 - decisões críticas ficam pendentes até o jogador ou uma política autorizada resolvê-las;
@@ -741,7 +744,7 @@ O modelo de invasão está aprovado em §8.14. Seguem abertos:
 
 - **Resolvido — escala e duração das ações:** 1 dia real equivale a 4 dias de jogo; um dia de jogo dura 6 horas reais. Construções, receitas, viagens, pesquisas e tratamentos usam durações em horas/dias de jogo; uma construção de aproximadamente 5 horas de jogo dura 1 hora e 15 minutos reais.
 - **Processos biológicos:** gestação, crescimento, envelhecimento e cura não podem seguir o calendário real (um ano de idade por ano real). Precisam de escala própria.
-- **Resolvido — dia/noite e fusos horários:** o dia/noite é global. Todas as colônias vivem o mesmo horário de jogo e o mesmo período simultaneamente; o fuso real do jogador não altera a simulação.
+- **Resolvido — dia/noite e fusos horários:** o dia/noite é global. Todas as colônias vivem o mesmo horário de jogo e o mesmo período simultaneamente; o fuso real do jogador não altera a simulação. A noite é um Day Event especial e recorrente.
 - **Estações e clima:** um ano real por ciclo de estações pode ser lento demais para gerar variação perceptível.
 - **Ritmo logístico:** transporte físico entre lotes em tempo real pode deixar o comércio lento demais (Pilar 3).
 
@@ -811,7 +814,7 @@ Depois disso, a segunda camada natural é logística local, energia avançada e 
 Próximos artefatos:
 
 1. revisão do [interaction-inventory.md](./interaction-inventory.md) com as classificações confirmadas;
-2. decisão sobre processos biológicos, estações, clima e ritmo logístico (§11.2);
+2. [Macro System Design de World/Time](../systems/world-time.md) com processos biológicos, estações, clima e ritmo logístico;
 3. [Policy Matrix](../systems/policy-matrix.md) com políticas, dependências e especializações;
 4. [Macro System Design de Colony Governance](../systems/colony-governance.md);
 5. [Macro System Design de Autonomy](../systems/autonomy.md), que consumirá as directives de Governance.
